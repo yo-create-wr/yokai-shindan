@@ -4,13 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0a0b10" />
-  <meta name="description" content="12の質問で守護妖怪を導き出し、毎日のお告げや妖怪図鑑を楽しめる無料の妖怪占い。登録不要です。" />
-  <meta property="og:title" content="妖怪占い｜あなたの守護妖怪を診断" />
-  <meta property="og:description" content="守護妖怪を見つけ、毎日のお告げを受け取りましょう。妖怪図鑑も少しずつ増えていきます。" />
+  <meta name="description" content="12の質問から考え方や行動の傾向を分析し、あなたに近い妖怪タイプと毎日の行動アドバイスを紹介する無料の妖怪診断。登録不要です。" />
+  <meta property="og:title" content="妖怪診断｜あなたに近い妖怪タイプは？" />
+  <meta property="og:description" content="12の質問から妖怪タイプを診断。性格傾向と毎日の行動アドバイスを確認でき、妖怪図鑑も少しずつ増えていきます。" />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="og-image.svg" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>妖怪占い｜あなたの守護妖怪を診断</title>
+  <title>妖怪診断｜あなたに近い妖怪タイプは？</title>
   <style>
     :root {
       --bg: #08090d;
@@ -1147,7 +1147,7 @@
     }
 
     .letter-panel::before {
-      content: "七夜";
+      content: "7日";
       position: absolute;
       right: 22px;
       top: 14px;
@@ -1268,14 +1268,14 @@
 
     <section id="introScreen" class="screen intro is-active" aria-labelledby="mainTitle">
       <div class="intro-inner">
-        <div class="eyebrow">YOKAI PERSONALITY ORACLE</div>
+        <div class="eyebrow">YOKAI PERSONALITY DIAGNOSIS</div>
         <div class="moon-mark" aria-hidden="true">
           <div class="moon-ring"></div>
           <div class="moon-glyph">妖</div>
         </div>
-        <h1 id="mainTitle">妖怪占い</h1>
+        <h1 id="mainTitle">妖怪診断</h1>
         <div id="firstVisitBlock">
-          <p class="lead">十二の問いに答えると、あなたの性質に最も近い「守護妖怪」が姿を現します。直感で、今のあなたに近い答えを選んでください。</p>
+          <p class="lead">十二の質問への回答から、あなたの考え方や行動に最も近い妖怪タイプを診断します。深く考えすぎず、普段の自分に近い答えを選んでください。</p>
           <div class="info-strip" aria-label="利用情報">
             <span>無料</span>
             <span>登録不要</span>
@@ -1287,24 +1287,24 @@
           </div>
         </div>
 
-        <section id="returningPanel" class="returning-panel" hidden aria-label="守護妖怪の間">
+        <section id="returningPanel" class="returning-panel" hidden aria-label="妖怪タイプのホーム">
           <div class="returning-main">
             <div class="character-frame">
               <img id="homeYokaiImage" class="character-img anim-float" alt="" />
             </div>
             <div class="returning-copy">
-              <div class="mini-label">YOUR GUARDIAN YOKAI</div>
+              <div class="mini-label">YOUR YOKAI TYPE</div>
               <h2 id="homeYokaiName"></h2>
               <p id="homeYokaiTitle"></p>
               <div class="visit-strip">
-                <div class="visit-strip-head"><span>七夜の妖怪帳</span><strong id="homeVisitCount">1 / 7</strong></div>
+                <div class="visit-strip-head"><span>7日間の記録</span><strong id="homeVisitCount">1 / 7</strong></div>
                 <div id="homeStampRow" class="stamp-row" aria-label="訪問印"></div>
               </div>
             </div>
           </div>
           <div class="returning-actions">
-            <button id="dailyBtn" class="primary-btn" type="button">今日のお告げを受け取る</button>
-            <button id="savedResultBtn" class="secondary-btn" type="button">守護妖怪を見る</button>
+            <button id="dailyBtn" class="primary-btn" type="button">今日のアドバイスを見る</button>
+            <button id="savedResultBtn" class="secondary-btn" type="button">診断結果を見る</button>
             <button id="bookBtn" class="secondary-btn" type="button">妖怪図鑑</button>
           </div>
           <button id="rediagnoseBtn" class="text-btn" type="button">診断をやり直す</button>
@@ -1316,7 +1316,7 @@
       <header class="quiz-header">
         <button id="backBtn" class="ghost-btn" type="button" aria-label="前の質問へ">←</button>
         <div class="progress-area">
-          <div class="progress-text"><span>守護妖怪を呼び出しています</span><span id="progressCount">1 / 12</span></div>
+          <div class="progress-text"><span>回答を確認しています</span><span id="progressCount">1 / 12</span></div>
           <div id="lanterns" class="lanterns" aria-hidden="true"></div>
         </div>
         <button id="quitBtn" class="ghost-btn" type="button" aria-label="最初に戻る">×</button>
@@ -1335,8 +1335,8 @@
     <section id="revealScreen" class="screen reveal" aria-live="polite">
       <div class="reveal-inner">
         <div class="seal" aria-hidden="true">封</div>
-        <h2 class="reveal-title">妖気を読み取っています</h2>
-        <p class="reveal-copy">あなたの答えから、六つの気質を照合しています。</p>
+        <h2 class="reveal-title">回答を分析しています</h2>
+        <p class="reveal-copy">あなたの回答から、六つの性格傾向を照合しています。</p>
         <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
       </div>
     </section>
@@ -1345,7 +1345,7 @@
       <div class="result-wrap">
         <article class="result-hero">
           <div>
-            <div class="result-kicker">YOUR GUARDIAN YOKAI</div>
+            <div class="result-kicker">YOUR YOKAI TYPE</div>
             <h2 id="resultName" class="result-name"></h2>
             <p id="resultTitle" class="result-title"></p>
             <p id="resultSummary" class="result-summary"></p>
@@ -1360,7 +1360,7 @@
             <div id="resultTraits" class="traits"></div>
           </section>
           <section class="result-card">
-            <h3>影が強まるとき</h3>
+            <h3>注意したい状態</h3>
             <p id="resultShadow"></p>
           </section>
           <section class="result-card">
@@ -1378,18 +1378,18 @@
         </div>
 
         <section class="sub-result">
-          <strong>内側にひそむ副妖怪：<span id="secondaryName"></span></strong>
+          <strong>もう一つの妖怪傾向：<span id="secondaryName"></span></strong>
           <p id="secondaryText"></p>
         </section>
 
         <div class="actions">
-          <button id="goDailyBtn" class="primary-btn" type="button">今日のお告げへ</button>
+          <button id="goDailyBtn" class="primary-btn" type="button">今日のアドバイスへ</button>
           <button id="shareImageBtn" class="secondary-btn" type="button">結果画像を作る</button>
           <button id="shareBtn" class="secondary-btn" type="button">結果を共有</button>
           <button id="resultBookBtn" class="secondary-btn" type="button">妖怪図鑑</button>
           <button id="restartBtn" class="secondary-btn" type="button">もう一度診断する</button>
         </div>
-        <p class="footer-note">この診断は娯楽を目的としたオリジナルコンテンツです。結果は性格や将来を断定するものではありません。</p>
+        <p class="footer-note">この診断は、質問への回答から考え方や行動の傾向を分類し、妖怪の特徴になぞらえて紹介するエンターテインメントコンテンツです。医療、心理、法律、金融その他の専門的な診断や判断を行うものではありません。結果とアドバイスは、ご自身を振り返るための参考としてお楽しみください。</p>
       </div>
     </section>
 
@@ -1398,8 +1398,8 @@
     <section id="dailyScreen" class="screen daily" aria-live="polite">
       <div class="page-wrap">
         <header class="page-topbar">
-          <button id="dailyHomeBtn" class="ghost-btn" type="button" aria-label="守護妖怪の間へ戻る">←</button>
-          <h2>今日の妖怪お告げ</h2>
+          <button id="dailyHomeBtn" class="ghost-btn" type="button" aria-label="妖怪タイプのホームへ戻る">←</button>
+          <h2>今日の行動アドバイス</h2>
           <button id="dailyBookBtn" class="ghost-btn" type="button" aria-label="妖怪図鑑">帳</button>
         </header>
 
@@ -1417,38 +1417,38 @@
 
         <section class="theme-panel">
           <h3>今日、優先したいものを一つ選んでください</h3>
-          <p>選んだテーマに合わせて、守護妖怪が今のあなたへの行動を示します。</p>
+          <p>選んだテーマに合わせて、今日取り入れやすい行動案を表示します。</p>
           <div id="themeButtons" class="theme-buttons"></div>
         </section>
 
         <section id="oraclePanel" class="oracle-panel" hidden>
-          <h3>守護妖怪からの助言</h3>
+          <h3>妖怪タイプ別アドバイス</h3>
           <p id="oracleAdvice"></p>
           <div class="oracle-grid">
-            <div class="oracle-item"><span>開運行動</span><strong id="oracleAction"></strong></div>
-            <div class="oracle-item"><span>開運時間</span><strong id="oracleTime"></strong></div>
-            <div class="oracle-item"><span>開運アイテム</span><strong id="oracleItem"></strong></div>
+            <div class="oracle-item"><span>おすすめの行動</span><strong id="oracleAction"></strong></div>
+            <div class="oracle-item"><span>取り組み方</span><strong id="oracleTime"></strong></div>
+            <div class="oracle-item"><span>役立つもの</span><strong id="oracleItem"></strong></div>
           </div>
         </section>
 
         <section class="visit-strip">
-          <div class="visit-strip-head"><span>七夜の妖怪帳</span><strong id="dailyVisitCount"></strong></div>
+          <div class="visit-strip-head"><span>7日間の記録</span><strong id="dailyVisitCount"></strong></div>
           <div id="dailyStampRow" class="stamp-row" aria-label="訪問印"></div>
         </section>
 
         <section id="visitorPanel" class="visitor-panel" hidden>
           <img id="visitorImage" alt="" />
-          <div><h3>今夜の訪問妖怪</h3><p id="visitorText"></p></div>
+          <div><h3>今日の図鑑ゲスト</h3><p id="visitorText"></p></div>
         </section>
 
         <section id="letterPanel" class="letter-panel" hidden>
-          <h3>七夜を迎えたあなたへ</h3>
+          <h3>7日間を振り返って</h3>
           <p id="letterText"></p>
         </section>
 
         <div class="daily-actions actions">
-          <button id="dailyShareBtn" class="secondary-btn" type="button">今日のお告げを共有</button>
-          <button id="dailyResultBtn" class="secondary-btn" type="button">守護妖怪の診断結果</button>
+          <button id="dailyShareBtn" class="secondary-btn" type="button">今日のアドバイスを共有</button>
+          <button id="dailyResultBtn" class="secondary-btn" type="button">妖怪タイプの診断結果</button>
         </div>
       </div>
     </section>
@@ -1456,13 +1456,13 @@
     <section id="bookScreen" class="screen book" aria-live="polite">
       <div class="page-wrap">
         <header class="page-topbar">
-          <button id="bookHomeBtn" class="ghost-btn" type="button" aria-label="守護妖怪の間へ戻る">←</button>
+          <button id="bookHomeBtn" class="ghost-btn" type="button" aria-label="妖怪タイプのホームへ戻る">←</button>
           <h2>妖怪図鑑</h2>
           <span aria-hidden="true"></span>
         </header>
         <section class="book-intro">
           <div class="book-label">YOKAI COLLECTION</div>
-          <p>守護妖怪は最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ姿を見せることがあります。</p>
+          <p>診断された妖怪タイプは最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ図鑑へ加わることがあります。</p>
           <div id="bookProgress" class="book-progress"></div>
         </section>
         <div id="bookGrid" class="book-grid"></div>
@@ -1513,13 +1513,13 @@
       {
         name: "河童", glyph: "河", title: "水辺を遊ぶ好奇心の妖怪",
         scores: { action: 4, social: 5, sensitivity: 3, caution: 2, independence: 3, intuition: 3 },
-        summary: "あなたは、新しい人や出来事へ自然に近づき、場を明るくする人です。好奇心と柔軟さが、思いがけない出会いや発見を運びます。",
+        summary: "あなたは、新しい人や出来事へ自然に近づき、場を明るくする人です。好奇心と柔軟さが、思いがけない出会いや発見につなげられます。",
         strength: "変化への適応が早く、人を楽しませながら物事を前へ進められます。勝負所では、軽やかな判断力も発揮します。",
         traits: ["好奇心", "親しみやすさ", "柔軟性", "勝負勘"],
         shadow: "刺激を求めすぎると、勝ち負けや勢いに心を奪われます。始める前に『続けた先に何が残るか』を考えると安定します。",
-        love: "友達のように笑い合える関係を好みます。楽しいだけでなく、落ち着いた時間も共有できる相手が良縁です。",
+        love: "友達のように笑い合える関係を好みます。楽しいだけでなく、落ち着いた時間も共有できる相手と相性がよい傾向です。",
         work: "営業、接客、企画、イベント、ゲームなど、変化と人の反応がある仕事で力を発揮します。",
-        secondary: "人と楽しむ力に加え、副妖怪の性質があなたの判断や対人距離に影響しています。"
+        secondary: "人と楽しむ力に加え、もう一つの妖怪傾向の性質があなたの判断や対人距離に影響しています。"
       },
       {
         name: "天狗", glyph: "天", title: "高みを目指す孤高の修行者",
@@ -1530,7 +1530,7 @@
         shadow: "弱みを見せないまま一人で抱え込むと、他人の意見を遠ざけます。人に任せることも強さの一部です。",
         love: "簡単には心を開きませんが、信頼した相手には誠実です。互いに自立しながら尊敬できる関係が向きます。",
         work: "専門職、技術職、経営、研究、指導など、実力が結果へ反映される環境に適性があります。",
-        secondary: "高い独立心の奥に、副妖怪が示す感情や対人傾向も隠れています。"
+        secondary: "高い独立心の奥に、もう一つの妖怪傾向が示す感情や対人傾向も隠れています。"
       },
       {
         name: "雪女", glyph: "雪", title: "静寂の中で心を見つめる観察者",
@@ -1541,18 +1541,18 @@
         shadow: "傷つくことを恐れると、突然心を閉ざしてしまいます。察してもらうのを待つより、少しだけ言葉にしてください。",
         love: "好きになるまで時間をかけますが、心を許すと深く愛します。曖昧な態度より、誠実な言葉を求めます。",
         work: "デザイン、文章、分析、研究、カウンセリングなど、感性と集中力を使う仕事に向きます。",
-        secondary: "繊細さの表し方には、副妖怪が示す行動性や社交性が加わっています。"
+        secondary: "繊細さの表し方には、もう一つの妖怪傾向が示す行動性や社交性が加わっています。"
       },
       {
-        name: "座敷童子", glyph: "福", title: "人と場所に福を呼ぶ調和者",
+        name: "座敷童子", glyph: "和", title: "人と場所を和ませる調和者",
         scores: { action: 3, social: 5, sensitivity: 4, caution: 4, independence: 2, intuition: 4 },
         summary: "あなたは、人の心を和らげ、集団に安心感を与える人です。目立たなくても、あなたがいる場所には自然と温かさが生まれます。",
-        strength: "共感力、協調性、気配りに優れ、人と人の間を整えられます。小さな幸運を見つける力も持っています。",
-        traits: ["思いやり", "協調性", "安心感", "幸運感知"],
+        strength: "共感力、協調性、気配りに優れ、人と人の間を整えられます。日常の小さな良さに気づく力も持っています。",
+        traits: ["思いやり", "協調性", "安心感", "気づく力"],
         shadow: "必要とされたい気持ちが強まると、自分を後回しにします。他人へ向ける優しさを、自分にも向けてください。",
         love: "相手を支え、居心地の良い関係を作ります。尽くしすぎず、受け取ることを許すと長続きします。",
         work: "教育、福祉、人事、接客、事務、宿泊など、人や場を支える仕事で力を発揮します。",
-        secondary: "人を支える性質に、副妖怪が示す自己主張や慎重さが重なっています。"
+        secondary: "人を支える性質に、もう一つの妖怪傾向が示す自己主張や慎重さが重なっています。"
       },
       {
         name: "唐傘小僧", glyph: "傘", title: "驚きと笑いを生み出す表現者",
@@ -1563,7 +1563,7 @@
         shadow: "注目されない不安から、本心まで冗談に隠すことがあります。真剣な気持ちを見せるほど魅力は深まります。",
         love: "楽しく意外性のある恋を好みます。好意を冗談で隠しすぎず、本気の言葉を一つ伝えると進展します。",
         work: "広告、動画、デザイン、販売、SNS、イベントなど、反応が返ってくる仕事に適性があります。",
-        secondary: "表現力の使い方には、副妖怪が示す慎重さや自立性も影響しています。"
+        secondary: "表現力の使い方には、もう一つの妖怪傾向が示す慎重さや自立性も影響しています。"
       },
       {
         name: "ぬりかべ", glyph: "壁", title: "大切なものを守る不動の防壁",
@@ -1574,7 +1574,7 @@
         shadow: "守る意識が強まりすぎると、変化や挑戦まで止めてしまいます。守るものと手放すものを分けて考えてください。",
         love: "時間をかけて信頼を築きます。派手さより、約束を守る相手との安定した関係を望みます。",
         work: "管理、経理、法務、保守、製造、インフラなど、正確さと継続が必要な仕事に向きます。",
-        secondary: "堅実さの内側に、副妖怪が示す柔軟性や感情の動きもあります。"
+        secondary: "堅実さの内側に、もう一つの妖怪傾向が示す柔軟性や感情の動きもあります。"
       },
       {
         name: "猫又", glyph: "猫", title: "二つの顔を持つ直感の賢者",
@@ -1585,7 +1585,7 @@
         shadow: "疑いが強まると、相手を試したり主導権にこだわったりします。本音を一つ見せることが信頼への近道です。",
         love: "束縛を嫌いながらも、深い絆を望みます。駆け引きより、対等な距離感を保てる相手が合います。",
         work: "交渉、マーケティング、調査、美容、創作、コンサルティングなどで洞察力が生きます。",
-        secondary: "鋭い直感の表面に、副妖怪が示す社交性や行動性が現れています。"
+        secondary: "鋭い直感の表面に、もう一つの妖怪傾向が示す社交性や行動性が現れています。"
       },
       {
         name: "ぬらりひょん", glyph: "主", title: "いつの間にか中心にいる世渡りの達人",
@@ -1596,7 +1596,7 @@
         shadow: "面倒を避けることに慣れると、責任まで曖昧にしてしまいます。引き受ける姿勢が本当の信頼を作ります。",
         love: "余裕ある態度で相手を引きつけます。大切な場面では曖昧にせず、意思を言葉にすると関係が深まります。",
         work: "経営、営業、管理職、仲介、プロデュースなど、人と流れを動かす仕事に向きます。",
-        secondary: "世渡りの巧さに、副妖怪が示す感情や独立性が個性として加わります。"
+        secondary: "世渡りの巧さに、もう一つの妖怪傾向が示す感情や独立性が個性として加わります。"
       },
       {
         name: "ろくろ首", glyph: "探", title: "遠くまで意識を伸ばす探究者",
@@ -1607,7 +1607,7 @@
         shadow: "考えすぎると、不安や疑いを自分で膨らませます。すべてを知ろうとせず、分からない余白を残してください。",
         love: "相手の言葉や態度を細かく見ます。想像だけで結論を出さず、直接確かめることで安心できます。",
         work: "研究、編集、取材、分析、IT、文章など、深く調べて整理する仕事に適性があります。",
-        secondary: "探究心の向かう先には、副妖怪が示す社交性や自立性が関わっています。"
+        secondary: "探究心の向かう先には、もう一つの妖怪傾向が示す社交性や自立性が関わっています。"
       },
       {
         name: "一反木綿", glyph: "風", title: "風に乗って進む自由な行動者",
@@ -1618,7 +1618,7 @@
         shadow: "自由を優先しすぎると、途中で責任を手放してしまいます。始める力と同じだけ、終わらせる力を意識してください。",
         love: "直感的に恋へ飛び込みます。一緒に新しい経験を楽しめ、互いを縛らない相手が向きます。",
         work: "旅行、営業、物流、スポーツ、起業、短期プロジェクトなど、動きのある仕事に適性があります。",
-        secondary: "自由な行動性に、副妖怪が示す感情の深さや慎重さも加わっています。"
+        secondary: "自由な行動性に、もう一つの妖怪傾向が示す感情の深さや慎重さも加わっています。"
       },
       {
         name: "のっぺらぼう", glyph: "無", title: "人の心を映し出す無形の共感者",
@@ -1629,18 +1629,18 @@
         shadow: "合わせすぎると、自分が何を望むのか分からなくなります。好かれる顔より、自分が落ち着ける顔を選んでください。",
         love: "相手の理想に寄り添えますが、我慢を重ねがちです。小さな本音を伝えるほど関係は安定します。",
         work: "接客、人事、秘書、カウンセリング、演技、サポートなど、相手を理解する仕事に向きます。",
-        secondary: "高い共感性に、副妖怪が示す自己主張や行動性が組み合わさっています。"
+        secondary: "高い共感性に、もう一つの妖怪傾向が示す自己主張や行動性が組み合わさっています。"
       },
       {
-        name: "海坊主", glyph: "海", title: "深い海に意志を秘める孤高の守護者",
+        name: "海坊主", glyph: "海", title: "深い海に意志を秘める孤高の守り手",
         scores: { action: 4, social: 1, sensitivity: 4, caution: 5, independence: 5, intuition: 4 },
         summary: "あなたは、静かな外見の奥に強い意志を持つ人です。簡単には本心を見せませんが、守ると決めたものには大きな力を注ぎます。",
         strength: "精神力、信念、危機対応に優れています。長期的な視点で耐え、重要な局面では周囲を支えます。",
-        traits: ["精神力", "信念", "危機対応", "守護力"],
+        traits: ["精神力", "信念", "危機対応", "保護意識"],
         shadow: "不満を内側へため込み、限界で一気に噴き出すことがあります。耐え切る前に状況を伝えてください。",
         love: "軽い関係より深い結びつきを求めます。強い愛情を、束縛ではなく信頼として表すことが鍵です。",
         work: "危機管理、経営、研究、専門職、大規模プロジェクトなど、責任の重い役割に向きます。",
-        secondary: "強い意志の表し方には、副妖怪が示す社交性や感受性が影響しています。"
+        secondary: "強い意志の表し方には、もう一つの妖怪傾向が示す社交性や感受性が影響しています。"
       }
     ];
 
@@ -1670,10 +1670,10 @@
     const dailyMoods = [
       { name: "ごきげん", icon: "✦", animation: "anim-bounce" },
       { name: "静かに考え中", icon: "◌", animation: "anim-doze" },
-      { name: "あなたを見守っています", icon: "◎", animation: "anim-float" },
+      { name: "静かに寄り添っています", icon: "◎", animation: "anim-float" },
       { name: "少し落ち着かない様子", icon: "△", animation: "anim-sway" },
-      { name: "妖気が満ちています", icon: "◇", animation: "anim-glow" },
-      { name: "何かを伝えたそうです", icon: "…", animation: "anim-peek" }
+      { name: "集中しています", icon: "◇", animation: "anim-glow" },
+      { name: "こちらを気にしています", icon: "…", animation: "anim-peek" }
     ];
 
     const dailyThemes = [
@@ -1684,52 +1684,52 @@
 
     const oracleData = {
       "kappa": {
-        messages: ["河童は水面に新しい波を見つけています。今日は小さな好奇心を見逃さないでください。", "河童が手招きをしています。誰かと笑い合う時間が、停滞をほどいてくれそうです。", "河童は少し静かです。勢いだけで決めず、続けた先まで一度眺めてみましょう。", "水辺の風が変わりました。普段と違う選択が、思いがけない発見につながります。"],
-        letter: "あなたの好奇心は、日常に新しい流れを呼び込む力です。七夜を重ねた今、面白さを追うだけでなく、育てたいものを一つ選んでください。"
+        messages: ["河童は水面に新しい波を見つけています。今日は小さな好奇心を見逃さないでください。", "河童が手招きをしています。誰かと笑い合う時間を作ると、気持ちを切り替えやすくなります。", "河童は少し静かです。勢いだけで決めず、続けた先まで一度眺めてみましょう。", "河童は普段と違う道を眺めています。小さな変化を一つ試すと、新しい発見につながります。"],
+        letter: "あなたの好奇心は、日常に新しい流れを呼び込む力です。7回の記録を重ねた今、面白さを追うだけでなく、育てたいものを一つ選んでください。"
       },
       "tengu": {
-        messages: ["天狗は高い場所から道を見渡しています。今日は目先の反応より、長い目的を優先してください。", "天狗が羽団扇を静かに置きました。自分で抱えず、一つだけ人に任せる日です。", "山の空気が澄んでいます。磨いてきた技術を、遠慮せず表へ出してよいでしょう。", "天狗は足元を確かめています。高みを目指すほど、基本を丁寧に扱ってください。"],
-        letter: "強さは、一人で耐え続けることだけではありません。七夜を越えたあなたには、信頼できる誰かと力を分け合う準備ができています。"
+        messages: ["天狗は高い場所から道を見渡しています。今日は目先の反応より、長い目的を優先してください。", "天狗が羽団扇を静かに置きました。今日は、自分で抱えず一つだけ人に任せてみましょう。", "山の空気が澄んでいます。磨いてきた技術を、遠慮せず表へ出してみましょう。", "天狗は足元を確かめています。高みを目指すほど、基本を丁寧に扱ってください。"],
+        letter: "強さは、一人で耐え続けることだけではありません。7回訪れたあなたには、信頼できる誰かと力を分け合う準備ができています。"
       },
       "yuki-onna": {
-        messages: ["雪女は静かな雪を眺めています。言葉になる前の気持ちを、今日は急いで決めつけないでください。", "冷たい風の中に小さな温もりがあります。心を許せる人へ、短い本音を伝える日です。", "雪女の周囲が澄んでいます。美しいと感じたものが、今のあなたの答えを示します。", "雪女は少し距離を取っています。疲れを感じたら、無理に明るく振る舞わなくて構いません。"],
-        letter: "あなたの繊細さは弱さではなく、見えない変化を受け取る力です。七夜を重ねた今、その感覚を自分自身のためにも使ってください。"
+        messages: ["雪女は静かな雪を眺めています。言葉になる前の気持ちを、今日は急いで決めつけないでください。", "冷たい風の中に小さな温もりがあります。心を許せる人へ、短い本音を伝えてみましょう。", "雪女の周囲が澄んでいます。美しいと感じたものを手がかりに、自分の気持ちを整理してみましょう。", "雪女は少し距離を取っています。疲れを感じたら、無理に明るく振る舞わなくて構いません。"],
+        letter: "あなたの繊細さは弱さではなく、見えない変化を受け取る力です。7回の記録を重ねた今、その感覚を自分自身のためにも使ってください。"
       },
       "zashiki-warashi": {
-        messages: ["座敷童子は部屋を整えています。小さな片づけが、心にも新しい余白を作ります。", "座敷童子が嬉しそうに笑っています。誰かへ向けた親切が、別の形で戻ってきそうです。", "今日は自分の席も用意してください。人を優先する前に、あなた自身の望みを確かめましょう。", "家の中に穏やかな妖気があります。慣れた場所を少し整えると運が動きます。"],
-        letter: "あなたが周囲へ与えてきた安心は、確かな福になっています。七夜を迎えた今日は、その優しさを自分へ返す番です。"
+        messages: ["座敷童子は部屋を整えています。小さな片づけが、心にも新しい余白を作ります。", "座敷童子が嬉しそうに笑っています。誰かへ向けた親切は、周囲との関係を整えるきっかけになります。", "今日は自分の席も用意してください。人を優先する前に、あなた自身の望みを確かめましょう。", "座敷童子は慣れた部屋を眺めています。身近な場所を少し整えると、気持ちを切り替えやすくなります。"],
+        letter: "あなたが周囲へ与えてきた安心は、人間関係を支える力になっています。7回目を迎えた今日は、その優しさを自分へ返す番です。"
       },
       "karakasa-kozo": {
-        messages: ["唐傘小僧は面白いことを思いついたようです。完成度より、まず形にしてみてください。", "唐傘小僧が片足で跳ねています。失敗を恐れず、人に見せることで流れが生まれます。", "今日は冗談の奥にある本音を一つだけ伝えてください。意外なほどまっすぐ届きます。", "退屈な空気に穴が開きそうです。あなたらしい工夫を一つ加えてみましょう。"],
-        letter: "あなたの個性は、人を驚かせるためだけでなく、停滞した空気を変えるためにあります。七夜を越えた今、本気の作品を一つ残してください。"
+        messages: ["唐傘小僧は面白いことを思いついたようです。完成度より、まず形にしてみてください。", "唐傘小僧が片足で跳ねています。失敗を恐れず途中経過を人に見せると、次の改善点が見つかります。", "今日は冗談の奥にある本音を一つだけ伝えてください。相手に意図が伝わりやすくなります。", "退屈な空気に穴が開きそうです。あなたらしい工夫を一つ加えてみましょう。"],
+        letter: "あなたの個性は、人を驚かせるためだけでなく、停滞した空気を変えるためにあります。7回の記録を終えた今、本気の作品を一つ残してください。"
       },
       "nurikabe": {
-        messages: ["ぬりかべは静かに立っています。今日は急ぐより、崩れやすい部分を一つ補強してください。", "ぬりかべが少し道を空けました。変化を拒まず、小さな例外を許してみましょう。", "守るべきものが見えています。断るべき頼みには、穏やかでも明確な境界線を。", "足元は安定しています。長く続けてきたことに、確かな成果が現れそうです。"],
-        letter: "あなたが守ってきたものは、簡単には崩れません。七夜を重ねた今、壁の一部を扉に変え、新しい流れを迎えてください。"
+        messages: ["ぬりかべは静かに立っています。今日は急ぐより、崩れやすい部分を一つ補強してください。", "ぬりかべが少し道を空けました。変化を拒まず、小さな例外を許してみましょう。", "守るべきものが見えています。断るべき頼みには、穏やかでも明確な境界線を。", "足元は安定しています。長く続けてきたことを振り返り、積み重ねた成果を確認してください。"],
+        letter: "あなたが守ってきたものは、簡単には崩れません。7回の記録を重ねた今、壁の一部を扉に変え、新しい流れを迎えてください。"
       },
       "nekomata": {
-        messages: ["猫又は尻尾を揺らしながら様子を見ています。直感は鋭い日ですが、相手を試しすぎないでください。", "猫又の目が輝いています。自分の魅力や得意分野を、遠慮なく使う日です。", "今日は一人の時間が知恵を整えます。無理に誰かの速度へ合わせなくて構いません。", "猫又が火を小さく灯しています。本音を一つ見せると、信頼が深まりそうです。"],
-        letter: "あなたは多くを見抜けるからこそ、簡単には心を明け渡しません。七夜を越えた今、見極めるだけでなく、信じる選択も加えてください。"
+        messages: ["猫又は尻尾を揺らしながら様子を見ています。直感を大切にしつつ、相手を試すような行動は控えてください。", "猫又の目が輝いています。自分の魅力や得意分野を、遠慮なく使ってみましょう。", "今日は一人の時間が知恵を整えます。無理に誰かの速度へ合わせなくて構いません。", "猫又が火を小さく灯しています。本音を一つ見せることが、信頼を深める一歩になります。"],
+        letter: "あなたは多くを見抜けるからこそ、簡単には心を明け渡しません。7回の記録を終えた今、見極めるだけでなく、信じる選択も加えてください。"
       },
       "nurarihyon": {
-        messages: ["ぬらりひょんは場の流れを読んでいます。今日は正面から押すより、自然な順番を整えてください。", "ぬらりひょんがお茶を置きました。曖昧にしてきた返事を、一つだけ明確にする日です。", "人の縁が動きやすい日です。久しぶりの相手へ短い連絡を送るとよいでしょう。", "余裕に見える態度の奥で、疲れがたまっていませんか。誰にも見せない休息を確保してください。"],
-        letter: "あなたには、人と状況を自然に動かす力があります。七夜を重ねた今、その力を責任から逃げるためではなく、皆が進める道を作るために使ってください。"
+        messages: ["ぬらりひょんは場の流れを読んでいます。今日は正面から押すより、自然な順番を整えてください。", "ぬらりひょんがお茶を置きました。曖昧にしてきた返事を、一つだけ明確にしてみましょう。", "今日は人とのつながりを整える日にしてください。久しぶりの相手へ、負担にならない短い連絡を送りましょう。", "余裕に見える態度の奥で、疲れがたまっていませんか。誰にも見せない休息を確保してください。"],
+        letter: "あなたには、人と状況を自然に動かす力があります。7回の記録を重ねた今、その力を責任から逃げるためではなく、皆が進める道を作るために使ってください。"
       },
       "rokurokubi": {
-        messages: ["ろくろ首は遠くを眺めています。気になることを調べると、今必要な情報へつながりそうです。", "今日は知りすぎないことも大切です。答えの出ないことを、一度棚へ戻してください。", "ろくろ首が誰かの声に耳を傾けています。言葉の裏を読む前に、そのまま受け取ってみましょう。", "探究心が強まっています。小さな疑問を一つ、最後まで掘り下げると成果になります。"],
-        letter: "あなたの探究心は、遠くの真実へ届く長い首のようなものです。七夜を越えた今、すべてを知ろうとせず、大切な一問を選んでください。"
+        messages: ["ろくろ首は遠くを眺めています。気になることを一つ調べ、今必要な情報を整理してみましょう。", "今日は知りすぎないことも大切です。答えの出ないことを、一度棚へ戻してください。", "ろくろ首が誰かの声に耳を傾けています。言葉の裏を読む前に、そのまま受け取ってみましょう。", "探究心が強まっています。小さな疑問を一つ選び、最後まで調べて記録に残しましょう。"],
+        letter: "あなたの探究心は、遠くの真実へ届く長い首のようなものです。7回の記録を終えた今、すべてを知ろうとせず、大切な一問を選んでください。"
       },
       "ittan-momen": {
-        messages: ["一反木綿が風をつかみました。今日は考え続けるより、最初の一歩を軽く踏み出してください。", "風向きが変わっています。予定に固執せず、より面白い道へ切り替えて構いません。", "勢いは十分です。始めたことを一つ終わらせると、次の風が強くなります。", "一反木綿は遠くへ行きたそうです。場所を変えるだけでも、気分と考えが整います。"],
-        letter: "あなたの身軽さは、新しい世界へ入るための翼です。七夜を迎えた今、始める力と同じだけ、終わらせる力も育ててください。"
+        messages: ["一反木綿が風をつかみました。今日は考え続けるより、最初の一歩を軽く踏み出してください。", "一反木綿は別の道を眺めています。予定に固執せず、より納得できる方法へ切り替えて構いません。", "勢いは十分です。始めたことを一つ終わらせると、次の行動へ移りやすくなります。", "一反木綿は遠くへ行きたそうです。場所を変えるだけでも、気分と考えが整います。"],
+        letter: "あなたの身軽さは、新しい世界へ入るための翼です。7回目を迎えた今、始める力と同じだけ、終わらせる力も育ててください。"
       },
       "nopperabo": {
-        messages: ["のっぺらぼうは静かにこちらを見ています。今日は誰かの期待ではなく、自分の希望を一つ選んでください。", "人の話を受け止める力が高まっています。ただし、背負う必要のない感情まで持ち帰らないでください。", "今日は小さな本音が鍵です。断る、休む、欲しいと言う。そのどれかを言葉にしましょう。", "のっぺらぼうが鏡の前に立っています。役割を離れたときの自分を、少し思い出してください。"],
-        letter: "あなたは多くの人に寄り添えるからこそ、自分の輪郭を失いやすい人です。七夜を越えた今、誰にも合わせない時間を大切にしてください。"
+        messages: ["のっぺらぼうは静かにこちらを見ています。今日は誰かの期待ではなく、自分の希望を一つ選んでください。", "のっぺらぼうは人の話に耳を傾けています。ただし、背負う必要のない感情まで持ち帰らないでください。", "今日は小さな本音が鍵です。断る、休む、欲しいと言う。そのどれかを言葉にしましょう。", "のっぺらぼうが鏡の前に立っています。役割を離れたときの自分を、少し思い出してください。"],
+        letter: "あなたは多くの人に寄り添えるからこそ、自分の輪郭を失いやすい人です。7回の記録を終えた今、誰にも合わせない時間を大切にしてください。"
       },
       "umibozu": {
-        messages: ["海坊主は静かな海に浮かんでいます。大きな決断ほど、今日は急いで答えを出さなくて構いません。", "深いところで感情が動いています。限界まで耐える前に、信頼できる相手へ状況を伝えてください。", "海坊主の周囲に強い波が立っています。守るべきもののために、明確な態度を示す日です。", "海が穏やかです。一人で考える時間が、長期的な答えを連れてきます。"],
-        letter: "あなたの深さと強さは、大切なものを守るためにあります。七夜を重ねた今、孤独だけを盾にせず、信頼できる人を内側へ招いてください。"
+        messages: ["海坊主は静かな海に浮かんでいます。大きな決断ほど、今日は急いで答えを出さなくて構いません。", "深いところで感情が動いています。限界まで耐える前に、信頼できる相手へ状況を伝えてください。", "海坊主の周囲に強い波が立っています。守りたいものを整理し、必要な場面では明確な態度を示してください。", "海坊主は静かな海を眺めています。一人で考える時間を取り、長期的な方針を整理してください。"],
+        letter: "あなたの深さと強さは、大切なものを守るためにあります。7回の記録を重ねた今、孤独だけを盾にせず、信頼できる人を内側へ招いてください。"
       }
     };
 
@@ -1737,7 +1737,7 @@
       challenge: [
         "完璧な準備を待たず、十分に小さな一歩へ変えてください。",
         "今日中に終えられる形へ分け、最初の一つだけ着手しましょう。",
-        "人に見せられる途中経過を作ると、次の道が開きます。",
+        "人に見せられる途中経過を作ると、次に直す点が明確になります。",
         "いつもの方法に一つだけ新しい工夫を加えてください。"
       ],
       calm: [
@@ -1747,16 +1747,16 @@
         "短い散歩か温かい飲み物で、考えを身体へ戻してください。"
       ],
       bond: [
-        "長い説明より、短く率直な一言が相手へ届く日です。",
+        "長い説明より、短く率直な一言を選んでください。",
         "答える前に、相手の話を最後まで聞くことを優先してください。",
         "しばらく連絡していない人へ、負担にならない短い言葉を送りましょう。",
         "助けるだけでなく、自分から一つ頼ることで関係が整います。"
       ]
     };
 
-    const luckyItems = ["白いハンカチ", "温かい飲み物", "小さな鏡", "青い小物", "丸いお菓子", "木の香り", "お気に入りの筆記具", "柔らかな布", "水の入ったグラス", "古い写真", "銀色の小物", "小さな鍵"];
-    const luckyTimes = ["7:00〜9:00", "10:00〜12:00", "13:00〜15:00", "16:00〜18:00", "19:00〜21:00", "22:00前後"];
-    const luckyActions = ["机の上を一か所整える", "普段と違う道を歩く", "短いお礼を伝える", "予定を一つ書き出す", "五分だけ外の空気を吸う", "不要な通知を一つ切る", "好きな音を一曲聴く", "水をゆっくり飲む"];
+    const supportItems = ["白いハンカチ", "温かい飲み物", "小さな鏡", "青い小物", "丸いお菓子", "木の香り", "お気に入りの筆記具", "柔らかな布", "水の入ったグラス", "古い写真", "銀色の小物", "小さな鍵"];
+    const approachTips = ["最初の5分だけ試す", "一度書き出して整理する", "静かな場所で取り組む", "誰かに途中経過を見せる", "一つずつ順番に進める", "終える時間を先に決める"];
+    const recommendedActions = ["机の上を一か所整える", "普段と違う道を歩く", "短いお礼を伝える", "予定を一つ書き出す", "五分だけ外の空気を吸う", "不要な通知を一つ切る", "好きな音を一曲聴く", "水をゆっくり飲む"];
 
     const screens = {
       intro: document.getElementById("introScreen"),
@@ -2216,9 +2216,9 @@
         const themeSeed = dailySeed(selectedKey);
         els.oraclePanel.hidden = false;
         els.oracleAdvice.textContent = themeAdvice[selectedKey][themeSeed % themeAdvice[selectedKey].length];
-        els.oracleAction.textContent = luckyActions[(themeSeed + 2) % luckyActions.length];
-        els.oracleTime.textContent = luckyTimes[(themeSeed + 3) % luckyTimes.length];
-        els.oracleItem.textContent = luckyItems[(themeSeed + 5) % luckyItems.length];
+        els.oracleAction.textContent = recommendedActions[(themeSeed + 2) % recommendedActions.length];
+        els.oracleTime.textContent = approachTips[(themeSeed + 3) % approachTips.length];
+        els.oracleItem.textContent = supportItems[(themeSeed + 5) % supportItems.length];
       } else {
         els.oraclePanel.hidden = true;
       }
@@ -2228,7 +2228,7 @@
         els.visitorPanel.hidden = false;
         els.visitorImage.src = assetPath(state.encounterSlug, "b");
         els.visitorImage.alt = `${visitor.name}のイラスト`;
-        els.visitorText.textContent = `今夜は「${visitor.name}」が遊びに来ました。妖怪図鑑に新しい記録が加わっています。`;
+        els.visitorText.textContent = `今日は「${visitor.name}」が図鑑ゲストとして登場しました。妖怪図鑑に新しい記録が加わっています。`;
       } else {
         els.visitorPanel.hidden = true;
       }
@@ -2249,8 +2249,8 @@
 
     function renderBook() {
       if (!state.savedGuardian) {
-        els.bookProgress.textContent = "守護妖怪を診断すると、妖怪図鑑が始まります。";
-        els.bookGrid.innerHTML = '<p class="empty-note">まずは十二の問いに答えて、守護妖怪を呼び出してください。</p>';
+        els.bookProgress.textContent = "妖怪タイプを診断すると、妖怪図鑑が始まります。";
+        els.bookGrid.innerHTML = '<p class="empty-note">まずは十二の質問に答えて、あなたの妖怪タイプを確認してください。</p>';
         return;
       }
       els.bookProgress.textContent = `${state.collection.length} / ${yokaiProfiles.length}体を記録`;
@@ -2262,10 +2262,10 @@
         const card = document.createElement("article");
         card.className = `book-card${unlocked ? "" : " is-locked"}${isGuardian ? " is-guardian" : ""}`;
         card.innerHTML = `
-          ${isGuardian ? '<span class="book-badge">守護妖怪</span>' : unlocked ? '<span class="book-badge">遭遇済み</span>' : ''}
+          ${isGuardian ? '<span class="book-badge">あなたのタイプ</span>' : unlocked ? '<span class="book-badge">遭遇済み</span>' : ''}
           <img class="book-image" src="${assetPath(slug, index % 2 === 0 ? "a" : "b")}" alt="${unlocked ? `${profile.name}のイラスト` : "未発見の妖怪"}" />
           <h3>${unlocked ? profile.name : "？？？"}</h3>
-          <p>${unlocked ? profile.summary : "別の日に守護妖怪へ会いに来ると、この妖怪が姿を見せるかもしれません。"}</p>
+          <p>${unlocked ? profile.summary : "別の日にサイトを訪れると、この妖怪が図鑑へ加わることがあります。"}</p>
         `;
         els.bookGrid.appendChild(card);
       });
@@ -2335,7 +2335,7 @@
 
       ctx.fillStyle = "#d8b260";
       ctx.font = "24px sans-serif";
-      ctx.fillText(mode === "daily" ? "TODAY'S YOKAI ORACLE" : "MY GUARDIAN YOKAI", 570, 150);
+      ctx.fillText(mode === "daily" ? "TODAY'S ACTION ADVICE" : "MY YOKAI TYPE", 570, 150);
       ctx.fillStyle = "#f6f2e8";
       ctx.font = "72px serif";
       ctx.fillText(profile.name, 570, 240);
@@ -2352,16 +2352,16 @@
       wrapCanvasText(ctx, text, 570, 350, 490, 46, 4);
       ctx.fillStyle = "#8e8981";
       ctx.font = "22px sans-serif";
-      ctx.fillText("妖怪占い", 570, 520);
+      ctx.fillText("妖怪診断", 570, 520);
 
       const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png", .95));
       const filename = `yokai-${mode}-${state.savedGuardian.primarySlug}.png`;
       const file = new File([blob], filename, { type: "image/png" });
-      const textShare = mode === "daily" ? `今日の守護妖怪は「${profile.name}」です。` : `私の守護妖怪は「${profile.name}」でした。`;
+      const textShare = mode === "daily" ? `私の妖怪タイプは「${profile.name}」です。今日の行動アドバイスも確認しました。` : `私の妖怪タイプは「${profile.name}」でした。`;
 
       try {
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: "妖怪占い", text: textShare });
+          await navigator.share({ files: [file], title: "妖怪診断", text: textShare });
         } else {
           const link = document.createElement("a");
           link.href = URL.createObjectURL(blob);
@@ -2379,12 +2379,12 @@
       if (!state.savedGuardian) return;
       const profile = profileBySlug(state.savedGuardian.primarySlug);
       const message = oracleData[state.savedGuardian.primarySlug].messages[dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length];
-      const text = `今日の「${profile.name}」からのお告げ：${message}`;
+      const text = `今日の「${profile.name}」タイプ向けアドバイス：${message}`;
       try {
-        if (navigator.share) await navigator.share({ title: "今日の妖怪お告げ", text, url: location.href });
+        if (navigator.share) await navigator.share({ title: "今日の行動アドバイス", text, url: location.href });
         else if (navigator.clipboard) {
           await navigator.clipboard.writeText(`${text}\n${location.href}`);
-          showToast("今日のお告げをコピーしました");
+          showToast("今日のアドバイスをコピーしました");
         }
       } catch (error) {
         if (error && error.name !== "AbortError") showToast("共有を完了できませんでした");
@@ -2410,8 +2410,8 @@
       if (!state.result) return;
       const name = state.result.primary.profile.name;
       const title = state.result.primary.profile.title;
-      const text = `私の守護妖怪は「${name}」でした。${title}｜妖怪占い`;
-      const shareData = { title: "妖怪占い", text, url: location.href };
+      const text = `私の妖怪タイプは「${name}」でした。${title}｜妖怪診断`;
+      const shareData = { title: "妖怪診断", text, url: location.href };
 
       try {
         if (navigator.share) {
