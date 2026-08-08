@@ -1,0 +1,174 @@
+{
+  "pattern-a": [
+    {
+      "slug": "kappa",
+      "nameJa": "河童",
+      "file": "pattern-a/kappa.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "tengu",
+      "nameJa": "天狗",
+      "file": "pattern-a/tengu.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "yuki-onna",
+      "nameJa": "雪女",
+      "file": "pattern-a/yuki-onna.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "zashiki-warashi",
+      "nameJa": "座敷童子",
+      "file": "pattern-a/zashiki-warashi.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "karakasa-kozo",
+      "nameJa": "唐傘小僧",
+      "file": "pattern-a/karakasa-kozo.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nurikabe",
+      "nameJa": "ぬりかべ",
+      "file": "pattern-a/nurikabe.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nekomata",
+      "nameJa": "猫又",
+      "file": "pattern-a/nekomata.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nurarihyon",
+      "nameJa": "ぬらりひょん",
+      "file": "pattern-a/nurarihyon.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "rokurokubi",
+      "nameJa": "ろくろ首",
+      "file": "pattern-a/rokurokubi.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "ittan-momen",
+      "nameJa": "一反木綿",
+      "file": "pattern-a/ittan-momen.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nopperabo",
+      "nameJa": "のっぺらぼう",
+      "file": "pattern-a/nopperabo.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "umibozu",
+      "nameJa": "海坊主",
+      "file": "pattern-a/umibozu.webp",
+      "width": 512,
+      "height": 512
+    }
+  ],
+  "pattern-b": [
+    {
+      "slug": "kappa",
+      "nameJa": "河童",
+      "file": "pattern-b/kappa.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "tengu",
+      "nameJa": "天狗",
+      "file": "pattern-b/tengu.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "yuki-onna",
+      "nameJa": "雪女",
+      "file": "pattern-b/yuki-onna.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "zashiki-warashi",
+      "nameJa": "座敷童子",
+      "file": "pattern-b/zashiki-warashi.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "karakasa-kozo",
+      "nameJa": "唐傘小僧",
+      "file": "pattern-b/karakasa-kozo.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nurikabe",
+      "nameJa": "ぬりかべ",
+      "file": "pattern-b/nurikabe.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nekomata",
+      "nameJa": "猫又",
+      "file": "pattern-b/nekomata.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nurarihyon",
+      "nameJa": "ぬらりひょん",
+      "file": "pattern-b/nurarihyon.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "rokurokubi",
+      "nameJa": "ろくろ首",
+      "file": "pattern-b/rokurokubi.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "ittan-momen",
+      "nameJa": "一反木綿",
+      "file": "pattern-b/ittan-momen.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "nopperabo",
+      "nameJa": "のっぺらぼう",
+      "file": "pattern-b/nopperabo.webp",
+      "width": 512,
+      "height": 512
+    },
+    {
+      "slug": "umibozu",
+      "nameJa": "海坊主",
+      "file": "pattern-b/umibozu.webp",
+      "width": 512,
+      "height": 512
+    }
+  ]
+}

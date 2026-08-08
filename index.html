@@ -1268,10 +1268,40 @@
       .returning-panel { padding: 22px 17px; }
     }
 
+
+    .language-toggle {
+      position: fixed;
+      top: calc(16px + var(--safe-top));
+      right: 78px;
+      z-index: 50;
+      min-width: 60px;
+      height: 36px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(10,11,16,.74);
+      color: var(--text);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(0,0,0,.24);
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+    .language-toggle:hover { background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.3); }
+    .language-toggle:active { transform: scale(.97); }
+    @media (max-width: 540px) {
+      .language-toggle { top: calc(12px + var(--safe-top)); right: 70px; min-width: 56px; height: 34px; padding: 0 10px; }
+    }
+
   </style>
 </head>
 <body>
   <main class="app">
+    <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch to English">EN</button>
     <div class="ambient"></div>
     <div class="mist"></div>
 
@@ -1767,6 +1797,470 @@
     const approachTips = ["最初の5分だけ試す", "一度書き出して整理する", "静かな場所で取り組む", "誰かに途中経過を見せる", "一つずつ順番に進める", "終える時間を先に決める"];
     const recommendedActions = ["机の上を一か所整える", "普段と違う道を歩く", "短いお礼を伝える", "予定を一つ書き出す", "五分だけ外の空気を吸う", "不要な通知を一つ切る", "好きな音を一曲聴く", "水をゆっくり飲む"];
 
+
+    const LANGUAGE_KEY = "yoCreateLanguage";
+    let currentLanguage = (() => {
+      try { return localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "ja"; }
+      catch (error) { return "ja"; }
+    })();
+
+    const questionTranslations = [
+      "When something looks interesting, I want to start even before the plan is fully worked out.",
+      "I often notice even small changes in another person's expression or tone of voice.",
+      "Even among many strangers, I can start conversations or join a group on my own.",
+      "Before making an important decision, I like to prepare by imagining what could go wrong.",
+      "Even if people around me disagree, I tend to stick with my own judgment when I believe it is right.",
+      "Sometimes I feel that one choice is right even when I cannot clearly explain why.",
+      "Even when something interests me, I often have trouble taking the first step.",
+      "After spending time with many people, I often want to be alone and quiet for a while.",
+      "Even after someone says something unpleasant to me, I can usually move on without dwelling on it.",
+      "Even if some details are still uncertain, I am comfortable starting first and adjusting later.",
+      "I feel uneasy making an important decision unless someone I trust agrees with me.",
+      "I usually value proven methods and objective data more than instinct or atmosphere."
+    ];
+
+    const answerTranslations = [
+      "Very much like me",
+      "Somewhat like me",
+      "Neither",
+      "Not very much like me",
+      "Not like me at all"
+    ];
+
+    const labelTranslations = {
+      action: "Initiative",
+      social: "Sociability",
+      sensitivity: "Sensitivity",
+      caution: "Caution",
+      independence: "Independence",
+      intuition: "Intuition"
+    };
+
+    const profileTranslations = {
+      "kappa": {
+        name: "Kappa",
+        title: "A curious spirit who plays by the water",
+        summary: "You naturally approach new people and experiences and brighten the atmosphere around you. Curiosity and flexibility can lead you to unexpected discoveries and connections.",
+        strength: "You adapt quickly to change and can move things forward while keeping others engaged. In competitive moments, you also show quick, light-footed judgment.",
+        traits: ["Curiosity", "Approachability", "Flexibility", "Competitive instinct"],
+        shadow: "When you chase stimulation too strongly, momentum or winning can take over. Before you begin, ask yourself what will remain if you keep going.",
+        love: "You enjoy relationships where you can laugh together like friends. You tend to pair well with someone who can share both exciting and quiet moments.",
+        work: "You thrive in sales, service, planning, events, games, and other work where change and human reactions are part of the job.",
+        secondary: "Alongside your ability to enjoy people, your second yokai tendency also influences your decisions and your preferred interpersonal distance."
+      },
+      "tengu": {
+        name: "Tengu",
+        title: "A solitary seeker aiming higher",
+        summary: "You have standards of your own and tend to carve out a path through effort. You bring strong resolve and clear judgment to difficult situations.",
+        strength: "Focus, ambition, and responsibility are major strengths. The more expertise you build, the more naturally you can show others a direction forward.",
+        traits: ["Ambition", "Focus", "Independence", "Decisiveness"],
+        shadow: "If you refuse to show weakness, you may carry too much alone and shut out other viewpoints. Delegating is also a form of strength.",
+        love: "You do not open up quickly, but you are sincere once trust is established. Relationships built on mutual independence and respect suit you well.",
+        work: "Specialist, technical, management, research, and teaching roles suit you, especially where skill is reflected clearly in results.",
+        secondary: "Beneath your strong independence, your second yokai tendency adds another layer of emotion and interpersonal style."
+      },
+      "yuki-onna": {
+        name: "Yuki-onna",
+        title: "A quiet observer of the heart",
+        summary: "You are sensitive to changes that others may miss. Beneath a calm exterior, you carry deep feeling, intuition, and a strong sense of beauty.",
+        strength: "You are skilled at reading the atmosphere, staying composed, trusting subtle impressions, and noticing details that reveal what really matters.",
+        traits: ["Observation", "Sensitivity", "Composure", "Aesthetic sense"],
+        shadow: "When you fear being hurt, you may close yourself off suddenly. Rather than waiting to be understood, try putting a small part of your feeling into words.",
+        love: "You take time to fall in love, but care deeply once you trust someone. Clear and sincere words matter more to you than vague signals.",
+        work: "Design, writing, analysis, research, counseling, and other work that uses sensitivity and sustained focus can suit you well.",
+        secondary: "Your second yokai tendency influences how your sensitivity is expressed through action and social behavior."
+      },
+      "zashiki-warashi": {
+        name: "Zashiki-warashi",
+        title: "A harmonizer who puts people at ease",
+        summary: "You naturally soften the atmosphere and make groups feel safer. Even without seeking attention, your presence can bring warmth to a place.",
+        strength: "Empathy, cooperation, and attentiveness help you connect people and notice small positive things that others may overlook.",
+        traits: ["Kindness", "Cooperation", "Reassurance", "Awareness"],
+        shadow: "When your need to be useful grows too strong, you may put yourself last. Give yourself some of the same care you offer others.",
+        love: "You are good at creating a comfortable, supportive relationship. Things stay healthier when you allow yourself to receive as well as give.",
+        work: "Education, welfare, HR, customer service, administration, and hospitality are good fits for your ability to support people and environments.",
+        secondary: "Your supportive nature is balanced by the assertiveness or caution shown by your second yokai tendency."
+      },
+      "karakasa-kozo": {
+        name: "Karakasa-kozo",
+        title: "An expressive spirit who creates surprise and laughter",
+        summary: "You see the world from a slightly unusual angle and can change a dull atmosphere. Your individuality naturally creates surprise and amusement.",
+        strength: "Originality, charm, and expressive energy are strong points. You can even turn mistakes into something interesting and draw attention naturally.",
+        traits: ["Originality", "Charm", "Expression", "Quickness"],
+        shadow: "When you worry about being overlooked, you may hide genuine feelings behind humor. Showing what you truly mean can make your appeal deeper.",
+        love: "You enjoy playful and unexpected romance. Progress comes more easily when you let one sincere sentence stand on its own instead of turning everything into a joke.",
+        work: "Advertising, video, design, sales, social media, and events suit your ability to create visible reactions.",
+        secondary: "Your expressive style is also shaped by the caution or independence of your second yokai tendency."
+      },
+      "nurikabe": {
+        name: "Nurikabe",
+        title: "A steadfast wall that protects what matters",
+        summary: "You move forward steadily rather than rushing and take protecting important people and places seriously. Once trust is built, you do not discard it easily.",
+        strength: "Patience, consistency, and responsibility help you spot risks early and perform especially well over the long term.",
+        traits: ["Patience", "Steadiness", "Consistency", "Protection"],
+        shadow: "When protection becomes too strong, it can block change and challenge as well. Separate what truly needs guarding from what can be released.",
+        love: "You build trust slowly and value reliability over flashiness. A stable relationship with someone who keeps promises tends to suit you.",
+        work: "Management, accounting, legal, maintenance, manufacturing, and infrastructure work fit your accuracy and persistence.",
+        secondary: "Inside your steady nature, your second yokai tendency adds flexibility and emotional movement."
+      },
+      "nekomata": {
+        name: "Nekomata",
+        title: "An intuitive sage with two faces",
+        summary: "You read people and situations sharply and know how to choose your position. You can balance friendliness with healthy caution.",
+        strength: "Intuition, insight, independence, and risk awareness help you adapt without losing your own center.",
+        traits: ["Intuition", "Insight", "Independence", "Presence"],
+        shadow: "When suspicion becomes too strong, you may test people or focus too much on control. Revealing one honest feeling is often the fastest path to trust.",
+        love: "You dislike being controlled yet still want a deep bond. An equal relationship with room for independence tends to fit you best.",
+        work: "Negotiation, marketing, research, beauty, creative work, and consulting can make good use of your insight.",
+        secondary: "Your sharp intuition is colored by the sociability and initiative of your second yokai tendency."
+      },
+      "nurarihyon": {
+        name: "Nurarihyon",
+        title: "A social tactician who naturally finds the center",
+        summary: "You read the flow of a situation and its relationships, then move things forward without forcing direct conflict.",
+        strength: "Negotiation, situational judgment, and networking help you organize different viewpoints and find workable compromises.",
+        traits: ["Negotiation", "Judgment", "Leadership", "Flexibility"],
+        shadow: "If avoiding inconvenience becomes a habit, responsibility can become vague too. Choosing to own your part is what builds lasting trust.",
+        love: "Your relaxed manner can be attractive, but important relationships deepen when you state your intentions clearly instead of leaving them ambiguous.",
+        work: "Management, sales, leadership, mediation, and production roles suit your ability to move both people and situations.",
+        secondary: "Your social skill gains a distinct flavor from the emotions and independence shown by your second yokai tendency."
+      },
+      "rokurokubi": {
+        name: "Rokurokubi",
+        title: "An explorer whose curiosity reaches far",
+        summary: "You rarely stop at what is right in front of you. You want to understand unfamiliar worlds and what people really mean, and you dig deeply into what interests you.",
+        strength: "Curiosity, research, imagination, and observation help you notice small inconsistencies and follow them toward useful answers.",
+        traits: ["Curiosity", "Research", "Imagination", "Observation"],
+        shadow: "When thinking goes too far, uncertainty can grow into anxiety or suspicion. Leave some room for things you do not need to know yet.",
+        love: "You pay close attention to words and behavior. Asking directly instead of reaching conclusions through imagination alone can bring reassurance.",
+        work: "Research, editing, journalism, analysis, IT, and writing suit your ability to investigate deeply and organize information.",
+        secondary: "Where your curiosity goes is influenced by the sociability and independence of your second yokai tendency."
+      },
+      "ittan-momen": {
+        name: "Ittan-momen",
+        title: "A free-moving spirit that rides the wind",
+        summary: "You tend to act before overthinking and open paths through momentum. You handle changing environments well and can move on without clinging to the past.",
+        strength: "Initiative, decisiveness, and fast transitions help you create momentum even in unfamiliar places.",
+        traits: ["Initiative", "Freedom", "Decisiveness", "Adaptability"],
+        shadow: "If freedom becomes the only priority, you may leave responsibilities unfinished. Give finishing the same importance as starting.",
+        love: "You tend to enter romance intuitively. A partner who enjoys new experiences with you without excessive restriction is a good match.",
+        work: "Travel, sales, logistics, sports, entrepreneurship, and short-term projects suit your need for movement.",
+        secondary: "Your free-moving style is balanced by the emotional depth or caution of your second yokai tendency."
+      },
+      "nopperabo": {
+        name: "Noppera-bo",
+        title: "A shapeless empath who reflects others",
+        summary: "You can adjust to others and find the role that is needed in a situation. You are relatively free of prejudice and can accept many different feelings.",
+        strength: "Empathy, adaptability, and listening skills help you step between people and reduce tension.",
+        traits: ["Empathy", "Adaptability", "Listening", "Flexibility"],
+        shadow: "If you adapt too much, you can lose sight of what you want. Choose the version of yourself that feels calm, not merely the one others prefer.",
+        love: "You can meet a partner where they are, but may tolerate too much. Small honest statements make the relationship more stable.",
+        work: "Customer service, HR, assistant roles, counseling, acting, and support work suit your ability to understand others.",
+        secondary: "Your high empathy combines with the assertiveness or initiative of your second yokai tendency."
+      },
+      "umibozu": {
+        name: "Umibozu",
+        title: "A solitary guardian with deep resolve",
+        summary: "You carry strong resolve beneath a quiet exterior. You do not reveal everything easily, but you invest great energy in what you decide to protect.",
+        strength: "Mental endurance, conviction, and crisis response help you hold a long-term view and support others when responsibility is heavy.",
+        traits: ["Endurance", "Conviction", "Crisis response", "Protectiveness"],
+        shadow: "You may store frustration until it erupts all at once. Communicate what is happening before you reach your limit.",
+        love: "You prefer deep connection over casual relationships. The key is expressing strong affection as trust rather than control.",
+        work: "Crisis management, leadership, research, specialist work, and large-scale projects can suit your tolerance for responsibility.",
+        secondary: "How you express your strong will is influenced by the sociability and sensitivity of your second yokai tendency."
+      }
+    };
+
+    const moodTranslations = [
+      "In a good mood",
+      "Quietly thinking",
+      "Staying close and calm",
+      "A little restless",
+      "Deeply focused",
+      "Keeping an eye on you"
+    ];
+
+    const themeTranslations = {
+      challenge: "A new step",
+      calm: "Peace of mind",
+      bond: "Connection with others"
+    };
+
+    const oracleTranslations = {
+      "kappa": {
+        messages: [
+          "Kappa has noticed a new ripple on the water. Do not overlook a small curiosity today.",
+          "Kappa is waving you over. Making time to laugh with someone can help you reset your mood.",
+          "Kappa is unusually quiet. Before acting on momentum alone, look once at where the choice may lead.",
+          "Kappa is watching a path you do not usually take. One small change may lead to a useful discovery."
+        ],
+        letter: "Your curiosity can bring new movement into everyday life. After seven visits, choose one thing you want to nurture instead of chasing interest alone."
+      },
+      "tengu": {
+        messages: [
+          "Tengu is looking over the road from high ground. Give the long-term goal priority over immediate reactions today.",
+          "Tengu has quietly set down the feather fan. Let someone else handle one thing instead of carrying everything yourself.",
+          "The mountain air is clear. Bring a skill you have worked on into view without downplaying it.",
+          "Tengu is checking the ground beneath its feet. The higher you aim, the more carefully you should handle the basics."
+        ],
+        letter: "Strength is not only enduring alone. After seven visits, you may be ready to share responsibility with someone you trust."
+      },
+      "yuki-onna": {
+        messages: [
+          "Yuki-onna is watching quiet snow. Do not rush to define a feeling before it has fully taken shape.",
+          "There is a little warmth in the cold wind. Try sharing one short, honest feeling with someone you trust.",
+          "The air around Yuki-onna is clear. Use something you find beautiful as a clue for sorting out your own feelings.",
+          "Yuki-onna is keeping some distance. If you are tired, you do not have to force yourself to appear cheerful."
+        ],
+        letter: "Your sensitivity is not weakness; it is an ability to notice subtle change. After seven visits, use that sensitivity for yourself as well as for others."
+      },
+      "zashiki-warashi": {
+        messages: [
+          "Zashiki-warashi is tidying the room. A small bit of organization can create fresh space in your mind too.",
+          "Zashiki-warashi looks pleased. A small kindness toward someone can help improve the atmosphere around you.",
+          "Make a place for yourself today as well. Check what you want before automatically putting someone else first.",
+          "Zashiki-warashi is looking around a familiar room. Adjusting one nearby space can make it easier to reset your mood."
+        ],
+        letter: "The reassurance you give others supports your relationships. On your seventh visit, return some of that kindness to yourself."
+      },
+      "karakasa-kozo": {
+        messages: [
+          "Karakasa-kozo seems to have an idea. Make it visible first instead of waiting for perfect quality.",
+          "Karakasa-kozo is hopping on one foot. Showing someone a work in progress can reveal the next thing to improve.",
+          "Share one honest feeling hidden behind a joke today. Your intention will be easier for the other person to understand.",
+          "The dull atmosphere is ready to crack open. Add one small idea that feels unmistakably like you."
+        ],
+        letter: "Your individuality can do more than surprise people; it can change stagnant situations. After seven visits, leave behind one thing you truly mean."
+      },
+      "nurikabe": {
+        messages: [
+          "Nurikabe is standing quietly. Rather than rushing, reinforce one part that feels fragile today.",
+          "Nurikabe has opened a little space in the road. Allow one small exception instead of rejecting change completely.",
+          "You can see what needs protection. Set a calm but clear boundary around requests you should decline.",
+          "The ground is stable. Look back at something you have continued for a long time and notice what has accumulated."
+        ],
+        letter: "What you have protected will not collapse easily. After seven visits, turn part of the wall into a door and allow a new flow in."
+      },
+      "nekomata": {
+        messages: [
+          "Nekomata is watching while its tail sways. Trust your intuition, but avoid testing people just to see how they react.",
+          "Nekomata's eyes are bright. Use a strength or charm of yours without minimizing it.",
+          "Time alone can organize your thoughts today. You do not have to match someone else's pace.",
+          "Nekomata has lit a small flame. Showing one honest feeling can deepen trust."
+        ],
+        letter: "Because you notice so much, you do not hand over trust easily. After seven visits, add the option of believing, not only evaluating."
+      },
+      "nurarihyon": {
+        messages: [
+          "Nurarihyon is reading the flow of the room. Arrange the natural order of things instead of pushing head-on.",
+          "Nurarihyon has set down the tea. Make one reply clear that you have been leaving vague.",
+          "Use today to maintain a relationship. Send a short, low-pressure message to someone you have not contacted in a while.",
+          "You may look relaxed, but fatigue can still build underneath. Make space for rest that no one else needs to see."
+        ],
+        letter: "You can move people and situations naturally. After seven visits, use that ability to create a path everyone can move through, not to avoid responsibility."
+      },
+      "rokurokubi": {
+        messages: [
+          "Rokurokubi is looking into the distance. Research one thing that interests you and organize only the information you need now.",
+          "Not knowing everything matters too. Put one question without an answer back on the shelf for now.",
+          "Rokurokubi is listening to someone's voice. Receive the words as they are before searching for hidden meaning.",
+          "Your curiosity is strong today. Choose one small question, investigate it fully, and leave a record of what you found."
+        ],
+        letter: "Your curiosity reaches far, like a long neck stretching toward the truth. After seven visits, choose one important question instead of trying to know everything."
+      },
+      "ittan-momen": {
+        messages: [
+          "Ittan-momen has caught the wind. Take a light first step instead of continuing to think about it.",
+          "Ittan-momen is looking at another route. You can change methods if another approach feels more convincing.",
+          "You already have momentum. Finish one thing you started so the next action becomes easier.",
+          "Ittan-momen seems ready to travel. Even changing your location for a while can help reorganize your mood and thoughts."
+        ],
+        letter: "Your lightness is a wing that helps you enter new worlds. On your seventh visit, develop the power to finish as deliberately as you begin."
+      },
+      "nopperabo": {
+        messages: [
+          "Noppera-bo is quietly facing you. Choose one thing you want today rather than what someone else expects.",
+          "Noppera-bo is listening carefully. Do not carry home emotions that are not yours to hold.",
+          "A small honest statement is useful today: say no, say you need rest, or say what you want.",
+          "Noppera-bo is standing before a mirror. Remember who you are when you are not performing a role for anyone."
+        ],
+        letter: "Because you can stay close to many people, your own outline can sometimes fade. After seven visits, protect some time in which you do not have to adapt to anyone."
+      },
+      "umibozu": {
+        messages: [
+          "Umibozu is floating on a calm sea. The bigger the decision, the less you need to rush an answer today.",
+          "Something is moving in deeper water. Tell someone you trust what is happening before endurance reaches its limit.",
+          "Strong waves are rising around Umibozu. Clarify what you want to protect and be direct when the situation calls for it.",
+          "Umibozu is looking over a quiet sea. Take time alone and organize the direction you want to follow over the long term."
+        ],
+        letter: "Your depth and strength exist to protect what matters. After seven visits, do not use solitude as your only shield; let someone trustworthy come closer."
+      }
+    };
+
+    const themeAdviceTranslations = {
+      challenge: [
+        "Do not wait for perfect preparation. Turn the task into a step small enough to begin now.",
+        "Break it into something you can finish today and start with only the first piece.",
+        "Create a work-in-progress version you can show someone; the next improvement will become clearer.",
+        "Add one new idea to the method you normally use."
+      ],
+      calm: [
+        "Remove one item from your schedule and deliberately create some empty space.",
+        "Do not rush to a conclusion. Wait until your breathing settles before you reply.",
+        "Tidying one place in your field of view can also reduce mental noise.",
+        "Use a short walk or a warm drink to bring your attention back into your body."
+      ],
+      bond: [
+        "Choose one short, direct sentence instead of a long explanation.",
+        "Before answering, make listening to the other person all the way through the priority.",
+        "Send a short, low-pressure message to someone you have not contacted in a while.",
+        "Do not only offer help. Ask for one small thing yourself and let the relationship become more balanced."
+      ]
+    };
+
+    const supportItemTranslations = ["A white handkerchief", "A warm drink", "A small mirror", "A blue accessory", "A round snack", "A woody scent", "A favorite pen", "A soft cloth", "A glass of water", "An old photo", "A silver accessory", "A small key"];
+    const approachTipTranslations = ["Try it for just five minutes", "Write it down once and organize it", "Work in a quiet place", "Show someone your progress", "Proceed one step at a time", "Choose a stopping time first"];
+    const recommendedActionTranslations = ["Tidy one small area of your desk", "Walk a route you do not usually take", "Send a short thank-you", "Write down one upcoming task", "Step outside for five minutes", "Turn off one unnecessary notification", "Listen to one song you like", "Drink a glass of water slowly"];
+
+    function isEnglish() { return currentLanguage === "en"; }
+    function profileSlug(profile) { return slugByName[profile.name]; }
+    function profileText(profile, field) {
+      if (!isEnglish()) return profile[field];
+      const translated = profileTranslations[profileSlug(profile)];
+      return translated && translated[field] !== undefined ? translated[field] : profile[field];
+    }
+    function profileName(profile) { return profileText(profile, "name"); }
+    function questionTextAt(index) { return isEnglish() ? questionTranslations[index] : questions[index].text; }
+    function answerLabelAt(index) { return isEnglish() ? answerTranslations[index] : answerOptions[index].label; }
+    function scoreLabel(key) { return isEnglish() ? labelTranslations[key] : labels[key]; }
+    function moodNameAt(index) { return isEnglish() ? moodTranslations[index] : dailyMoods[index].name; }
+    function themeName(theme) { return isEnglish() ? themeTranslations[theme.key] : theme.name; }
+    function oracleMessage(slug, index) { return isEnglish() ? oracleTranslations[slug].messages[index] : oracleData[slug].messages[index]; }
+    function oracleLetter(slug) { return isEnglish() ? oracleTranslations[slug].letter : oracleData[slug].letter; }
+    function themeAdviceText(key, index) { return isEnglish() ? themeAdviceTranslations[key][index] : themeAdvice[key][index]; }
+    function recommendedAction(index) { return isEnglish() ? recommendedActionTranslations[index] : recommendedActions[index]; }
+    function approachTip(index) { return isEnglish() ? approachTipTranslations[index] : approachTips[index]; }
+    function supportItem(index) { return isEnglish() ? supportItemTranslations[index] : supportItems[index]; }
+
+    const staticUi = {
+      ja: {
+        title: "妖怪診断｜あなたに近い妖怪タイプは？",
+        description: "12の質問から考え方や行動の傾向を分析し、あなたに近い妖怪タイプと毎日の行動アドバイスを紹介する無料の妖怪診断。登録不要です。",
+        ogDescription: "12の質問から妖怪タイプを診断。性格傾向と毎日の行動アドバイスを確認でき、妖怪図鑑も少しずつ増えていきます。",
+        toggle: "EN",
+        toggleAria: "Switch to English"
+      },
+      en: {
+        title: "Yokai Diagnosis | Which Yokai Type Are You?",
+        description: "A free 12-question personality diagnosis that matches your thinking and behavior patterns with a Japanese yokai type and offers practical daily advice. No registration required.",
+        ogDescription: "Discover your yokai personality type in 12 questions, review your traits, get practical daily advice, and gradually expand your yokai collection.",
+        toggle: "日本語",
+        toggleAria: "日本語に切り替える"
+      }
+    };
+
+    const staticTextRules = [
+      ["#mainTitle", "妖怪診断", "Yokai Diagnosis"],
+      ["#firstVisitBlock .lead", "十二の質問への回答から、あなたの考え方や行動に最も近い妖怪タイプを診断します。深く考えすぎず、普段の自分に近い答えを選んでください。", "Answer 12 questions to find the yokai type closest to your way of thinking and acting. Do not overthink it; choose the answer that feels most like your usual self."],
+      [".info-strip span:nth-child(1)", "無料", "Free"],
+      [".info-strip span:nth-child(2)", "登録不要", "No sign-up"],
+      [".info-strip span:nth-child(3)", "約2分", "About 2 min"],
+      [".info-strip span:nth-child(4)", "全12問", "12 questions"],
+      ["#startBtn", "鳥居をくぐる", "Start the Diagnosis"],
+      [".returning-panel .visit-strip-head span", "7日間の記録", "7-Day Record"],
+      ["#dailyBtn", "今日のアドバイスを見る", "View Today's Advice"],
+      ["#savedResultBtn", "診断結果を見る", "View My Result"],
+      ["#bookBtn", "妖怪図鑑", "Yokai Collection"],
+      ["#rediagnoseBtn", "診断をやり直す", "Retake the Diagnosis"],
+      [".progress-text span:first-child", "回答を確認しています", "Question Progress"],
+      [".reveal-title", "回答を分析しています", "Analyzing Your Answers"],
+      [".reveal-copy", "あなたの回答から、六つの性格傾向を照合しています。", "Comparing six personality traits based on your answers."],
+      [".result-grid .result-card:nth-child(1) h3", "あなたの強み", "Your Strengths"],
+      [".result-grid .result-card:nth-child(2) h3", "注意したい状態", "Watch Out For"],
+      [".result-grid .result-card:nth-child(3) h3", "恋愛の傾向", "Relationship Tendencies"],
+      [".result-grid .result-card:nth-child(4) h3", "仕事の傾向", "Work Tendencies"],
+      [".result-grid .result-card:nth-child(5) h3", "六つの気質", "Six Traits"],
+      ["#goDailyBtn", "今日のアドバイスへ", "Today's Advice"],
+      ["#shareImageBtn", "結果画像を作る", "Create Result Image"],
+      ["#shareBtn", "結果を共有", "Share Result"],
+      ["#resultBookBtn", "妖怪図鑑", "Yokai Collection"],
+      ["#restartBtn", "もう一度診断する", "Retake Diagnosis"],
+      [".footer-note", "この診断は、質問への回答から考え方や行動の傾向を分類し、妖怪の特徴になぞらえて紹介するエンターテインメントコンテンツです。医療、心理、法律、金融その他の専門的な診断や判断を行うものではありません。結果とアドバイスは、ご自身を振り返るための参考としてお楽しみください。", "This is an entertainment personality experience that groups patterns in your answers and compares them with characteristics associated with Japanese yokai. It is not a medical, psychological, legal, financial, or other professional diagnosis. Use the results and advice as a prompt for personal reflection."],
+      ["#dailyScreen .page-topbar h2", "今日の行動アドバイス", "Today's Action Advice"],
+      [".theme-panel h3", "今日、優先したいものを一つ選んでください", "Choose One Priority for Today"],
+      [".theme-panel p", "選んだテーマに合わせて、今日取り入れやすい行動案を表示します。", "Choose a theme to receive an action you can easily try today."],
+      ["#oraclePanel h3", "妖怪タイプ別アドバイス", "Advice for Your Yokai Type"],
+      [".oracle-item:nth-child(1) span", "おすすめの行動", "Suggested Action"],
+      [".oracle-item:nth-child(2) span", "取り組み方", "How to Approach It"],
+      [".oracle-item:nth-child(3) span", "役立つもの", "Something Useful"],
+      ["#dailyScreen .visit-strip-head span", "7日間の記録", "7-Day Record"],
+      ["#visitorPanel h3", "今日の図鑑ゲスト", "Today's Collection Guest"],
+      ["#letterPanel h3", "7日間を振り返って", "After Seven Visits"],
+      ["#dailyShareBtn", "今日のアドバイスを共有", "Share Today's Advice"],
+      ["#dailyResultBtn", "妖怪タイプの診断結果", "My Yokai Result"],
+      ["#bookScreen .page-topbar h2", "妖怪図鑑", "Yokai Collection"],
+      [".book-intro p", "診断された妖怪タイプは最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ図鑑へ加わることがあります。", "Your diagnosed yokai type is recorded immediately. On later visits, another yokai may be added to your collection one at a time."]
+    ];
+
+    function setNodeText(selector, ja, en) {
+      const node = document.querySelector(selector);
+      if (node) node.textContent = isEnglish() ? en : ja;
+    }
+
+    function localizedDate() {
+      return new Intl.DateTimeFormat(isEnglish() ? "en-US" : "ja-JP", {
+        timeZone: "Asia/Tokyo", month: "long", day: "numeric", weekday: "short"
+      }).format(new Date());
+    }
+
+    function applyStaticLanguage() {
+      const copy = staticUi[currentLanguage];
+      document.documentElement.lang = currentLanguage;
+      document.title = copy.title;
+      const desc = document.querySelector('meta[name="description"]');
+      if (desc) desc.content = copy.description;
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.content = isEnglish() ? "Yokai Diagnosis | Which Yokai Type Are You?" : "妖怪診断｜あなたに近い妖怪タイプは？";
+      const ogDesc = document.querySelector('meta[property="og:description"]');
+      if (ogDesc) ogDesc.content = copy.ogDescription;
+
+      staticTextRules.forEach(([selector, ja, en]) => setNodeText(selector, ja, en));
+
+      const subStrong = document.querySelector(".sub-result strong");
+      if (subStrong && subStrong.firstChild) subStrong.firstChild.nodeValue = isEnglish() ? "Another yokai tendency: " : "もう一つの妖怪傾向：";
+
+      const toggle = document.getElementById("languageToggle");
+      toggle.textContent = copy.toggle;
+      toggle.setAttribute("aria-label", copy.toggleAria);
+      document.getElementById("dailyBookBtn").textContent = isEnglish() ? "☷" : "帳";
+
+      document.getElementById("backBtn").setAttribute("aria-label", isEnglish() ? "Previous question" : "前の質問へ");
+      document.getElementById("quitBtn").setAttribute("aria-label", isEnglish() ? "Return to the beginning" : "最初に戻る");
+      document.getElementById("dailyHomeBtn").setAttribute("aria-label", isEnglish() ? "Back to yokai type home" : "妖怪タイプのホームへ戻る");
+      document.getElementById("dailyBookBtn").setAttribute("aria-label", isEnglish() ? "Yokai collection" : "妖怪図鑑");
+      document.getElementById("bookHomeBtn").setAttribute("aria-label", isEnglish() ? "Back to yokai type home" : "妖怪タイプのホームへ戻る");
+      document.getElementById("returningPanel").setAttribute("aria-label", isEnglish() ? "Yokai type home" : "妖怪タイプのホーム");
+      document.querySelector("#firstVisitBlock .info-strip").setAttribute("aria-label", isEnglish() ? "Usage information" : "利用情報");
+      document.getElementById("homeStampRow").setAttribute("aria-label", isEnglish() ? "Visit stamps" : "訪問印");
+      document.getElementById("dailyStampRow").setAttribute("aria-label", isEnglish() ? "Visit stamps" : "訪問印");
+    }
+
+    function refreshCurrentView() {
+      applyStaticLanguage();
+      renderQuestion();
+      updateHome();
+      if (state.result) renderResult();
+      if (screens.daily.classList.contains("is-active") && state.savedGuardian) renderDailyOracle();
+      if (screens.book.classList.contains("is-active")) renderBook();
+    }
+
+    function toggleLanguage() {
+      currentLanguage = isEnglish() ? "ja" : "en";
+      try { localStorage.setItem(LANGUAGE_KEY, currentLanguage); } catch (error) {}
+      refreshCurrentView();
+    }
+
+
     const screens = {
       intro: document.getElementById("introScreen"),
       quiz: document.getElementById("quizScreen"),
@@ -1872,12 +2366,6 @@
       return `${parts.year}-${parts.month}-${parts.day}`;
     }
 
-    function japaneseDate() {
-      return new Intl.DateTimeFormat("ja-JP", {
-        timeZone: "Asia/Tokyo", month: "long", day: "numeric", weekday: "short"
-      }).format(new Date());
-    }
-
     function hashString(value) {
       let hash = 2166136261;
       for (let i = 0; i < value.length; i += 1) {
@@ -1962,10 +2450,10 @@
       const mood = dailyMoods[dayHash % dailyMoods.length];
       const pattern = dayHash % 2 === 0 ? "a" : "b";
       els.homeYokaiImage.src = assetPath(state.savedGuardian.primarySlug, pattern);
-      els.homeYokaiImage.alt = `${profile.name}のイラスト`;
+      els.homeYokaiImage.alt = isEnglish() ? `${profileName(profile)} illustration` : `${profile.name}のイラスト`;
       setCharacterAnimation(els.homeYokaiImage, mood.animation);
-      els.homeYokaiName.textContent = profile.name;
-      els.homeYokaiTitle.textContent = profile.title;
+      els.homeYokaiName.textContent = profileName(profile);
+      els.homeYokaiTitle.textContent = profileText(profile, "title");
       els.homeVisitCount.textContent = `${Math.min(state.visits.length, 7)} / 7`;
       createStampRow(els.homeStampRow, state.visits.length);
     }
@@ -2035,7 +2523,7 @@
       const selected = state.answers[state.current];
       els.questionNumber.textContent = String(state.current + 1).padStart(2, "0");
       els.progressCount.textContent = `${state.current + 1} / ${questions.length}`;
-      els.questionText.textContent = question.text;
+      els.questionText.textContent = questionTextAt(state.current);
       els.backBtn.disabled = state.current === 0;
       els.answerList.innerHTML = "";
 
@@ -2049,7 +2537,7 @@
         const btn = document.createElement("button");
         btn.type = "button";
         btn.className = "answer-btn" + (selected === option.value ? " is-selected" : "");
-        btn.innerHTML = `<span class="answer-number">${index + 1}</span><span class="answer-copy">${option.label}</span>`;
+        btn.innerHTML = `<span class="answer-number">${index + 1}</span><span class="answer-copy">${answerLabelAt(index)}</span>`;
         btn.addEventListener("click", () => selectAnswer(option.value, btn));
         els.answerList.appendChild(btn);
       });
@@ -2131,27 +2619,33 @@
       const p = primary.profile;
       const s = secondary.profile;
 
-      els.resultName.textContent = p.name;
+      els.resultName.textContent = profileName(p);
       els.resultGlyph.textContent = p.glyph;
       const primarySlug = slugByName[p.name];
       els.resultImage.src = assetPath(primarySlug, "a");
-      els.resultImage.alt = `${p.name}のイラスト`;
+      els.resultImage.alt = isEnglish() ? `${profileName(p)} illustration` : `${p.name}のイラスト`;
       setCharacterAnimation(els.resultImage, "anim-float");
-      els.resultTitle.textContent = p.title;
-      els.resultSummary.textContent = p.summary;
-      els.resultStrength.textContent = p.strength;
-      els.resultShadow.textContent = p.shadow;
-      els.resultLove.textContent = p.love;
-      els.resultWork.textContent = p.work;
-      els.resultTraits.innerHTML = p.traits.map(trait => `<span class="trait">${trait}</span>`).join("");
-      els.secondaryName.textContent = s.name;
+      els.resultTitle.textContent = profileText(p, "title");
+      els.resultSummary.textContent = profileText(p, "summary");
+      els.resultStrength.textContent = profileText(p, "strength");
+      els.resultShadow.textContent = profileText(p, "shadow");
+      els.resultLove.textContent = profileText(p, "love");
+      els.resultWork.textContent = profileText(p, "work");
+      els.resultTraits.innerHTML = profileText(p, "traits").map(trait => `<span class="trait">${trait}</span>`).join("");
+      els.secondaryName.textContent = profileName(s);
 
       if (gap < 1) {
-        els.secondaryText.textContent = `二つの妖怪の距離が非常に近く、あなたは「${p.name}」と「${s.name}」の性質をほぼ同じ強さで持つ複合型です。${s.secondary}`;
+        els.secondaryText.textContent = isEnglish()
+          ? `The two closest yokai are almost tied. You show a blended type with both ${profileName(p)} and ${profileName(s)} traits at nearly equal strength. ${profileText(s, "secondary")}`
+          : `二つの妖怪の距離が非常に近く、あなたは「${p.name}」と「${s.name}」の性質をほぼ同じ強さで持つ複合型です。${s.secondary}`;
       } else if (gap < 3) {
-        els.secondaryText.textContent = `中心となるのは「${p.name}」ですが、「${s.name}」の気質も強く表れています。${s.secondary}`;
+        els.secondaryText.textContent = isEnglish()
+          ? `Your main type is ${profileName(p)}, but ${profileName(s)} traits also appear strongly. ${profileText(s, "secondary")}`
+          : `中心となるのは「${p.name}」ですが、「${s.name}」の気質も強く表れています。${s.secondary}`;
       } else {
-        els.secondaryText.textContent = `あなたの中心は明確に「${p.name}」です。ただし、状況によっては「${s.name}」の性質が補助的に現れます。${s.secondary}`;
+        els.secondaryText.textContent = isEnglish()
+          ? `Your core type is clearly ${profileName(p)}. Depending on the situation, ${profileName(s)} traits may appear as a supporting tendency. ${profileText(s, "secondary")}`
+          : `あなたの中心は明確に「${p.name}」です。ただし、状況によっては「${s.name}」の性質が補助的に現れます。${s.secondary}`;
       }
 
       els.scoreList.innerHTML = "";
@@ -2160,7 +2654,7 @@
         const row = document.createElement("div");
         row.className = "score-row";
         row.innerHTML = `
-          <span>${label}</span>
+          <span>${scoreLabel(key)}</span>
           <div class="score-track"><div class="score-fill" data-width="${(value / 5) * 100}%"></div></div>
           <span>${value.toFixed(1)}</span>
         `;
@@ -2194,13 +2688,13 @@
       const mood = dailyMoods[seed % dailyMoods.length];
       const pattern = seed % 2 === 0 ? "a" : "b";
 
-      els.dailyDate.textContent = japaneseDate();
-      els.dailyYokaiName.textContent = profile.name;
+      els.dailyDate.textContent = localizedDate();
+      els.dailyYokaiName.textContent = profileName(profile);
       els.dailyYokaiImage.src = assetPath(slug, pattern);
-      els.dailyYokaiImage.alt = `${profile.name}のイラスト`;
+      els.dailyYokaiImage.alt = isEnglish() ? `${profileName(profile)} illustration` : `${profile.name}のイラスト`;
       setCharacterAnimation(els.dailyYokaiImage, mood.animation);
-      els.dailyMood.textContent = `${mood.icon} ${mood.name}`;
-      els.dailyMessage.textContent = oracle.messages[seed % oracle.messages.length];
+      els.dailyMood.textContent = `${mood.icon} ${moodNameAt(dailyMoods.indexOf(mood))}`;
+      els.dailyMessage.textContent = oracleMessage(slug, seed % oracle.messages.length);
       els.dailyVisitCount.textContent = `${Math.min(state.visits.length, 7)} / 7`;
       createStampRow(els.dailyStampRow, state.visits.length);
 
@@ -2211,7 +2705,7 @@
         const button = document.createElement("button");
         button.type = "button";
         button.className = `theme-btn${selectedKey === theme.key ? " is-selected" : ""}`;
-        button.innerHTML = `<span class="theme-icon">${theme.icon}</span><span class="theme-name">${theme.name}</span>`;
+        button.innerHTML = `<span class="theme-icon">${theme.icon}</span><span class="theme-name">${themeName(theme)}</span>`;
         button.addEventListener("click", () => {
           localStorage.setItem(STORAGE_KEYS.daily, JSON.stringify({
             date: todayKey(), guardianSlug: slug, themeKey: theme.key
@@ -2224,10 +2718,10 @@
       if (selectedKey) {
         const themeSeed = dailySeed(selectedKey);
         els.oraclePanel.hidden = false;
-        els.oracleAdvice.textContent = themeAdvice[selectedKey][themeSeed % themeAdvice[selectedKey].length];
-        els.oracleAction.textContent = recommendedActions[(themeSeed + 2) % recommendedActions.length];
-        els.oracleTime.textContent = approachTips[(themeSeed + 3) % approachTips.length];
-        els.oracleItem.textContent = supportItems[(themeSeed + 5) % supportItems.length];
+        els.oracleAdvice.textContent = themeAdviceText(selectedKey, themeSeed % themeAdvice[selectedKey].length);
+        els.oracleAction.textContent = recommendedAction((themeSeed + 2) % recommendedActions.length);
+        els.oracleTime.textContent = approachTip((themeSeed + 3) % approachTips.length);
+        els.oracleItem.textContent = supportItem((themeSeed + 5) % supportItems.length);
       } else {
         els.oraclePanel.hidden = true;
       }
@@ -2236,15 +2730,17 @@
         const visitor = profileBySlug(state.encounterSlug);
         els.visitorPanel.hidden = false;
         els.visitorImage.src = assetPath(state.encounterSlug, "b");
-        els.visitorImage.alt = `${visitor.name}のイラスト`;
-        els.visitorText.textContent = `今日は「${visitor.name}」が図鑑ゲストとして登場しました。妖怪図鑑に新しい記録が加わっています。`;
+        els.visitorImage.alt = isEnglish() ? `${profileName(visitor)} illustration` : `${visitor.name}のイラスト`;
+        els.visitorText.textContent = isEnglish()
+          ? `${profileName(visitor)} is today's collection guest. A new entry has been added to your Yokai Collection.`
+          : `今日は「${visitor.name}」が図鑑ゲストとして登場しました。妖怪図鑑に新しい記録が加わっています。`;
       } else {
         els.visitorPanel.hidden = true;
       }
 
       if (state.visits.length >= 7) {
         els.letterPanel.hidden = false;
-        els.letterText.textContent = oracle.letter;
+        els.letterText.textContent = oracleLetter(slug);
       } else {
         els.letterPanel.hidden = true;
       }
@@ -2258,11 +2754,13 @@
 
     function renderBook() {
       if (!state.savedGuardian) {
-        els.bookProgress.textContent = "妖怪タイプを診断すると、妖怪図鑑が始まります。";
-        els.bookGrid.innerHTML = '<p class="empty-note">まずは十二の質問に答えて、あなたの妖怪タイプを確認してください。</p>';
+        els.bookProgress.textContent = isEnglish() ? "Complete the diagnosis to begin your Yokai Collection." : "妖怪タイプを診断すると、妖怪図鑑が始まります。";
+        els.bookGrid.innerHTML = isEnglish()
+          ? '<p class="empty-note">Answer the 12 questions first to discover your yokai type.</p>'
+          : '<p class="empty-note">まずは十二の質問に答えて、あなたの妖怪タイプを確認してください。</p>';
         return;
       }
-      els.bookProgress.textContent = `${state.collection.length} / ${yokaiProfiles.length}体を記録`;
+      els.bookProgress.textContent = isEnglish() ? `${state.collection.length} / ${yokaiProfiles.length} recorded` : `${state.collection.length} / ${yokaiProfiles.length}体を記録`;
       els.bookGrid.innerHTML = "";
       yokaiProfiles.forEach((profile, index) => {
         const slug = slugByName[profile.name];
@@ -2271,10 +2769,10 @@
         const card = document.createElement("article");
         card.className = `book-card${unlocked ? "" : " is-locked"}${isGuardian ? " is-guardian" : ""}`;
         card.innerHTML = `
-          ${isGuardian ? '<span class="book-badge">あなたのタイプ</span>' : unlocked ? '<span class="book-badge">遭遇済み</span>' : ''}
-          <img class="book-image" src="${assetPath(slug, index % 2 === 0 ? "a" : "b")}" alt="${unlocked ? `${profile.name}のイラスト` : "未発見の妖怪"}" />
-          <h3>${unlocked ? profile.name : "？？？"}</h3>
-          <p>${unlocked ? profile.summary : "別の日にサイトを訪れると、この妖怪が図鑑へ加わることがあります。"}</p>
+          ${isGuardian ? `<span class="book-badge">${isEnglish() ? "Your Type" : "あなたのタイプ"}</span>` : unlocked ? `<span class="book-badge">${isEnglish() ? "Discovered" : "遭遇済み"}</span>` : ""}
+          <img class="book-image" src="${assetPath(slug, index % 2 === 0 ? "a" : "b")}" alt="${unlocked ? (isEnglish() ? `${profileName(profile)} illustration` : `${profile.name}のイラスト`) : (isEnglish() ? "Undiscovered yokai" : "未発見の妖怪")}" />
+          <h3>${unlocked ? profileName(profile) : "???"}</h3>
+          <p>${unlocked ? profileText(profile, "summary") : (isEnglish() ? "Visit on another day and this yokai may be added to your collection." : "別の日にサイトを訪れると、この妖怪が図鑑へ加わることがあります。")}</p>
         `;
         els.bookGrid.appendChild(card);
       });
@@ -2295,14 +2793,15 @@
     }
 
     function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 5) {
-      const chars = [...text];
+      const units = isEnglish() ? text.split(/\s+/) : [...text];
+      const spacer = isEnglish() ? " " : "";
       let line = "";
       let lines = 0;
-      for (const char of chars) {
-        const test = line + char;
+      for (const unit of units) {
+        const test = line ? `${line}${spacer}${unit}` : unit;
         if (ctx.measureText(test).width > maxWidth && line) {
           ctx.fillText(line, x, y + lines * lineHeight);
-          line = char;
+          line = unit;
           lines += 1;
           if (lines >= maxLines - 1) break;
         } else {
@@ -2347,56 +2846,58 @@
       ctx.fillText(mode === "daily" ? "TODAY'S ACTION ADVICE" : "MY YOKAI TYPE", 570, 150);
       ctx.fillStyle = "#f6f2e8";
       ctx.font = "72px serif";
-      ctx.fillText(profile.name, 570, 240);
+      ctx.fillText(profileName(profile), 570, 240);
       ctx.fillStyle = "#d3cec5";
       ctx.font = "29px serif";
-      ctx.fillText(profile.title, 570, 292);
+      ctx.fillText(profileText(profile, "title"), 570, 292);
 
       ctx.fillStyle = "#f0ece4";
       ctx.font = "27px serif";
       const dailyData = getDailySelection();
       const text = mode === "daily"
-        ? oracleData[state.savedGuardian.primarySlug].messages[dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length]
-        : profile.summary;
+        ? oracleMessage(state.savedGuardian.primarySlug, dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length)
+        : profileText(profile, "summary");
       wrapCanvasText(ctx, text, 570, 350, 490, 46, 4);
       ctx.fillStyle = "#8e8981";
       ctx.font = "22px sans-serif";
-      ctx.fillText("妖怪診断", 570, 520);
+      ctx.fillText(isEnglish() ? "Yokai Diagnosis" : "妖怪診断", 570, 520);
 
       const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png", .95));
       const filename = `yokai-${mode}-${state.savedGuardian.primarySlug}.png`;
       const file = new File([blob], filename, { type: "image/png" });
-      const textShare = mode === "daily" ? `私の妖怪タイプは「${profile.name}」です。今日の行動アドバイスも確認しました。` : `私の妖怪タイプは「${profile.name}」でした。`;
+      const textShare = isEnglish()
+        ? (mode === "daily" ? `My yokai type is ${profileName(profile)}. I also checked today's action advice.` : `My yokai type is ${profileName(profile)}.`)
+        : (mode === "daily" ? `私の妖怪タイプは「${profile.name}」です。今日の行動アドバイスも確認しました。` : `私の妖怪タイプは「${profile.name}」でした。`);
 
       try {
         if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
-          await navigator.share({ files: [file], title: "妖怪診断", text: textShare });
+          await navigator.share({ files: [file], title: isEnglish() ? "Yokai Diagnosis" : "妖怪診断", text: textShare });
         } else {
           const link = document.createElement("a");
           link.href = URL.createObjectURL(blob);
           link.download = filename;
           link.click();
           setTimeout(() => URL.revokeObjectURL(link.href), 1500);
-          showToast("共有画像を保存しました");
+          showToast(isEnglish() ? "Share image saved" : "共有画像を保存しました");
         }
       } catch (error) {
-        if (error && error.name !== "AbortError") showToast("画像を作成できませんでした");
+        if (error && error.name !== "AbortError") showToast(isEnglish() ? "Could not create the image" : "画像を作成できませんでした");
       }
     }
 
     async function shareDaily() {
       if (!state.savedGuardian) return;
       const profile = profileBySlug(state.savedGuardian.primarySlug);
-      const message = oracleData[state.savedGuardian.primarySlug].messages[dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length];
-      const text = `今日の「${profile.name}」タイプ向けアドバイス：${message}`;
+      const message = oracleMessage(state.savedGuardian.primarySlug, dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length);
+      const text = isEnglish() ? `Today's advice for ${profileName(profile)}: ${message}` : `今日の「${profile.name}」タイプ向けアドバイス：${message}`;
       try {
-        if (navigator.share) await navigator.share({ title: "今日の行動アドバイス", text, url: location.href });
+        if (navigator.share) await navigator.share({ title: isEnglish() ? "Today\'s Action Advice" : "今日の行動アドバイス", text, url: location.href });
         else if (navigator.clipboard) {
           await navigator.clipboard.writeText(`${text}\n${location.href}`);
-          showToast("今日のアドバイスをコピーしました");
+          showToast(isEnglish() ? "Today\'s advice copied" : "今日のアドバイスをコピーしました");
         }
       } catch (error) {
-        if (error && error.name !== "AbortError") showToast("共有を完了できませんでした");
+        if (error && error.name !== "AbortError") showToast(isEnglish() ? "Could not complete sharing" : "共有を完了できませんでした");
       }
     }
 
@@ -2417,22 +2918,23 @@
 
     async function shareResult() {
       if (!state.result) return;
-      const name = state.result.primary.profile.name;
-      const title = state.result.primary.profile.title;
-      const text = `私の妖怪タイプは「${name}」でした。${title}｜妖怪診断`;
-      const shareData = { title: "妖怪診断", text, url: location.href };
+      const resultProfile = state.result.primary.profile;
+      const name = profileName(resultProfile);
+      const title = profileText(resultProfile, "title");
+      const text = isEnglish() ? `My yokai type is ${name}. ${title} | Yokai Diagnosis` : `私の妖怪タイプは「${resultProfile.name}」でした。${resultProfile.title}｜妖怪診断`;
+      const shareData = { title: isEnglish() ? "Yokai Diagnosis" : "妖怪診断", text, url: location.href };
 
       try {
         if (navigator.share) {
           await navigator.share(shareData);
         } else if (navigator.clipboard) {
           await navigator.clipboard.writeText(`${text}\n${location.href}`);
-          showToast("結果をコピーしました");
+          showToast(isEnglish() ? "Result copied" : "結果をコピーしました");
         } else {
-          showToast("共有機能を利用できませんでした");
+          showToast(isEnglish() ? "Sharing is not available on this device" : "共有機能を利用できませんでした");
         }
       } catch (error) {
-        if (error && error.name !== "AbortError") showToast("共有を完了できませんでした");
+        if (error && error.name !== "AbortError") showToast(isEnglish() ? "Could not complete sharing" : "共有を完了できませんでした");
       }
     }
 
@@ -2464,16 +2966,18 @@
     els.dailyHomeBtn.addEventListener("click", () => { updateHome(); showScreen("intro"); });
     els.dailyResultBtn.addEventListener("click", () => { if (restoreSavedResult()) showScreen("result"); });
     els.dailyShareBtn.addEventListener("click", shareDaily);
+    document.getElementById("languageToggle").addEventListener("click", toggleLanguage);
 
     buildLanterns();
-    renderQuestion();
     readSavedState();
+    applyStaticLanguage();
+    renderQuestion();
     if (state.savedGuardian) {
       registerVisit();
       updateHome();
       if (state.encounterSlug) {
         const visitor = profileBySlug(state.encounterSlug);
-        window.setTimeout(() => showToast(`${visitor.name}が妖怪図鑑に加わりました`), 650);
+        window.setTimeout(() => showToast(isEnglish() ? `${profileName(visitor)} was added to your Yokai Collection` : `${visitor.name}が妖怪図鑑に加わりました`), 650);
       }
     } else {
       updateHome();

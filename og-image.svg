@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <radialGradient id="g" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#38121a"/>
+      <stop offset="0.5" stop-color="#11131a"/>
+      <stop offset="1" stop-color="#07080b"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#g)"/>
+  <circle cx="600" cy="245" r="135" fill="none" stroke="#d8b260" stroke-opacity=".55" stroke-width="2"/>
+  <circle cx="600" cy="245" r="100" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-dasharray="8 12"/>
+  <circle cx="600" cy="245" r="60" fill="none" stroke="#b92132" stroke-opacity=".65" stroke-width="2"/>
+  <text x="600" y="285" text-anchor="middle" fill="#f8f4e6" font-size="138" font-family="serif" filter="url(#glow)">妖</text>
+  <text x="600" y="440" text-anchor="middle" fill="#f8f4e6" font-size="82" letter-spacing="18" font-family="serif">妖怪診断</text>
+  <text x="600" y="500" text-anchor="middle" fill="#d8b260" font-size="27" letter-spacing="6" font-family="sans-serif">あなたに近い妖怪タイプは？</text>
+</svg>
