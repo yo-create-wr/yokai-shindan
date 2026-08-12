@@ -1189,6 +1189,69 @@
       margin-top: 18px;
     }
 
+    .book-affiliate {
+      margin-top: 28px;
+      padding: 24px;
+      border: 1px solid rgba(216,178,96,.28);
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(216,178,96,.09), rgba(255,255,255,.035));
+      text-align: center;
+    }
+
+    .book-affiliate-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 999px;
+      color: #bcb6ac;
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: .12em;
+    }
+
+    .book-affiliate p {
+      margin: 0;
+      color: #eee8dc;
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    .book-affiliate-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      margin-top: 16px;
+      padding: 0 22px;
+      border: 1px solid rgba(216,178,96,.5);
+      border-radius: 999px;
+      color: #17130d;
+      background: linear-gradient(135deg, #e6c878, #c89a42);
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+      transition: transform .25s ease, box-shadow .25s ease, filter .25s ease;
+    }
+
+    .book-affiliate-link:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+      box-shadow: 0 16px 34px rgba(0,0,0,.3);
+    }
+
+    .book-affiliate-link:active { transform: scale(.98); }
+
+    .book-affiliate-note {
+      display: block;
+      margin-top: 10px;
+      color: #8f8a82;
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+    }
+
     .book-card {
       position: relative;
       overflow: hidden;
@@ -1438,6 +1501,7 @@
           <button id="goDailyBtn" class="primary-btn" type="button">今日のアドバイスへ</button>
           <button id="shareImageBtn" class="secondary-btn" type="button">結果画像を作る</button>
           <button id="shareBtn" class="secondary-btn" type="button">結果を共有</button>
+          <a id="resultArticleLink" class="secondary-btn" href="/guides/yokai/" data-role="result-article">妖怪について詳しく読む</a>
           <button id="resultBookBtn" class="secondary-btn" type="button">妖怪図鑑</button>
           <button id="restartBtn" class="secondary-btn" type="button">もう一度診断する</button>
         </div>
@@ -1518,6 +1582,12 @@
           <div id="bookProgress" class="book-progress"></div>
         </section>
         <div id="bookGrid" class="book-grid"></div>
+        <aside class="book-affiliate" aria-label="おすすめ商品">
+          <span class="book-affiliate-label">広告</span>
+          <p>妖怪のことを詳しく知りたい方にはこちらをお勧めします</p>
+          <a id="yokaiBookAffiliateLink" class="book-affiliate-link" href="https://amzn.to/4zeAk7s" target="_blank" rel="sponsored nofollow noopener noreferrer">おすすめの妖怪本を見る</a>
+          <small class="book-affiliate-note">Amazonの商品ページへ移動します。</small>
+        </aside>
       </div>
     </section>
 
@@ -2212,7 +2282,11 @@
       ["#dailyShareBtn", "今日のアドバイスを共有", "Share Today's Advice"],
       ["#dailyResultBtn", "妖怪タイプの診断結果", "My Yokai Result"],
       ["#bookScreen .page-topbar h2", "妖怪図鑑", "Yokai Collection"],
-      [".book-intro p", "診断された妖怪タイプは最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ図鑑へ加わることがあります。", "Your diagnosed yokai type is recorded immediately. On later visits, another yokai may be added to your collection one at a time."]
+      [".book-intro p", "診断された妖怪タイプは最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ図鑑へ加わることがあります。", "Your diagnosed yokai type is recorded immediately. On later visits, another yokai may be added to your collection one at a time."],
+      [".book-affiliate-label", "広告", "Ad"],
+      [".book-affiliate p", "妖怪のことを詳しく知りたい方にはこちらをお勧めします", "If you would like to learn more about yokai, we recommend this book."],
+      ["#yokaiBookAffiliateLink", "おすすめの妖怪本を見る", "View the Recommended Yokai Book"],
+      [".book-affiliate-note", "Amazonの商品ページへ移動します。", "You will be taken to the Amazon product page."]
     ];
 
     function setNodeText(selector, ja, en) {
@@ -2334,6 +2408,7 @@
       goDailyBtn: document.getElementById("goDailyBtn"),
       shareImageBtn: document.getElementById("shareImageBtn"),
       resultBookBtn: document.getElementById("resultBookBtn"),
+      resultArticleLink: document.getElementById("resultArticleLink"),
       dailyHomeBtn: document.getElementById("dailyHomeBtn"),
       dailyBookBtn: document.getElementById("dailyBookBtn"),
       dailyYokaiImage: document.getElementById("dailyYokaiImage"),
@@ -2635,6 +2710,11 @@
       els.resultName.textContent = profileName(p);
       els.resultGlyph.textContent = p.glyph;
       const primarySlug = slugByName[p.name];
+      if (els.resultArticleLink) {
+        els.resultArticleLink.href = `/guides/yokai/${primarySlug}/`;
+        els.resultArticleLink.textContent = isEnglish() ? "Learn about this yokai (Japanese)" : `${p.name}について詳しく読む`;
+        els.resultArticleLink.onclick = () => { if (typeof gtag === "function") gtag("event", "yokai_article_click", { yokai_type: primarySlug }); };
+      }
       els.resultImage.src = assetPath(primarySlug, "a");
       els.resultImage.alt = isEnglish() ? `${profileName(p)} illustration` : `${p.name}のイラスト`;
       setCharacterAnimation(els.resultImage, "anim-float");
@@ -2979,6 +3059,16 @@
     els.dailyHomeBtn.addEventListener("click", () => { updateHome(); showScreen("intro"); });
     els.dailyResultBtn.addEventListener("click", () => { if (restoreSavedResult()) showScreen("result"); });
     els.dailyShareBtn.addEventListener("click", shareDaily);
+    document.getElementById("yokaiBookAffiliateLink").addEventListener("click", () => {
+      if (typeof gtag === "function") {
+        gtag("event", "affiliate_click", {
+          partner: "amazon",
+          destination: "https://amzn.to/4zeAk7s",
+          language: currentLanguage,
+          category: "yokai_book"
+        });
+      }
+    });
     document.getElementById("languageToggle").addEventListener("click", toggleLanguage);
 
     buildLanterns();
