@@ -1438,6 +1438,7 @@
           <button id="goDailyBtn" class="primary-btn" type="button">今日のアドバイスへ</button>
           <button id="shareImageBtn" class="secondary-btn" type="button">結果画像を作る</button>
           <button id="shareBtn" class="secondary-btn" type="button">結果を共有</button>
+          <a id="resultArticleLink" class="secondary-btn" href="/guides/yokai/" data-role="result-article">妖怪について詳しく読む</a>
           <button id="resultBookBtn" class="secondary-btn" type="button">妖怪図鑑</button>
           <button id="restartBtn" class="secondary-btn" type="button">もう一度診断する</button>
         </div>
@@ -2334,6 +2335,7 @@
       goDailyBtn: document.getElementById("goDailyBtn"),
       shareImageBtn: document.getElementById("shareImageBtn"),
       resultBookBtn: document.getElementById("resultBookBtn"),
+      resultArticleLink: document.getElementById("resultArticleLink"),
       dailyHomeBtn: document.getElementById("dailyHomeBtn"),
       dailyBookBtn: document.getElementById("dailyBookBtn"),
       dailyYokaiImage: document.getElementById("dailyYokaiImage"),
@@ -2635,6 +2637,11 @@
       els.resultName.textContent = profileName(p);
       els.resultGlyph.textContent = p.glyph;
       const primarySlug = slugByName[p.name];
+      if (els.resultArticleLink) {
+        els.resultArticleLink.href = `/guides/yokai/${primarySlug}/`;
+        els.resultArticleLink.textContent = isEnglish() ? "Learn about this yokai (Japanese)" : `${p.name}について詳しく読む`;
+        els.resultArticleLink.onclick = () => { if (typeof gtag === "function") gtag("event", "yokai_article_click", { yokai_type: primarySlug }); };
+      }
       els.resultImage.src = assetPath(primarySlug, "a");
       els.resultImage.alt = isEnglish() ? `${profileName(p)} illustration` : `${p.name}のイラスト`;
       setCharacterAnimation(els.resultImage, "anim-float");
