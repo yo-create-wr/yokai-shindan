@@ -1,183 +1,3000 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#090b10">
-  <title>YO CREATE｜クイックタロット・妖怪診断</title>
-  <meta name="description" content="YO CREATEのWebコンテンツ入口。エブリデイ クイックタロットと妖怪診断を無料・登録不要で利用できます。">
-  <meta name="robots" content="index,follow">
-  <link rel="canonical" href="https://yo-create-wr.github.io/">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="YO CREATE">
-  <meta property="og:description" content="クイックタロットと妖怪診断。">
-  <meta property="og:url" content="https://yo-create-wr.github.io/">
-  <meta property="og:image" content="https://yo-create-wr.github.io/og-image.svg">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-
+  <meta charset="UTF-8" />
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MX019B8LQH"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+
     gtag('config', 'G-MX019B8LQH');
   </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0b10" />
+  <meta name="description" content="12の質問から考え方や行動の傾向を分析し、あなたに近い妖怪タイプと毎日の行動アドバイスを紹介する無料の妖怪診断。登録不要です。" />
+  <meta property="og:title" content="妖怪診断｜あなたに近い妖怪タイプは？" />
+  <meta property="og:description" content="12の質問から妖怪タイプを診断。性格傾向と毎日の行動アドバイスを確認でき、妖怪図鑑も少しずつ増えていきます。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="og-image.svg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>妖怪診断｜あなたに近い妖怪タイプは？</title>
   <style>
-    :root{--bg:#090b10;--panel:#10131a;--line:rgba(255,255,255,.105);--text:#f5f4f1;--muted:#a4a7b0;--r:26px}
-    *{box-sizing:border-box}
-    html{background:var(--bg)}
-    body{margin:0;min-height:100vh;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Yu Gothic",Meiryo,sans-serif;background:radial-gradient(circle at 50% -10%,rgba(98,88,145,.13),transparent 38%),#090b10;-webkit-font-smoothing:antialiased}
-    a{color:inherit;text-decoration:none;-webkit-tap-highlight-color:transparent}
-    .page{width:min(1160px,calc(100% - 40px));margin:auto;padding:0 0 34px}
-    header{height:122px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,.055);position:relative}
-    .brand{font-family:Georgia,"Times New Roman",serif;font-size:clamp(29px,4vw,42px);letter-spacing:.12em;font-weight:500;white-space:nowrap}
-    .lang-toggle{position:absolute;right:0;top:50%;transform:translateY(-50%);min-width:58px;height:36px;padding:0 14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;background:rgba(255,255,255,.045);color:var(--text);font:600 11px/1 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;letter-spacing:.08em;cursor:pointer;transition:.25s}
-    .lang-toggle:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28)}
-    main{padding:48px 0 42px}
-    .services{display:grid;grid-template-columns:1fr 1fr;gap:22px}
-    .card{display:flex;flex-direction:column;min-width:0;overflow:hidden;border:1px solid var(--line);border-radius:var(--r);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));transition:transform .42s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;box-shadow:0 20px 70px rgba(0,0,0,.2)}
-    .card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.22);box-shadow:0 30px 90px rgba(0,0,0,.35)}
-    .visual{height:330px;display:grid;place-items:center;overflow:hidden;background:#090b10;position:relative}
-    .visual:after{content:"";position:absolute;inset:0;box-shadow:inset 0 -35px 45px rgba(9,11,16,.34);pointer-events:none}
-    .visual img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-    .tarot .visual img{object-fit:contain;padding:14px 20px 0}
-    .yokai .visual img{object-fit:contain;object-position:center;padding:26px 34px;transform:none}
-    .yokai:hover .visual img{transform:scale(1.01)}
-    .card:hover .visual img{transform:scale(1.025)}
-    .body{padding:25px 28px 27px;display:grid;grid-template-columns:1fr auto;gap:8px 18px;align-items:center}
-    h1{font-size:clamp(24px,3vw,31px);letter-spacing:-.035em;margin:0;font-weight:650}
-    p{grid-column:1;margin:0;color:var(--muted);font-size:13px;line-height:1.7}
-    .go{grid-column:2;grid-row:1 / span 2;width:46px;height:46px;border:1px solid rgba(255,255,255,.14);border-radius:50%;display:grid;place-items:center;font-size:20px;transition:.35s}
-    .card:hover .go{background:#f4f2ec;color:#0b0d12;border-color:#f4f2ec;transform:translateX(3px)}
-    footer{min-height:68px;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;gap:20px;color:#767b87;font-size:11px}
-    footer a{transition:.25s} footer a:hover{color:#fff}.links{display:flex;gap:22px}
-
-    .reading{margin-top:30px;border-top:1px solid rgba(255,255,255,.07);padding-top:28px}.reading-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:12px}.reading-head h2{margin:0;font-size:14px;letter-spacing:.02em}.reading-head span{font-size:10px;color:#6f7480;letter-spacing:.1em}.reading-links{display:grid;grid-template-columns:1fr 1fr;gap:10px}.reading-link{border:1px solid var(--line);border-radius:18px;padding:17px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;background:rgba(255,255,255,.02);transition:.3s}.reading-link:hover{transform:translateY(-3px);background:rgba(255,255,255,.045);border-color:rgba(255,255,255,.2)}.reading-link strong{font-size:14px}.reading-link small{display:block;margin-top:5px;color:#777d88;font-size:10px}.reading-link i{font-style:normal;color:#8e94a0}
-    @media(max-width:760px){
-      .page{width:min(100% - 24px,620px)}
-      header{height:92px}.brand{font-size:29px}.lang-toggle{right:2px;min-width:54px;height:34px;padding:0 11px}
-      main{padding:26px 0 34px}.services{grid-template-columns:1fr;gap:16px}.reading-links{grid-template-columns:1fr}
-      .visual{height:265px}.tarot .visual img{padding:9px 12px 0}.yokai .visual img{padding:20px 18px}.body{padding:21px 21px 23px}
-      footer{padding:20px 2px;align-items:flex-start;flex-direction:column}.links{gap:16px;flex-wrap:wrap}
+    :root {
+      --bg: #08090d;
+      --bg-soft: #11131a;
+      --paper: rgba(248, 244, 230, 0.96);
+      --ink: #19171a;
+      --text: #f6f2e8;
+      --muted: #aaa7a0;
+      --line: rgba(255, 255, 255, 0.12);
+      --red: #b92132;
+      --red-bright: #ef4c5f;
+      --gold: #d8b260;
+      --green: #8dbb92;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
+      --radius: 30px;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
-    @media(max-width:420px){.visual{height:235px}h1{font-size:23px}.body{grid-template-columns:1fr auto}.go{width:42px;height:42px}}
-    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}.card,.visual img,.go{transition:none!important}}
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 50% 12%, rgba(185, 33, 50, 0.12), transparent 30%),
+        linear-gradient(180deg, #07080b 0%, #0b0c12 48%, #07080b 100%);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", "Noto Serif JP", serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+
+    .app {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
+    }
+
+    .ambient,
+    .ambient::before,
+    .ambient::after {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -3;
+    }
+
+    .ambient {
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,.05), transparent 22%),
+        radial-gradient(circle at 80% 75%, rgba(255,255,255,.035), transparent 26%);
+    }
+
+    .ambient::before {
+      content: "";
+      opacity: .18;
+      background-image:
+        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, transparent, black 18%, black 82%, transparent);
+    }
+
+    .ambient::after {
+      content: "";
+      background:
+        radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,.55) 100%);
+    }
+
+    .mist {
+      position: fixed;
+      left: -20vw;
+      bottom: -16vh;
+      width: 140vw;
+      height: 50vh;
+      pointer-events: none;
+      z-index: -2;
+      filter: blur(34px);
+      opacity: .28;
+      background:
+        radial-gradient(ellipse at 15% 50%, rgba(230,233,239,.28), transparent 45%),
+        radial-gradient(ellipse at 45% 30%, rgba(230,233,239,.18), transparent 42%),
+        radial-gradient(ellipse at 75% 60%, rgba(230,233,239,.24), transparent 46%);
+      animation: drift 16s ease-in-out infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate3d(-3%, 0, 0) scale(1); }
+      to { transform: translate3d(3%, -2%, 0) scale(1.06); }
+    }
+
+    .screen {
+      display: none;
+      min-height: 100vh;
+      padding: calc(34px + var(--safe-top)) 22px calc(32px + var(--safe-bottom));
+    }
+
+    .screen.is-active {
+      display: grid;
+      animation: screenIn .7s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    @keyframes screenIn {
+      from { opacity: 0; transform: translateY(18px) scale(.985); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .intro {
+      place-items: center;
+      text-align: center;
+    }
+
+    .intro-inner {
+      width: min(100%, 960px);
+      padding: clamp(20px, 4vw, 48px) 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--gold);
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, currentColor);
+    }
+
+    .eyebrow::after { transform: scaleX(-1); }
+
+    .moon-mark {
+      position: relative;
+      width: clamp(150px, 28vw, 250px);
+      aspect-ratio: 1;
+      margin: 38px auto 28px;
+      display: grid;
+      place-items: center;
+    }
+
+    .moon-ring {
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(216,178,96,.35);
+      border-radius: 50%;
+      box-shadow: inset 0 0 40px rgba(216,178,96,.08), 0 0 70px rgba(185,33,50,.13);
+      animation: rotateSlow 24s linear infinite;
+    }
+
+    .moon-ring::before,
+    .moon-ring::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      inset: 12%;
+      border: 1px dashed rgba(255,255,255,.16);
+    }
+
+    .moon-ring::after {
+      inset: 28%;
+      border-style: solid;
+      border-color: rgba(185,33,50,.5);
+      box-shadow: 0 0 28px rgba(185,33,50,.22);
+    }
+
+    .moon-glyph {
+      font-size: clamp(76px, 16vw, 122px);
+      color: rgba(248,244,230,.93);
+      text-shadow: 0 0 30px rgba(255,255,255,.12);
+      transform: translateY(-3px);
+    }
+
+    @keyframes rotateSlow { to { transform: rotate(360deg); } }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(50px, 10vw, 96px);
+      font-weight: 500;
+      letter-spacing: .08em;
+      line-height: 1.1;
+    }
+
+    .lead {
+      max-width: 660px;
+      margin: 28px auto 0;
+      color: #d2cec6;
+      font-size: clamp(15px, 2.6vw, 19px);
+      line-height: 2;
+    }
+
+    .info-strip {
+      margin: 42px auto 0;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px 24px;
+      font-family: system-ui, sans-serif;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: .08em;
+    }
+
+    .info-strip span {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .info-strip span::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: var(--gold);
+      box-shadow: 0 0 12px rgba(216,178,96,.7);
+    }
+
+    .primary-btn,
+    .secondary-btn,
+    .answer-btn {
+      border: 0;
+      cursor: pointer;
+      color: inherit;
+    }
+
+    .primary-btn {
+      position: relative;
+      min-width: min(100%, 320px);
+      margin-top: 38px;
+      padding: 19px 34px;
+      border-radius: 999px;
+      overflow: hidden;
+      color: #fff8ee;
+      background: linear-gradient(135deg, #8f1322, #c52d3e 58%, #8f1322);
+      box-shadow: 0 18px 44px rgba(185,33,50,.28), inset 0 1px 0 rgba(255,255,255,.24);
+      font-size: 16px;
+      letter-spacing: .16em;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .primary-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(110deg, transparent 20%, rgba(255,255,255,.35) 45%, transparent 70%);
+      transform: translateX(-120%);
+      animation: shine 4.5s ease-in-out infinite;
+    }
+
+    @keyframes shine {
+      0%, 60% { transform: translateX(-120%); }
+      82%, 100% { transform: translateX(120%); }
+    }
+
+    .primary-btn:hover { transform: translateY(-2px); box-shadow: 0 22px 54px rgba(185,33,50,.34); }
+    .primary-btn:active { transform: translateY(1px) scale(.99); }
+
+    .quiz {
+      grid-template-rows: auto 1fr;
+      width: min(100%, 980px);
+      margin: 0 auto;
+    }
+
+    .quiz-header {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      align-items: center;
+      gap: 18px;
+      width: 100%;
+      padding-top: 4px;
+    }
+
+    .ghost-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      color: #ded9d0;
+      background: rgba(255,255,255,.04);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .ghost-btn:disabled { opacity: .25; cursor: default; }
+    .ghost-btn:not(:disabled):hover { background: rgba(255,255,255,.09); }
+
+    .progress-area { min-width: 0; }
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: .14em;
+    }
+
+    .lanterns {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 6px;
+    }
+
+    .lantern {
+      height: 18px;
+      border-radius: 4px 4px 7px 7px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.03);
+      transition: .45s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .lantern.is-lit {
+      background: linear-gradient(180deg, #ffbd6b, #d83242 80%);
+      border-color: rgba(255,213,152,.55);
+      box-shadow: 0 0 16px rgba(239,76,95,.55), inset 0 0 5px rgba(255,255,255,.65);
+      transform: translateY(-2px);
+    }
+
+    .question-stage {
+      display: grid;
+      place-items: center;
+      padding: clamp(38px, 8vh, 84px) 0 24px;
+    }
+
+    .question-card {
+      width: min(100%, 780px);
+      padding: clamp(28px, 6vw, 64px);
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.055), rgba(255,255,255,.025)),
+        rgba(12,13,18,.72);
+      backdrop-filter: blur(18px);
+      box-shadow: var(--shadow);
+    }
+
+    .question-label {
+      color: var(--gold);
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: .2em;
+    }
+
+    .question-text {
+      min-height: 6em;
+      margin: 24px 0 34px;
+      display: flex;
+      align-items: center;
+      font-size: clamp(24px, 5vw, 38px);
+      font-weight: 500;
+      line-height: 1.75;
+    }
+
+    .answers {
+      display: grid;
+      gap: 12px;
+    }
+
+    .answer-btn {
+      position: relative;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 14px;
+      width: 100%;
+      padding: 16px 18px;
+      text-align: left;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 16px;
+      color: #ddd8cf;
+      background: rgba(255,255,255,.035);
+      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+    }
+
+    .answer-btn:hover {
+      transform: translateX(4px);
+      border-color: rgba(216,178,96,.55);
+      background: rgba(216,178,96,.08);
+    }
+
+    .answer-btn.is-selected {
+      border-color: rgba(239,76,95,.9);
+      background: rgba(185,33,50,.18);
+    }
+
+    .answer-number {
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+      color: var(--gold);
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+    }
+
+    .answer-copy {
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      letter-spacing: .04em;
+    }
+
+    .reveal {
+      place-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .reveal-inner {
+      position: relative;
+      width: min(100%, 760px);
+    }
+
+    .seal {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(216,178,96,.4);
+      color: var(--paper);
+      font-size: 72px;
+      box-shadow: 0 0 60px rgba(185,33,50,.22), inset 0 0 40px rgba(216,178,96,.08);
+      animation: sealPulse 2s ease-in-out infinite;
+    }
+
+    .seal::before,
+    .seal::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px dashed rgba(255,255,255,.2);
+      border-radius: 50%;
+      animation: rotateSlow 8s linear infinite;
+    }
+
+    .seal::after {
+      inset: -14px;
+      border-style: solid;
+      border-color: rgba(185,33,50,.35);
+      animation-direction: reverse;
+      animation-duration: 13s;
+    }
+
+    @keyframes sealPulse {
+      50% { transform: scale(1.035); filter: brightness(1.12); }
+    }
+
+    .reveal-title {
+      margin: 0;
+      font-size: clamp(28px, 6vw, 52px);
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+
+    .reveal-copy {
+      margin-top: 18px;
+      color: var(--muted);
+      line-height: 2;
+    }
+
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 30px;
+    }
+
+    .dots span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--red-bright);
+      animation: bounce 1.15s ease-in-out infinite;
+      box-shadow: 0 0 12px rgba(239,76,95,.6);
+    }
+
+    .dots span:nth-child(2) { animation-delay: .12s; }
+    .dots span:nth-child(3) { animation-delay: .24s; }
+    @keyframes bounce { 50% { transform: translateY(-8px); opacity: .45; } }
+
+    .result {
+      place-items: start center;
+      padding-top: calc(26px + var(--safe-top));
+    }
+
+    .result-wrap {
+      width: min(100%, 980px);
+      padding-bottom: 40px;
+    }
+
+    .result-hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 500px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+      padding: clamp(34px, 7vw, 74px);
+      border-radius: 38px;
+      color: var(--ink);
+      background:
+        linear-gradient(140deg, rgba(255,255,255,.75), rgba(238,231,208,.88)),
+        var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .result-hero::before {
+      content: "";
+      position: absolute;
+      inset: -10% 55% -20% -10%;
+      background: radial-gradient(circle, rgba(185,33,50,.14), transparent 62%);
+    }
+
+    .result-kicker {
+      position: relative;
+      color: #7d5f23;
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+    }
+
+    .result-name {
+      position: relative;
+      margin: 18px 0 8px;
+      font-size: clamp(46px, 9vw, 86px);
+      font-weight: 500;
+      line-height: 1.15;
+      letter-spacing: .05em;
+    }
+
+    .result-title {
+      position: relative;
+      margin: 0;
+      color: #5f554c;
+      font-size: clamp(17px, 3vw, 23px);
+      line-height: 1.65;
+    }
+
+    .result-summary {
+      position: relative;
+      margin: 28px 0 0;
+      color: #363136;
+      font-size: 16px;
+      line-height: 2;
+    }
+
+    .yokai-emblem {
+      position: relative;
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(25,23,26,.13);
+      background:
+        radial-gradient(circle at 50% 44%, rgba(185,33,50,.18), transparent 44%),
+        repeating-radial-gradient(circle, rgba(25,23,26,.05) 0 1px, transparent 1px 12px);
+      box-shadow: inset 0 0 50px rgba(25,23,26,.08);
+    }
+
+    .yokai-emblem::before,
+    .yokai-emblem::after {
+      content: "";
+      position: absolute;
+      inset: 8%;
+      border-radius: 50%;
+      border: 1px dashed rgba(25,23,26,.18);
+      animation: rotateSlow 24s linear infinite;
+    }
+
+    .yokai-emblem::after {
+      inset: 23%;
+      border-style: solid;
+      border-color: rgba(185,33,50,.28);
+      animation-direction: reverse;
+      animation-duration: 17s;
+    }
+
+    .yokai-glyph {
+      position: relative;
+      z-index: 2;
+      font-size: clamp(82px, 16vw, 154px);
+      line-height: 1;
+      text-shadow: 0 8px 24px rgba(25,23,26,.14);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .result-card {
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 24px;
+      background: rgba(255,255,255,.045);
+      backdrop-filter: blur(12px);
+    }
+
+    .result-card h3 {
+      margin: 0 0 14px;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: .14em;
+      font-weight: 500;
+    }
+
+    .result-card p {
+      margin: 0;
+      color: #d5d0c8;
+      line-height: 1.9;
+      font-size: 14px;
+    }
+
+    .traits {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 16px;
+    }
+
+    .trait {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: rgba(216,178,96,.11);
+      color: #ead7aa;
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+    }
+
+    .score-card { grid-column: 1 / -1; }
+    .score-list { display: grid; gap: 14px; }
+    .score-row {
+      display: grid;
+      grid-template-columns: 74px 1fr 34px;
+      align-items: center;
+      gap: 12px;
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+      color: #c9c4bc;
+    }
+
+    .score-track {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+    }
+
+    .score-fill {
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--red), var(--gold));
+      transition: width 1s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .sub-result {
+      margin-top: 18px;
+      padding: 26px 28px;
+      border-radius: 24px;
+      border: 1px solid rgba(216,178,96,.24);
+      background: rgba(216,178,96,.065);
+    }
+
+    .sub-result strong { color: #f0d99f; }
+    .sub-result p { margin: 8px 0 0; color: #d5d0c8; line-height: 1.85; font-size: 14px; }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .secondary-btn {
+      padding: 15px 24px;
+      border-radius: 999px;
+      color: #ede8df;
+      border: 1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.045);
+      transition: .2s ease;
+    }
+
+    .secondary-btn:hover { background: rgba(255,255,255,.09); transform: translateY(-2px); }
+
+    .footer-note {
+      margin-top: 28px;
+      color: #7f7c76;
+      text-align: center;
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      line-height: 1.8;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: calc(28px + var(--safe-bottom));
+      transform: translate(-50%, 20px);
+      padding: 12px 18px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(25,23,26,.9);
+      box-shadow: 0 14px 34px rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 30;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+    }
+
+    .toast.is-show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 760px) {
+      .screen { padding-left: 16px; padding-right: 16px; }
+      .result-hero { grid-template-columns: 1fr; min-height: auto; }
+      .yokai-emblem { width: min(100%, 310px); margin: 0 auto; order: -1; }
+      .result-grid { grid-template-columns: 1fr; }
+      .score-card { grid-column: auto; }
+      .question-text { min-height: 7em; }
+      .quiz-header { gap: 10px; }
+      .lanterns { gap: 4px; }
+      .lantern { height: 14px; }
+    }
+
+    @media (max-width: 430px) {
+      .question-card { padding: 24px 18px; border-radius: 24px; }
+      .answer-btn { padding: 14px; }
+      .result-card, .sub-result { padding: 23px 20px; }
+      .result-hero { padding: 28px 22px; border-radius: 28px; }
+      .lead { line-height: 1.85; }
+      .info-strip { gap: 10px 18px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+
+    [hidden] { display: none !important; }
+
+    .intro-actions,
+    .returning-actions,
+    .daily-actions,
+    .book-actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .text-btn {
+      border: 0;
+      padding: 10px 12px;
+      color: #c9c4bc;
+      background: transparent;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-color: rgba(216,178,96,.45);
+      text-underline-offset: 5px;
+    }
+
+    .returning-panel {
+      width: min(100%, 760px);
+      margin: 36px auto 0;
+      padding: clamp(24px, 5vw, 42px);
+      border: 1px solid rgba(216,178,96,.22);
+      border-radius: 32px;
+      background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.025));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .returning-main {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 30px;
+      align-items: center;
+      text-align: left;
+    }
+
+    .character-frame {
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      aspect-ratio: 1;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(216,178,96,.18), transparent 48%),
+        rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .character-frame::after {
+      content: "";
+      position: absolute;
+      inset: 9%;
+      border: 1px dashed rgba(216,178,96,.28);
+      border-radius: 50%;
+      animation: rotateSlow 28s linear infinite;
+    }
+
+    .character-img {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      height: 92%;
+      object-fit: contain;
+      filter: drop-shadow(0 18px 22px rgba(0,0,0,.28));
+      transform-origin: 50% 82%;
+    }
+
+    .anim-float { animation: characterFloat 4s ease-in-out infinite; }
+    .anim-sway { animation: characterSway 3.6s ease-in-out infinite; }
+    .anim-bounce { animation: characterBounce 2.2s ease-in-out infinite; }
+    .anim-doze { animation: characterDoze 5s ease-in-out infinite; }
+    .anim-glow { animation: characterGlow 3.4s ease-in-out infinite; }
+    .anim-peek { animation: characterPeek 4.4s ease-in-out infinite; }
+
+    @keyframes characterFloat { 50% { transform: translateY(-12px) rotate(1deg); } }
+    @keyframes characterSway { 25% { transform: rotate(-3deg); } 75% { transform: rotate(3deg); } }
+    @keyframes characterBounce { 45% { transform: translateY(-15px) scale(1.02); } 55% { transform: translateY(-15px) scale(1.02); } }
+    @keyframes characterDoze { 50% { transform: translateY(5px) scale(.985); filter: drop-shadow(0 12px 16px rgba(0,0,0,.25)) brightness(.92); } }
+    @keyframes characterGlow { 50% { transform: scale(1.025); filter: drop-shadow(0 0 24px rgba(216,178,96,.5)); } }
+    @keyframes characterPeek { 0%,100% { transform: translateX(-4px) rotate(-1deg); } 50% { transform: translateX(8px) rotate(2deg); } }
+
+    .returning-copy .mini-label,
+    .daily-label,
+    .book-label {
+      color: var(--gold);
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: .2em;
+    }
+
+    .returning-copy h2 {
+      margin: 10px 0 6px;
+      font-size: clamp(32px, 7vw, 56px);
+      font-weight: 500;
+    }
+
+    .returning-copy p {
+      margin: 0;
+      color: #cfcac2;
+      line-height: 1.9;
+    }
+
+    .visit-strip {
+      margin-top: 24px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(0,0,0,.18);
+    }
+
+    .visit-strip-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #d9d3ca;
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+    }
+
+    .stamp-row {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .stamp {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.25);
+      background: rgba(255,255,255,.025);
+      font-size: 14px;
+      transition: .4s ease;
+    }
+
+    .stamp.is-earned {
+      color: #fff4dc;
+      border-color: rgba(216,178,96,.55);
+      background: radial-gradient(circle, rgba(185,33,50,.75), rgba(116,18,31,.9));
+      box-shadow: 0 0 18px rgba(185,33,50,.34);
+      transform: rotate(-8deg);
+    }
+
+    .returning-actions { margin-top: 24px; }
+    .returning-actions .primary-btn,
+    .actions .primary-btn { margin-top: 0; }
+
+    .quiz-companion {
+      width: 112px;
+      margin: -4px auto 14px;
+      aspect-ratio: 1;
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .quiz-companion::before {
+      content: "";
+      position: absolute;
+      inset: 10%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(216,178,96,.18), transparent 68%);
+      filter: blur(6px);
+    }
+
+    .quiz-companion img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,.3));
+    }
+
+    .result-character {
+      position: relative;
+      z-index: 2;
+      width: 92%;
+      height: 92%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 22px rgba(25,23,26,.18));
+    }
+
+    .daily,
+    .book {
+      place-items: start center;
+      padding-top: calc(22px + var(--safe-top));
+    }
+
+    .page-wrap {
+      width: min(100%, 980px);
+      padding-bottom: 44px;
+    }
+
+    .page-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .page-topbar h2 {
+      margin: 0;
+      font-size: clamp(25px, 5vw, 40px);
+      font-weight: 500;
+    }
+
+    .daily-hero {
+      display: grid;
+      grid-template-columns: minmax(260px, .85fr) minmax(0, 1.15fr);
+      gap: clamp(24px, 5vw, 52px);
+      align-items: center;
+      padding: clamp(26px, 6vw, 58px);
+      border-radius: 36px;
+      background: linear-gradient(145deg, rgba(255,255,255,.075), rgba(255,255,255,.025));
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: var(--shadow);
+    }
+
+    .daily-character { max-width: 360px; width: 100%; margin: auto; }
+
+    .daily-copy h3 {
+      margin: 10px 0 4px;
+      font-size: clamp(35px, 7vw, 62px);
+      font-weight: 500;
+    }
+
+    .daily-mood {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 10px 0 0;
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: #f0d99f;
+      background: rgba(216,178,96,.1);
+      font-family: system-ui, sans-serif;
+      font-size: 12px;
+    }
+
+    .daily-message {
+      margin: 22px 0 0;
+      color: #ded9d0;
+      font-size: clamp(17px, 3vw, 21px);
+      line-height: 2;
+    }
+
+    .theme-panel,
+    .oracle-panel,
+    .letter-panel,
+    .visitor-panel {
+      margin-top: 18px;
+      padding: clamp(22px, 4vw, 34px);
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+    }
+
+    .theme-panel h3,
+    .oracle-panel h3,
+    .letter-panel h3,
+    .visitor-panel h3 {
+      margin: 0;
+      color: var(--gold);
+      font-size: 14px;
+      letter-spacing: .12em;
+      font-weight: 500;
+    }
+
+    .theme-panel p,
+    .oracle-panel p,
+    .letter-panel p,
+    .visitor-panel p {
+      color: #d2cdc5;
+      line-height: 1.9;
+    }
+
+    .theme-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .theme-btn {
+      min-height: 104px;
+      padding: 18px 12px;
+      border: 1px solid rgba(255,255,255,.11);
+      border-radius: 18px;
+      color: #e4dfd7;
+      background: rgba(255,255,255,.035);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .theme-btn:hover,
+    .theme-btn.is-selected {
+      transform: translateY(-3px);
+      border-color: rgba(216,178,96,.58);
+      background: rgba(216,178,96,.09);
+    }
+
+    .theme-icon { display: block; margin-bottom: 8px; font-size: 26px; }
+    .theme-name { display: block; font-size: 14px; }
+
+    .oracle-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .oracle-item {
+      padding: 17px;
+      border-radius: 17px;
+      background: rgba(0,0,0,.17);
+    }
+
+    .oracle-item span {
+      display: block;
+      color: #9f9b94;
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: .13em;
+    }
+
+    .oracle-item strong {
+      display: block;
+      margin-top: 8px;
+      color: #f1e8d5;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.6;
+    }
+
+    .visitor-panel {
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      align-items: center;
+      gap: 22px;
+      border-color: rgba(216,178,96,.28);
+      background: rgba(216,178,96,.06);
+    }
+
+    .visitor-panel img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 14px rgba(0,0,0,.28));
+    }
+
+    .letter-panel {
+      position: relative;
+      overflow: hidden;
+      color: var(--ink);
+      background: linear-gradient(145deg, #f7f0dc, #dfd1ac);
+      border-color: rgba(216,178,96,.6);
+    }
+
+    .letter-panel::before {
+      content: "7日";
+      position: absolute;
+      right: 22px;
+      top: 14px;
+      color: rgba(185,33,50,.15);
+      font-size: 70px;
+      font-weight: 700;
+    }
+
+    .letter-panel h3 { color: #7f5521; }
+    .letter-panel p { position: relative; color: #3b342c; }
+
+    .book-intro {
+      padding: 28px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+    }
+
+    .book-progress {
+      margin-top: 14px;
+      color: #d8d2c9;
+      font-family: system-ui, sans-serif;
+      font-size: 13px;
+    }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .book-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 340px;
+      padding: 20px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+    }
+
+    .book-card.is-locked { color: #716e69; }
+    .book-card.is-guardian { border-color: rgba(216,178,96,.56); box-shadow: 0 0 28px rgba(216,178,96,.09); }
+
+    .book-image {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      border-radius: 18px;
+      background: radial-gradient(circle, rgba(216,178,96,.12), transparent 65%);
+    }
+
+    .book-card.is-locked .book-image {
+      filter: grayscale(1) brightness(.16) contrast(.85);
+      opacity: .7;
+    }
+
+    .book-card h3 {
+      margin: 14px 0 6px;
+      font-size: 24px;
+      font-weight: 500;
+    }
+
+    .book-card p {
+      margin: 0;
+      color: #aaa69f;
+      font-size: 12px;
+      line-height: 1.75;
+    }
+
+    .book-badge {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #f4dfae;
+      background: rgba(20,19,22,.72);
+      font-family: system-ui, sans-serif;
+      font-size: 10px;
+      letter-spacing: .08em;
+    }
+
+    .empty-note {
+      color: #aaa69f;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .share-canvas { display: none; }
+
+    @media (max-width: 760px) {
+      .returning-main,
+      .daily-hero { grid-template-columns: 1fr; text-align: center; }
+      .returning-main .character-frame { width: min(100%, 220px); margin: auto; }
+      .returning-copy { text-align: center; }
+      .daily-character { max-width: 260px; }
+      .theme-buttons,
+      .oracle-grid { grid-template-columns: 1fr; }
+      .book-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .visitor-panel { grid-template-columns: 86px 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .book-grid { grid-template-columns: 1fr; }
+      .book-card { min-height: 0; }
+      .stamp-row { gap: 5px; }
+      .returning-panel { padding: 22px 17px; }
+    }
+
+
+    .language-toggle {
+      position: fixed;
+      top: calc(16px + var(--safe-top));
+      right: 78px;
+      z-index: 50;
+      min-width: 60px;
+      height: 36px;
+      padding: 0 13px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: rgba(10,11,16,.74);
+      color: var(--text);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      font-family: system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(0,0,0,.24);
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+    .language-toggle:hover { background: rgba(255,255,255,.11); border-color: rgba(255,255,255,.3); }
+    .language-toggle:active { transform: scale(.97); }
+    @media (max-width: 540px) {
+      .language-toggle { top: calc(12px + var(--safe-top)); right: 70px; min-width: 56px; height: 34px; padding: 0 10px; }
+    }
+
+  
+    .kofi-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 28px auto 0;
+      min-height: 44px;
+    }
+
   </style>
 </head>
 <body>
-  <div class="page">
-    <header><a class="brand" href="/">YO CREATE</a><button id="languageToggle" class="lang-toggle" type="button" aria-label="Switch to English">EN</button></header>
+  <main class="app">
+    <button id="languageToggle" class="language-toggle" type="button" aria-label="Switch to English">EN</button>
+    <div class="ambient"></div>
+    <div class="mist"></div>
 
-    <main>
-      <div class="services">
-        <a id="tarotCard" class="card tarot" href="/quick-tarot/" aria-label="エブリデイ クイックタロットを開く" onclick="trackPortal('quick_tarot')">
-          <div class="visual"><img id="tarotImage" src="assets/tarot-portal.webp" alt="カード裏面2枚と太陽のタロットカード"></div>
-          <div class="body">
-            <h1 id="tarotTitle">クイックタロット</h1>
-            <p id="tarotDesc">3枚のカードからアドバイスを受け取る</p>
-            <span class="go" aria-hidden="true">→</span>
+    <section id="introScreen" class="screen intro is-active" aria-labelledby="mainTitle">
+      <div class="intro-inner">
+        <div class="eyebrow">YOKAI PERSONALITY DIAGNOSIS</div>
+        <div class="moon-mark" aria-hidden="true">
+          <div class="moon-ring"></div>
+          <div class="moon-glyph">妖</div>
+        </div>
+        <h1 id="mainTitle">妖怪診断</h1>
+        <div id="firstVisitBlock">
+          <p class="lead">十二の質問への回答から、あなたの考え方や行動に最も近い妖怪タイプを診断します。深く考えすぎず、普段の自分に近い答えを選んでください。</p>
+          <div class="info-strip" aria-label="利用情報">
+            <span>無料</span>
+            <span>登録不要</span>
+            <span>約2分</span>
+            <span>全12問</span>
           </div>
-        </a>
+          <div class="intro-actions">
+            <button id="startBtn" class="primary-btn" type="button">鳥居をくぐる</button>
+          </div>
+        </div>
 
-        <a id="yokaiCard" class="card yokai" href="/yokai-shindan/" aria-label="妖怪診断を開く" onclick="trackPortal('yokai_shindan')">
-          <div class="visual"><img id="yokaiImage" src="assets/yokai-portal.webp" alt="河童、唐傘小僧、ろくろ首、のっぺらぼう"></div>
-          <div class="body">
-            <h1 id="yokaiTitle">妖怪診断</h1>
-            <p id="yokaiDesc">12の質問からあなたの妖怪タイプを診断</p>
-            <span class="go" aria-hidden="true">→</span>
+        <section id="returningPanel" class="returning-panel" hidden aria-label="妖怪タイプのホーム">
+          <div class="returning-main">
+            <div class="character-frame">
+              <img id="homeYokaiImage" class="character-img anim-float" alt="" />
+            </div>
+            <div class="returning-copy">
+              <div class="mini-label">YOUR YOKAI TYPE</div>
+              <h2 id="homeYokaiName"></h2>
+              <p id="homeYokaiTitle"></p>
+              <div class="visit-strip">
+                <div class="visit-strip-head"><span>7日間の記録</span><strong id="homeVisitCount">1 / 7</strong></div>
+                <div id="homeStampRow" class="stamp-row" aria-label="訪問印"></div>
+              </div>
+            </div>
           </div>
-        </a>
+          <div class="returning-actions">
+            <button id="dailyBtn" class="primary-btn" type="button">今日のアドバイスを見る</button>
+            <button id="savedResultBtn" class="secondary-btn" type="button">診断結果を見る</button>
+            <button id="bookBtn" class="secondary-btn" type="button">妖怪図鑑</button>
+          </div>
+          <button id="rediagnoseBtn" class="text-btn" type="button">診断をやり直す</button>
+        </section>
+
+        <div class="kofi-wrap" aria-label="Ko-fi support">
+          <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support me on Ko-fi', '#4d3f3c', 'I5K8240D50');kofiwidget2.draw();</script>
+        </div>
       </div>
-      <section class="reading" aria-labelledby="readingTitle"><div class="reading-head"><h2 id="readingTitle">読みもの</h2><span id="readingNote">GUIDES</span></div><div class="reading-links"><a id="tarotGuide" class="reading-link" href="/guides/tarot/" onclick="trackGuide('tarot')"><div><strong id="tarotGuideTitle">大アルカナ22枚を知る</strong><small id="tarotGuideDesc">カードの意味と行動のヒント</small></div><i>→</i></a><a id="yokaiGuide" class="reading-link" href="/guides/yokai/" onclick="trackGuide('yokai')"><div><strong id="yokaiGuideTitle">妖怪12体を知る</strong><small id="yokaiGuideDesc">伝承と診断タイプの違い</small></div><i>→</i></a></div></section>
-    </main>
+    </section>
 
-    <footer>
-      <span>© YO CREATE</span>
-      <div class="links"><a href="/about/">ABOUT</a><a href="/privacy/">PRIVACY</a><a href="/disclaimer/">DISCLAIMER</a><a href="https://x.com/douyoh" target="_blank" rel="noopener noreferrer">CONTACT</a></div>
-    </footer>
-  </div>
+    <section id="quizScreen" class="screen quiz" aria-live="polite">
+      <header class="quiz-header">
+        <button id="backBtn" class="ghost-btn" type="button" aria-label="前の質問へ">←</button>
+        <div class="progress-area">
+          <div class="progress-text"><span>回答を確認しています</span><span id="progressCount">1 / 12</span></div>
+          <div id="lanterns" class="lanterns" aria-hidden="true"></div>
+        </div>
+        <button id="quitBtn" class="ghost-btn" type="button" aria-label="最初に戻る">×</button>
+      </header>
+
+      <div class="question-stage">
+        <article id="questionCard" class="question-card">
+          <div class="quiz-companion" aria-hidden="true"><img id="quizYokaiImage" class="anim-float" alt="" /></div>
+          <div class="question-label">QUESTION <span id="questionNumber">01</span></div>
+          <h2 id="questionText" class="question-text"></h2>
+          <div id="answerList" class="answers"></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="revealScreen" class="screen reveal" aria-live="polite">
+      <div class="reveal-inner">
+        <div class="seal" aria-hidden="true">封</div>
+        <h2 class="reveal-title">回答を分析しています</h2>
+        <p class="reveal-copy">あなたの回答から、六つの性格傾向を照合しています。</p>
+        <div class="dots" aria-hidden="true"><span></span><span></span><span></span></div>
+      </div>
+    </section>
+
+    <section id="resultScreen" class="screen result" aria-live="polite">
+      <div class="result-wrap">
+        <article class="result-hero">
+          <div>
+            <div class="result-kicker">YOUR YOKAI TYPE</div>
+            <h2 id="resultName" class="result-name"></h2>
+            <p id="resultTitle" class="result-title"></p>
+            <p id="resultSummary" class="result-summary"></p>
+          </div>
+          <div class="yokai-emblem"><img id="resultImage" class="result-character anim-float" alt="" /><div id="resultGlyph" class="yokai-glyph" hidden></div></div>
+        </article>
+
+        <div class="result-grid">
+          <section class="result-card">
+            <h3>あなたの強み</h3>
+            <p id="resultStrength"></p>
+            <div id="resultTraits" class="traits"></div>
+          </section>
+          <section class="result-card">
+            <h3>注意したい状態</h3>
+            <p id="resultShadow"></p>
+          </section>
+          <section class="result-card">
+            <h3>恋愛の傾向</h3>
+            <p id="resultLove"></p>
+          </section>
+          <section class="result-card">
+            <h3>仕事の傾向</h3>
+            <p id="resultWork"></p>
+          </section>
+          <section class="result-card score-card">
+            <h3>六つの気質</h3>
+            <div id="scoreList" class="score-list"></div>
+          </section>
+        </div>
+
+        <section class="sub-result">
+          <strong>もう一つの妖怪傾向：<span id="secondaryName"></span></strong>
+          <p id="secondaryText"></p>
+        </section>
+
+        <div class="actions">
+          <button id="goDailyBtn" class="primary-btn" type="button">今日のアドバイスへ</button>
+          <button id="shareImageBtn" class="secondary-btn" type="button">結果画像を作る</button>
+          <button id="shareBtn" class="secondary-btn" type="button">結果を共有</button>
+          <button id="resultBookBtn" class="secondary-btn" type="button">妖怪図鑑</button>
+          <button id="restartBtn" class="secondary-btn" type="button">もう一度診断する</button>
+        </div>
+        <p class="footer-note">この診断は、質問への回答から考え方や行動の傾向を分類し、妖怪の特徴になぞらえて紹介するエンターテインメントコンテンツです。医療、心理、法律、金融その他の専門的な診断や判断を行うものではありません。結果とアドバイスは、ご自身を振り返るための参考としてお楽しみください。</p>
+      </div>
+    </section>
+
+
+
+    <section id="dailyScreen" class="screen daily" aria-live="polite">
+      <div class="page-wrap">
+        <header class="page-topbar">
+          <button id="dailyHomeBtn" class="ghost-btn" type="button" aria-label="妖怪タイプのホームへ戻る">←</button>
+          <h2>今日の行動アドバイス</h2>
+          <button id="dailyBookBtn" class="ghost-btn" type="button" aria-label="妖怪図鑑">帳</button>
+        </header>
+
+        <article class="daily-hero">
+          <div class="daily-character character-frame">
+            <img id="dailyYokaiImage" class="character-img anim-float" alt="" />
+          </div>
+          <div class="daily-copy">
+            <div id="dailyDate" class="daily-label"></div>
+            <h3 id="dailyYokaiName"></h3>
+            <div id="dailyMood" class="daily-mood"></div>
+            <p id="dailyMessage" class="daily-message"></p>
+          </div>
+        </article>
+
+        <section class="theme-panel">
+          <h3>今日、優先したいものを一つ選んでください</h3>
+          <p>選んだテーマに合わせて、今日取り入れやすい行動案を表示します。</p>
+          <div id="themeButtons" class="theme-buttons"></div>
+        </section>
+
+        <section id="oraclePanel" class="oracle-panel" hidden>
+          <h3>妖怪タイプ別アドバイス</h3>
+          <p id="oracleAdvice"></p>
+          <div class="oracle-grid">
+            <div class="oracle-item"><span>おすすめの行動</span><strong id="oracleAction"></strong></div>
+            <div class="oracle-item"><span>取り組み方</span><strong id="oracleTime"></strong></div>
+            <div class="oracle-item"><span>役立つもの</span><strong id="oracleItem"></strong></div>
+          </div>
+        </section>
+
+        <section class="visit-strip">
+          <div class="visit-strip-head"><span>7日間の記録</span><strong id="dailyVisitCount"></strong></div>
+          <div id="dailyStampRow" class="stamp-row" aria-label="訪問印"></div>
+        </section>
+
+        <section id="visitorPanel" class="visitor-panel" hidden>
+          <img id="visitorImage" alt="" />
+          <div><h3>今日の図鑑ゲスト</h3><p id="visitorText"></p></div>
+        </section>
+
+        <section id="letterPanel" class="letter-panel" hidden>
+          <h3>7日間を振り返って</h3>
+          <p id="letterText"></p>
+        </section>
+
+        <div class="daily-actions actions">
+          <button id="dailyShareBtn" class="secondary-btn" type="button">今日のアドバイスを共有</button>
+          <button id="dailyResultBtn" class="secondary-btn" type="button">妖怪タイプの診断結果</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="bookScreen" class="screen book" aria-live="polite">
+      <div class="page-wrap">
+        <header class="page-topbar">
+          <button id="bookHomeBtn" class="ghost-btn" type="button" aria-label="妖怪タイプのホームへ戻る">←</button>
+          <h2>妖怪図鑑</h2>
+          <span aria-hidden="true"></span>
+        </header>
+        <section class="book-intro">
+          <div class="book-label">YOKAI COLLECTION</div>
+          <p>診断された妖怪タイプは最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ図鑑へ加わることがあります。</p>
+          <div id="bookProgress" class="book-progress"></div>
+        </section>
+        <div id="bookGrid" class="book-grid"></div>
+      </div>
+    </section>
+
+    <canvas id="shareCanvas" class="share-canvas" width="1200" height="630" aria-hidden="true"></canvas>
+
+    <div id="toast" class="toast" role="status"></div>
+  </main>
+
   <script>
+    "use strict";
+
+    const questions = [
+      { text: "面白そうなことを見つけると、計画が完全に決まっていなくても始めたくなる。", key: "action", reverse: false },
+      { text: "相手の表情や声の調子が少し変わっただけでも、すぐに気づくことが多い。", key: "sensitivity", reverse: false },
+      { text: "知らない人が多い場所でも、自分から話しかけたり輪に入ったりできる。", key: "social", reverse: false },
+      { text: "大切なことを決める前には、失敗した場合まで想像して準備しておきたい。", key: "caution", reverse: false },
+      { text: "周囲に反対されても、自分が正しいと思えば自分の判断を貫く方だ。", key: "independence", reverse: false },
+      { text: "理由をうまく説明できなくても、『こちらを選ぶべきだ』と感じることがある。", key: "intuition", reverse: false },
+      { text: "興味を持ったことでも、最初の一歩をなかなか踏み出せないことが多い。", key: "action", reverse: true },
+      { text: "多くの人と過ごしたあとは、しばらく誰とも話さず一人でいたくなる。", key: "social", reverse: true },
+      { text: "嫌なことを言われても、あまり引きずらずに気持ちを切り替えられる。", key: "sensitivity", reverse: true },
+      { text: "細かな確認が残っていても、まず始めてから調整すればよいと思う。", key: "caution", reverse: true },
+      { text: "大切な決断は、信頼できる人から賛成してもらえないと不安になる。", key: "independence", reverse: true },
+      { text: "勘や雰囲気よりも、実績のある方法や客観的なデータを優先する。", key: "intuition", reverse: true }
+    ];
+
+    const answerOptions = [
+      { label: "とても当てはまる", value: 5 },
+      { label: "やや当てはまる", value: 4 },
+      { label: "どちらともいえない", value: 3 },
+      { label: "あまり当てはまらない", value: 2 },
+      { label: "まったく当てはまらない", value: 1 }
+    ];
+
+    const labels = {
+      action: "行動力",
+      social: "社交性",
+      sensitivity: "感受性",
+      caution: "慎重性",
+      independence: "独立性",
+      intuition: "直感性"
+    };
+
+    const yokaiProfiles = [
+      {
+        name: "河童", glyph: "河", title: "水辺を遊ぶ好奇心の妖怪",
+        scores: { action: 4, social: 5, sensitivity: 3, caution: 2, independence: 3, intuition: 3 },
+        summary: "あなたは、新しい人や出来事へ自然に近づき、場を明るくする人です。好奇心と柔軟さが、思いがけない出会いや発見につなげられます。",
+        strength: "変化への適応が早く、人を楽しませながら物事を前へ進められます。勝負所では、軽やかな判断力も発揮します。",
+        traits: ["好奇心", "親しみやすさ", "柔軟性", "勝負勘"],
+        shadow: "刺激を求めすぎると、勝ち負けや勢いに心を奪われます。始める前に『続けた先に何が残るか』を考えると安定します。",
+        love: "友達のように笑い合える関係を好みます。楽しいだけでなく、落ち着いた時間も共有できる相手と相性がよい傾向です。",
+        work: "営業、接客、企画、イベント、ゲームなど、変化と人の反応がある仕事で力を発揮します。",
+        secondary: "人と楽しむ力に加え、もう一つの妖怪傾向の性質があなたの判断や対人距離に影響しています。"
+      },
+      {
+        name: "天狗", glyph: "天", title: "高みを目指す孤高の修行者",
+        scores: { action: 5, social: 2, sensitivity: 2, caution: 4, independence: 5, intuition: 4 },
+        summary: "あなたは、自分の基準を持ち、努力によって道を切り開く人です。簡単には折れない意志と、困難な局面での判断力があります。",
+        strength: "集中力、向上心、責任感が強く、専門性を磨くほど存在感が増します。周囲が迷う場面でも進む方向を示せます。",
+        traits: ["向上心", "集中力", "自立心", "決断力"],
+        shadow: "弱みを見せないまま一人で抱え込むと、他人の意見を遠ざけます。人に任せることも強さの一部です。",
+        love: "簡単には心を開きませんが、信頼した相手には誠実です。互いに自立しながら尊敬できる関係が向きます。",
+        work: "専門職、技術職、経営、研究、指導など、実力が結果へ反映される環境に適性があります。",
+        secondary: "高い独立心の奥に、もう一つの妖怪傾向が示す感情や対人傾向も隠れています。"
+      },
+      {
+        name: "雪女", glyph: "雪", title: "静寂の中で心を見つめる観察者",
+        scores: { action: 2, social: 2, sensitivity: 5, caution: 4, independence: 4, intuition: 5 },
+        summary: "あなたは、表面に出ない変化まで感じ取る繊細な観察者です。静かな印象の内側に、深い情熱と美意識を秘めています。",
+        strength: "空気を読む力、冷静さ、直感、美的感覚に優れています。人が見落とす細部から本質へ近づけます。",
+        traits: ["観察力", "感受性", "冷静さ", "美意識"],
+        shadow: "傷つくことを恐れると、突然心を閉ざしてしまいます。察してもらうのを待つより、少しだけ言葉にしてください。",
+        love: "好きになるまで時間をかけますが、心を許すと深く愛します。曖昧な態度より、誠実な言葉を求めます。",
+        work: "デザイン、文章、分析、研究、カウンセリングなど、感性と集中力を使う仕事に向きます。",
+        secondary: "繊細さの表し方には、もう一つの妖怪傾向が示す行動性や社交性が加わっています。"
+      },
+      {
+        name: "座敷童子", glyph: "和", title: "人と場所を和ませる調和者",
+        scores: { action: 3, social: 5, sensitivity: 4, caution: 4, independence: 2, intuition: 4 },
+        summary: "あなたは、人の心を和らげ、集団に安心感を与える人です。目立たなくても、あなたがいる場所には自然と温かさが生まれます。",
+        strength: "共感力、協調性、気配りに優れ、人と人の間を整えられます。日常の小さな良さに気づく力も持っています。",
+        traits: ["思いやり", "協調性", "安心感", "気づく力"],
+        shadow: "必要とされたい気持ちが強まると、自分を後回しにします。他人へ向ける優しさを、自分にも向けてください。",
+        love: "相手を支え、居心地の良い関係を作ります。尽くしすぎず、受け取ることを許すと長続きします。",
+        work: "教育、福祉、人事、接客、事務、宿泊など、人や場を支える仕事で力を発揮します。",
+        secondary: "人を支える性質に、もう一つの妖怪傾向が示す自己主張や慎重さが重なっています。"
+      },
+      {
+        name: "唐傘小僧", glyph: "傘", title: "驚きと笑いを生み出す表現者",
+        scores: { action: 4, social: 5, sensitivity: 4, caution: 1, independence: 3, intuition: 4 },
+        summary: "あなたは、普通とは少し違う角度から世界を見て、退屈な空気を変える人です。驚きや笑いを生み出す個性があります。",
+        strength: "独創性、愛嬌、表現力に優れ、失敗さえも面白さへ変えられます。人の注目を自然に集めます。",
+        traits: ["独創性", "愛嬌", "表現力", "瞬発力"],
+        shadow: "注目されない不安から、本心まで冗談に隠すことがあります。真剣な気持ちを見せるほど魅力は深まります。",
+        love: "楽しく意外性のある恋を好みます。好意を冗談で隠しすぎず、本気の言葉を一つ伝えると進展します。",
+        work: "広告、動画、デザイン、販売、SNS、イベントなど、反応が返ってくる仕事に適性があります。",
+        secondary: "表現力の使い方には、もう一つの妖怪傾向が示す慎重さや自立性も影響しています。"
+      },
+      {
+        name: "ぬりかべ", glyph: "壁", title: "大切なものを守る不動の防壁",
+        scores: { action: 2, social: 2, sensitivity: 2, caution: 5, independence: 4, intuition: 2 },
+        summary: "あなたは、急がず着実に進み、大切な人や場所を守る人です。一度築いた信頼を簡単には手放しません。",
+        strength: "忍耐力、継続力、責任感に優れ、危険やほころびを早く見つけます。長期戦で真価を発揮します。",
+        traits: ["忍耐力", "堅実さ", "継続力", "防衛力"],
+        shadow: "守る意識が強まりすぎると、変化や挑戦まで止めてしまいます。守るものと手放すものを分けて考えてください。",
+        love: "時間をかけて信頼を築きます。派手さより、約束を守る相手との安定した関係を望みます。",
+        work: "管理、経理、法務、保守、製造、インフラなど、正確さと継続が必要な仕事に向きます。",
+        secondary: "堅実さの内側に、もう一つの妖怪傾向が示す柔軟性や感情の動きもあります。"
+      },
+      {
+        name: "猫又", glyph: "猫", title: "二つの顔を持つ直感の賢者",
+        scores: { action: 3, social: 3, sensitivity: 5, caution: 4, independence: 5, intuition: 5 },
+        summary: "あなたは、相手や状況を鋭く見抜き、自分の立ち位置を選べる人です。親しみやすさと警戒心を巧みに使い分けます。",
+        strength: "直感、人を見る目、自立心、危険回避に優れています。場に合わせながらも、自分の核を失いません。",
+        traits: ["直感", "洞察力", "自立心", "魅力"],
+        shadow: "疑いが強まると、相手を試したり主導権にこだわったりします。本音を一つ見せることが信頼への近道です。",
+        love: "束縛を嫌いながらも、深い絆を望みます。駆け引きより、対等な距離感を保てる相手が合います。",
+        work: "交渉、マーケティング、調査、美容、創作、コンサルティングなどで洞察力が生きます。",
+        secondary: "鋭い直感の表面に、もう一つの妖怪傾向が示す社交性や行動性が現れています。"
+      },
+      {
+        name: "ぬらりひょん", glyph: "主", title: "いつの間にか中心にいる世渡りの達人",
+        scores: { action: 3, social: 5, sensitivity: 3, caution: 4, independence: 4, intuition: 4 },
+        summary: "あなたは、場の流れと人間関係を読み、自然に物事を動かす人です。正面衝突を避けながら、望む位置へ進めます。",
+        strength: "交渉力、状況判断、人脈形成に優れています。複数の立場を整理し、落とし所を作る力があります。",
+        traits: ["交渉力", "状況判断", "統率力", "柔軟性"],
+        shadow: "面倒を避けることに慣れると、責任まで曖昧にしてしまいます。引き受ける姿勢が本当の信頼を作ります。",
+        love: "余裕ある態度で相手を引きつけます。大切な場面では曖昧にせず、意思を言葉にすると関係が深まります。",
+        work: "経営、営業、管理職、仲介、プロデュースなど、人と流れを動かす仕事に向きます。",
+        secondary: "世渡りの巧さに、もう一つの妖怪傾向が示す感情や独立性が個性として加わります。"
+      },
+      {
+        name: "ろくろ首", glyph: "探", title: "遠くまで意識を伸ばす探究者",
+        scores: { action: 2, social: 3, sensitivity: 5, caution: 4, independence: 3, intuition: 4 },
+        summary: "あなたは、目の前だけで満足せず、知らない世界や人の本心を探ろうとする人です。興味を持ったことを深く掘り下げます。",
+        strength: "探究心、情報収集、想像力に優れています。小さな違和感を見逃さず、答えへ近づくことができます。",
+        traits: ["探究心", "情報収集", "想像力", "観察力"],
+        shadow: "考えすぎると、不安や疑いを自分で膨らませます。すべてを知ろうとせず、分からない余白を残してください。",
+        love: "相手の言葉や態度を細かく見ます。想像だけで結論を出さず、直接確かめることで安心できます。",
+        work: "研究、編集、取材、分析、IT、文章など、深く調べて整理する仕事に適性があります。",
+        secondary: "探究心の向かう先には、もう一つの妖怪傾向が示す社交性や自立性が関わっています。"
+      },
+      {
+        name: "一反木綿", glyph: "風", title: "風に乗って進む自由な行動者",
+        scores: { action: 5, social: 4, sensitivity: 2, caution: 1, independence: 5, intuition: 3 },
+        summary: "あなたは、考え込むより先に動き、勢いで道を開く人です。環境の変化にも強く、過去へ執着せず進めます。",
+        strength: "行動力、決断力、切り替えの早さに優れています。新しい場所でも自分の流れを作れます。",
+        traits: ["行動力", "自由さ", "決断力", "適応力"],
+        shadow: "自由を優先しすぎると、途中で責任を手放してしまいます。始める力と同じだけ、終わらせる力を意識してください。",
+        love: "直感的に恋へ飛び込みます。一緒に新しい経験を楽しめ、互いを縛らない相手が向きます。",
+        work: "旅行、営業、物流、スポーツ、起業、短期プロジェクトなど、動きのある仕事に適性があります。",
+        secondary: "自由な行動性に、もう一つの妖怪傾向が示す感情の深さや慎重さも加わっています。"
+      },
+      {
+        name: "のっぺらぼう", glyph: "無", title: "人の心を映し出す無形の共感者",
+        scores: { action: 2, social: 4, sensitivity: 5, caution: 3, independence: 2, intuition: 4 },
+        summary: "あなたは、相手に合わせながら必要な役割を見つけられる人です。偏見が少なく、さまざまな人の気持ちを受け止めます。",
+        strength: "共感力、適応力、聞く力に優れています。人と人の間に入り、緊張を和らげることができます。",
+        traits: ["共感力", "適応力", "聞く力", "柔軟性"],
+        shadow: "合わせすぎると、自分が何を望むのか分からなくなります。好かれる顔より、自分が落ち着ける顔を選んでください。",
+        love: "相手の理想に寄り添えますが、我慢を重ねがちです。小さな本音を伝えるほど関係は安定します。",
+        work: "接客、人事、秘書、カウンセリング、演技、サポートなど、相手を理解する仕事に向きます。",
+        secondary: "高い共感性に、もう一つの妖怪傾向が示す自己主張や行動性が組み合わさっています。"
+      },
+      {
+        name: "海坊主", glyph: "海", title: "深い海に意志を秘める孤高の守り手",
+        scores: { action: 4, social: 1, sensitivity: 4, caution: 5, independence: 5, intuition: 4 },
+        summary: "あなたは、静かな外見の奥に強い意志を持つ人です。簡単には本心を見せませんが、守ると決めたものには大きな力を注ぎます。",
+        strength: "精神力、信念、危機対応に優れています。長期的な視点で耐え、重要な局面では周囲を支えます。",
+        traits: ["精神力", "信念", "危機対応", "保護意識"],
+        shadow: "不満を内側へため込み、限界で一気に噴き出すことがあります。耐え切る前に状況を伝えてください。",
+        love: "軽い関係より深い結びつきを求めます。強い愛情を、束縛ではなく信頼として表すことが鍵です。",
+        work: "危機管理、経営、研究、専門職、大規模プロジェクトなど、責任の重い役割に向きます。",
+        secondary: "強い意志の表し方には、もう一つの妖怪傾向が示す社交性や感受性が影響しています。"
+      }
+    ];
+
+
+    const STORAGE_KEYS = {
+      guardian: "yokaiOracle.guardian.v1",
+      visits: "yokaiOracle.visits.v1",
+      collection: "yokaiOracle.collection.v1",
+      daily: "yokaiOracle.daily.v1"
+    };
+
+    const slugByName = {
+      "河童": "kappa",
+      "天狗": "tengu",
+      "雪女": "yuki-onna",
+      "座敷童子": "zashiki-warashi",
+      "唐傘小僧": "karakasa-kozo",
+      "ぬりかべ": "nurikabe",
+      "猫又": "nekomata",
+      "ぬらりひょん": "nurarihyon",
+      "ろくろ首": "rokurokubi",
+      "一反木綿": "ittan-momen",
+      "のっぺらぼう": "nopperabo",
+      "海坊主": "umibozu"
+    };
+
+    const dailyMoods = [
+      { name: "ごきげん", icon: "✦", animation: "anim-bounce" },
+      { name: "静かに考え中", icon: "◌", animation: "anim-doze" },
+      { name: "静かに寄り添っています", icon: "◎", animation: "anim-float" },
+      { name: "少し落ち着かない様子", icon: "△", animation: "anim-sway" },
+      { name: "集中しています", icon: "◇", animation: "anim-glow" },
+      { name: "こちらを気にしています", icon: "…", animation: "anim-peek" }
+    ];
+
+    const dailyThemes = [
+      { key: "challenge", icon: "↗", name: "新しい一歩" },
+      { key: "calm", icon: "○", name: "心の平穏" },
+      { key: "bond", icon: "結", name: "人とのつながり" }
+    ];
+
+    const oracleData = {
+      "kappa": {
+        messages: ["河童は水面に新しい波を見つけています。今日は小さな好奇心を見逃さないでください。", "河童が手招きをしています。誰かと笑い合う時間を作ると、気持ちを切り替えやすくなります。", "河童は少し静かです。勢いだけで決めず、続けた先まで一度眺めてみましょう。", "河童は普段と違う道を眺めています。小さな変化を一つ試すと、新しい発見につながります。"],
+        letter: "あなたの好奇心は、日常に新しい流れを呼び込む力です。7回の記録を重ねた今、面白さを追うだけでなく、育てたいものを一つ選んでください。"
+      },
+      "tengu": {
+        messages: ["天狗は高い場所から道を見渡しています。今日は目先の反応より、長い目的を優先してください。", "天狗が羽団扇を静かに置きました。今日は、自分で抱えず一つだけ人に任せてみましょう。", "山の空気が澄んでいます。磨いてきた技術を、遠慮せず表へ出してみましょう。", "天狗は足元を確かめています。高みを目指すほど、基本を丁寧に扱ってください。"],
+        letter: "強さは、一人で耐え続けることだけではありません。7回訪れたあなたには、信頼できる誰かと力を分け合う準備ができています。"
+      },
+      "yuki-onna": {
+        messages: ["雪女は静かな雪を眺めています。言葉になる前の気持ちを、今日は急いで決めつけないでください。", "冷たい風の中に小さな温もりがあります。心を許せる人へ、短い本音を伝えてみましょう。", "雪女の周囲が澄んでいます。美しいと感じたものを手がかりに、自分の気持ちを整理してみましょう。", "雪女は少し距離を取っています。疲れを感じたら、無理に明るく振る舞わなくて構いません。"],
+        letter: "あなたの繊細さは弱さではなく、見えない変化を受け取る力です。7回の記録を重ねた今、その感覚を自分自身のためにも使ってください。"
+      },
+      "zashiki-warashi": {
+        messages: ["座敷童子は部屋を整えています。小さな片づけが、心にも新しい余白を作ります。", "座敷童子が嬉しそうに笑っています。誰かへ向けた親切は、周囲との関係を整えるきっかけになります。", "今日は自分の席も用意してください。人を優先する前に、あなた自身の望みを確かめましょう。", "座敷童子は慣れた部屋を眺めています。身近な場所を少し整えると、気持ちを切り替えやすくなります。"],
+        letter: "あなたが周囲へ与えてきた安心は、人間関係を支える力になっています。7回目を迎えた今日は、その優しさを自分へ返す番です。"
+      },
+      "karakasa-kozo": {
+        messages: ["唐傘小僧は面白いことを思いついたようです。完成度より、まず形にしてみてください。", "唐傘小僧が片足で跳ねています。失敗を恐れず途中経過を人に見せると、次の改善点が見つかります。", "今日は冗談の奥にある本音を一つだけ伝えてください。相手に意図が伝わりやすくなります。", "退屈な空気に穴が開きそうです。あなたらしい工夫を一つ加えてみましょう。"],
+        letter: "あなたの個性は、人を驚かせるためだけでなく、停滞した空気を変えるためにあります。7回の記録を終えた今、本気の作品を一つ残してください。"
+      },
+      "nurikabe": {
+        messages: ["ぬりかべは静かに立っています。今日は急ぐより、崩れやすい部分を一つ補強してください。", "ぬりかべが少し道を空けました。変化を拒まず、小さな例外を許してみましょう。", "守るべきものが見えています。断るべき頼みには、穏やかでも明確な境界線を。", "足元は安定しています。長く続けてきたことを振り返り、積み重ねた成果を確認してください。"],
+        letter: "あなたが守ってきたものは、簡単には崩れません。7回の記録を重ねた今、壁の一部を扉に変え、新しい流れを迎えてください。"
+      },
+      "nekomata": {
+        messages: ["猫又は尻尾を揺らしながら様子を見ています。直感を大切にしつつ、相手を試すような行動は控えてください。", "猫又の目が輝いています。自分の魅力や得意分野を、遠慮なく使ってみましょう。", "今日は一人の時間が知恵を整えます。無理に誰かの速度へ合わせなくて構いません。", "猫又が火を小さく灯しています。本音を一つ見せることが、信頼を深める一歩になります。"],
+        letter: "あなたは多くを見抜けるからこそ、簡単には心を明け渡しません。7回の記録を終えた今、見極めるだけでなく、信じる選択も加えてください。"
+      },
+      "nurarihyon": {
+        messages: ["ぬらりひょんは場の流れを読んでいます。今日は正面から押すより、自然な順番を整えてください。", "ぬらりひょんがお茶を置きました。曖昧にしてきた返事を、一つだけ明確にしてみましょう。", "今日は人とのつながりを整える日にしてください。久しぶりの相手へ、負担にならない短い連絡を送りましょう。", "余裕に見える態度の奥で、疲れがたまっていませんか。誰にも見せない休息を確保してください。"],
+        letter: "あなたには、人と状況を自然に動かす力があります。7回の記録を重ねた今、その力を責任から逃げるためではなく、皆が進める道を作るために使ってください。"
+      },
+      "rokurokubi": {
+        messages: ["ろくろ首は遠くを眺めています。気になることを一つ調べ、今必要な情報を整理してみましょう。", "今日は知りすぎないことも大切です。答えの出ないことを、一度棚へ戻してください。", "ろくろ首が誰かの声に耳を傾けています。言葉の裏を読む前に、そのまま受け取ってみましょう。", "探究心が強まっています。小さな疑問を一つ選び、最後まで調べて記録に残しましょう。"],
+        letter: "あなたの探究心は、遠くの真実へ届く長い首のようなものです。7回の記録を終えた今、すべてを知ろうとせず、大切な一問を選んでください。"
+      },
+      "ittan-momen": {
+        messages: ["一反木綿が風をつかみました。今日は考え続けるより、最初の一歩を軽く踏み出してください。", "一反木綿は別の道を眺めています。予定に固執せず、より納得できる方法へ切り替えて構いません。", "勢いは十分です。始めたことを一つ終わらせると、次の行動へ移りやすくなります。", "一反木綿は遠くへ行きたそうです。場所を変えるだけでも、気分と考えが整います。"],
+        letter: "あなたの身軽さは、新しい世界へ入るための翼です。7回目を迎えた今、始める力と同じだけ、終わらせる力も育ててください。"
+      },
+      "nopperabo": {
+        messages: ["のっぺらぼうは静かにこちらを見ています。今日は誰かの期待ではなく、自分の希望を一つ選んでください。", "のっぺらぼうは人の話に耳を傾けています。ただし、背負う必要のない感情まで持ち帰らないでください。", "今日は小さな本音が鍵です。断る、休む、欲しいと言う。そのどれかを言葉にしましょう。", "のっぺらぼうが鏡の前に立っています。役割を離れたときの自分を、少し思い出してください。"],
+        letter: "あなたは多くの人に寄り添えるからこそ、自分の輪郭を失いやすい人です。7回の記録を終えた今、誰にも合わせない時間を大切にしてください。"
+      },
+      "umibozu": {
+        messages: ["海坊主は静かな海に浮かんでいます。大きな決断ほど、今日は急いで答えを出さなくて構いません。", "深いところで感情が動いています。限界まで耐える前に、信頼できる相手へ状況を伝えてください。", "海坊主の周囲に強い波が立っています。守りたいものを整理し、必要な場面では明確な態度を示してください。", "海坊主は静かな海を眺めています。一人で考える時間を取り、長期的な方針を整理してください。"],
+        letter: "あなたの深さと強さは、大切なものを守るためにあります。7回の記録を重ねた今、孤独だけを盾にせず、信頼できる人を内側へ招いてください。"
+      }
+    };
+
+    const themeAdvice = {
+      challenge: [
+        "完璧な準備を待たず、十分に小さな一歩へ変えてください。",
+        "今日中に終えられる形へ分け、最初の一つだけ着手しましょう。",
+        "人に見せられる途中経過を作ると、次に直す点が明確になります。",
+        "いつもの方法に一つだけ新しい工夫を加えてください。"
+      ],
+      calm: [
+        "予定を一つ減らし、何もしない余白を意識して作ってください。",
+        "結論を急がず、呼吸が落ち着いてから返事をしましょう。",
+        "視界に入る場所を少し整えると、心のざわつきも弱まります。",
+        "短い散歩か温かい飲み物で、考えを身体へ戻してください。"
+      ],
+      bond: [
+        "長い説明より、短く率直な一言を選んでください。",
+        "答える前に、相手の話を最後まで聞くことを優先してください。",
+        "しばらく連絡していない人へ、負担にならない短い言葉を送りましょう。",
+        "助けるだけでなく、自分から一つ頼ることで関係が整います。"
+      ]
+    };
+
+    const supportItems = ["白いハンカチ", "温かい飲み物", "小さな鏡", "青い小物", "丸いお菓子", "木の香り", "お気に入りの筆記具", "柔らかな布", "水の入ったグラス", "古い写真", "銀色の小物", "小さな鍵"];
+    const approachTips = ["最初の5分だけ試す", "一度書き出して整理する", "静かな場所で取り組む", "誰かに途中経過を見せる", "一つずつ順番に進める", "終える時間を先に決める"];
+    const recommendedActions = ["机の上を一か所整える", "普段と違う道を歩く", "短いお礼を伝える", "予定を一つ書き出す", "五分だけ外の空気を吸う", "不要な通知を一つ切る", "好きな音を一曲聴く", "水をゆっくり飲む"];
+
+
     const LANGUAGE_KEY = "yoCreateLanguage";
     let currentLanguage = (() => {
       try { return localStorage.getItem(LANGUAGE_KEY) === "en" ? "en" : "ja"; }
       catch (error) { return "ja"; }
     })();
 
-    const portalCopy = {
-      ja: {
-        title: "YO CREATE｜クイックタロット・妖怪診断",
-        description: "YO CREATEのWebコンテンツ入口。エブリデイ クイックタロットと妖怪診断を無料・登録不要で利用できます。",
-        ogDescription: "クイックタロットと妖怪診断。",
-        tarotTitle: "クイックタロット",
-        tarotDesc: "3枚のカードからアドバイスを受け取る",
-        yokaiTitle: "妖怪診断",
-        yokaiDesc: "12の質問からあなたの妖怪タイプを診断",
-        tarotAria: "エブリデイ クイックタロットを開く",
-        yokaiAria: "妖怪診断を開く",
-        tarotAlt: "カード裏面2枚と太陽のタロットカード",
-        yokaiAlt: "河童、唐傘小僧、ろくろ首、のっぺらぼう",
-        button: "EN",
-        buttonAria: "Switch to English",
-        readingTitle: "読みもの", readingNote: "GUIDES", tarotGuideTitle: "大アルカナ22枚を知る", tarotGuideDesc: "カードの意味と行動のヒント", yokaiGuideTitle: "妖怪12体を知る", yokaiGuideDesc: "伝承と診断タイプの違い"
+    const questionTranslations = [
+      "When something looks interesting, I want to start even before the plan is fully worked out.",
+      "I often notice even small changes in another person's expression or tone of voice.",
+      "Even among many strangers, I can start conversations or join a group on my own.",
+      "Before making an important decision, I like to prepare by imagining what could go wrong.",
+      "Even if people around me disagree, I tend to stick with my own judgment when I believe it is right.",
+      "Sometimes I feel that one choice is right even when I cannot clearly explain why.",
+      "Even when something interests me, I often have trouble taking the first step.",
+      "After spending time with many people, I often want to be alone and quiet for a while.",
+      "Even after someone says something unpleasant to me, I can usually move on without dwelling on it.",
+      "Even if some details are still uncertain, I am comfortable starting first and adjusting later.",
+      "I feel uneasy making an important decision unless someone I trust agrees with me.",
+      "I usually value proven methods and objective data more than instinct or atmosphere."
+    ];
+
+    const answerTranslations = [
+      "Very much like me",
+      "Somewhat like me",
+      "Neither",
+      "Not very much like me",
+      "Not like me at all"
+    ];
+
+    const labelTranslations = {
+      action: "Initiative",
+      social: "Sociability",
+      sensitivity: "Sensitivity",
+      caution: "Caution",
+      independence: "Independence",
+      intuition: "Intuition"
+    };
+
+    const profileTranslations = {
+      "kappa": {
+        name: "Kappa",
+        title: "A curious spirit who plays by the water",
+        summary: "You naturally approach new people and experiences and brighten the atmosphere around you. Curiosity and flexibility can lead you to unexpected discoveries and connections.",
+        strength: "You adapt quickly to change and can move things forward while keeping others engaged. In competitive moments, you also show quick, light-footed judgment.",
+        traits: ["Curiosity", "Approachability", "Flexibility", "Competitive instinct"],
+        shadow: "When you chase stimulation too strongly, momentum or winning can take over. Before you begin, ask yourself what will remain if you keep going.",
+        love: "You enjoy relationships where you can laugh together like friends. You tend to pair well with someone who can share both exciting and quiet moments.",
+        work: "You thrive in sales, service, planning, events, games, and other work where change and human reactions are part of the job.",
+        secondary: "Alongside your ability to enjoy people, your second yokai tendency also influences your decisions and your preferred interpersonal distance."
       },
-      en: {
-        title: "YO CREATE | Quick Tarot & Yokai Diagnosis",
-        description: "YO CREATE web experiences: Quick Tarot and Yokai Diagnosis. Free to use with no registration required.",
-        ogDescription: "Quick Tarot and Yokai Diagnosis.",
-        tarotTitle: "Quick Tarot",
-        tarotDesc: "Receive guidance from three cards",
-        yokaiTitle: "Yokai Diagnosis",
-        yokaiDesc: "Discover your yokai personality type in 12 questions",
-        tarotAria: "Open Everyday Quick Tarot",
-        yokaiAria: "Open Yokai Diagnosis",
-        tarotAlt: "Two tarot card backs with The Sun card",
-        yokaiAlt: "Kappa, Karakasa-kozo, Rokurokubi, and Noppera-bo",
-        button: "日本語",
-        buttonAria: "日本語に切り替える",
-        readingTitle: "Guides", readingNote: "JAPANESE ARTICLES", tarotGuideTitle: "Major Arcana Guide", tarotGuideDesc: "22 card meanings and practical reflections", yokaiGuideTitle: "Yokai Guide", yokaiGuideDesc: "12 yokai stories and diagnosis types"
+      "tengu": {
+        name: "Tengu",
+        title: "A solitary seeker aiming higher",
+        summary: "You have standards of your own and tend to carve out a path through effort. You bring strong resolve and clear judgment to difficult situations.",
+        strength: "Focus, ambition, and responsibility are major strengths. The more expertise you build, the more naturally you can show others a direction forward.",
+        traits: ["Ambition", "Focus", "Independence", "Decisiveness"],
+        shadow: "If you refuse to show weakness, you may carry too much alone and shut out other viewpoints. Delegating is also a form of strength.",
+        love: "You do not open up quickly, but you are sincere once trust is established. Relationships built on mutual independence and respect suit you well.",
+        work: "Specialist, technical, management, research, and teaching roles suit you, especially where skill is reflected clearly in results.",
+        secondary: "Beneath your strong independence, your second yokai tendency adds another layer of emotion and interpersonal style."
+      },
+      "yuki-onna": {
+        name: "Yuki-onna",
+        title: "A quiet observer of the heart",
+        summary: "You are sensitive to changes that others may miss. Beneath a calm exterior, you carry deep feeling, intuition, and a strong sense of beauty.",
+        strength: "You are skilled at reading the atmosphere, staying composed, trusting subtle impressions, and noticing details that reveal what really matters.",
+        traits: ["Observation", "Sensitivity", "Composure", "Aesthetic sense"],
+        shadow: "When you fear being hurt, you may close yourself off suddenly. Rather than waiting to be understood, try putting a small part of your feeling into words.",
+        love: "You take time to fall in love, but care deeply once you trust someone. Clear and sincere words matter more to you than vague signals.",
+        work: "Design, writing, analysis, research, counseling, and other work that uses sensitivity and sustained focus can suit you well.",
+        secondary: "Your second yokai tendency influences how your sensitivity is expressed through action and social behavior."
+      },
+      "zashiki-warashi": {
+        name: "Zashiki-warashi",
+        title: "A harmonizer who puts people at ease",
+        summary: "You naturally soften the atmosphere and make groups feel safer. Even without seeking attention, your presence can bring warmth to a place.",
+        strength: "Empathy, cooperation, and attentiveness help you connect people and notice small positive things that others may overlook.",
+        traits: ["Kindness", "Cooperation", "Reassurance", "Awareness"],
+        shadow: "When your need to be useful grows too strong, you may put yourself last. Give yourself some of the same care you offer others.",
+        love: "You are good at creating a comfortable, supportive relationship. Things stay healthier when you allow yourself to receive as well as give.",
+        work: "Education, welfare, HR, customer service, administration, and hospitality are good fits for your ability to support people and environments.",
+        secondary: "Your supportive nature is balanced by the assertiveness or caution shown by your second yokai tendency."
+      },
+      "karakasa-kozo": {
+        name: "Karakasa-kozo",
+        title: "An expressive spirit who creates surprise and laughter",
+        summary: "You see the world from a slightly unusual angle and can change a dull atmosphere. Your individuality naturally creates surprise and amusement.",
+        strength: "Originality, charm, and expressive energy are strong points. You can even turn mistakes into something interesting and draw attention naturally.",
+        traits: ["Originality", "Charm", "Expression", "Quickness"],
+        shadow: "When you worry about being overlooked, you may hide genuine feelings behind humor. Showing what you truly mean can make your appeal deeper.",
+        love: "You enjoy playful and unexpected romance. Progress comes more easily when you let one sincere sentence stand on its own instead of turning everything into a joke.",
+        work: "Advertising, video, design, sales, social media, and events suit your ability to create visible reactions.",
+        secondary: "Your expressive style is also shaped by the caution or independence of your second yokai tendency."
+      },
+      "nurikabe": {
+        name: "Nurikabe",
+        title: "A steadfast wall that protects what matters",
+        summary: "You move forward steadily rather than rushing and take protecting important people and places seriously. Once trust is built, you do not discard it easily.",
+        strength: "Patience, consistency, and responsibility help you spot risks early and perform especially well over the long term.",
+        traits: ["Patience", "Steadiness", "Consistency", "Protection"],
+        shadow: "When protection becomes too strong, it can block change and challenge as well. Separate what truly needs guarding from what can be released.",
+        love: "You build trust slowly and value reliability over flashiness. A stable relationship with someone who keeps promises tends to suit you.",
+        work: "Management, accounting, legal, maintenance, manufacturing, and infrastructure work fit your accuracy and persistence.",
+        secondary: "Inside your steady nature, your second yokai tendency adds flexibility and emotional movement."
+      },
+      "nekomata": {
+        name: "Nekomata",
+        title: "An intuitive sage with two faces",
+        summary: "You read people and situations sharply and know how to choose your position. You can balance friendliness with healthy caution.",
+        strength: "Intuition, insight, independence, and risk awareness help you adapt without losing your own center.",
+        traits: ["Intuition", "Insight", "Independence", "Presence"],
+        shadow: "When suspicion becomes too strong, you may test people or focus too much on control. Revealing one honest feeling is often the fastest path to trust.",
+        love: "You dislike being controlled yet still want a deep bond. An equal relationship with room for independence tends to fit you best.",
+        work: "Negotiation, marketing, research, beauty, creative work, and consulting can make good use of your insight.",
+        secondary: "Your sharp intuition is colored by the sociability and initiative of your second yokai tendency."
+      },
+      "nurarihyon": {
+        name: "Nurarihyon",
+        title: "A social tactician who naturally finds the center",
+        summary: "You read the flow of a situation and its relationships, then move things forward without forcing direct conflict.",
+        strength: "Negotiation, situational judgment, and networking help you organize different viewpoints and find workable compromises.",
+        traits: ["Negotiation", "Judgment", "Leadership", "Flexibility"],
+        shadow: "If avoiding inconvenience becomes a habit, responsibility can become vague too. Choosing to own your part is what builds lasting trust.",
+        love: "Your relaxed manner can be attractive, but important relationships deepen when you state your intentions clearly instead of leaving them ambiguous.",
+        work: "Management, sales, leadership, mediation, and production roles suit your ability to move both people and situations.",
+        secondary: "Your social skill gains a distinct flavor from the emotions and independence shown by your second yokai tendency."
+      },
+      "rokurokubi": {
+        name: "Rokurokubi",
+        title: "An explorer whose curiosity reaches far",
+        summary: "You rarely stop at what is right in front of you. You want to understand unfamiliar worlds and what people really mean, and you dig deeply into what interests you.",
+        strength: "Curiosity, research, imagination, and observation help you notice small inconsistencies and follow them toward useful answers.",
+        traits: ["Curiosity", "Research", "Imagination", "Observation"],
+        shadow: "When thinking goes too far, uncertainty can grow into anxiety or suspicion. Leave some room for things you do not need to know yet.",
+        love: "You pay close attention to words and behavior. Asking directly instead of reaching conclusions through imagination alone can bring reassurance.",
+        work: "Research, editing, journalism, analysis, IT, and writing suit your ability to investigate deeply and organize information.",
+        secondary: "Where your curiosity goes is influenced by the sociability and independence of your second yokai tendency."
+      },
+      "ittan-momen": {
+        name: "Ittan-momen",
+        title: "A free-moving spirit that rides the wind",
+        summary: "You tend to act before overthinking and open paths through momentum. You handle changing environments well and can move on without clinging to the past.",
+        strength: "Initiative, decisiveness, and fast transitions help you create momentum even in unfamiliar places.",
+        traits: ["Initiative", "Freedom", "Decisiveness", "Adaptability"],
+        shadow: "If freedom becomes the only priority, you may leave responsibilities unfinished. Give finishing the same importance as starting.",
+        love: "You tend to enter romance intuitively. A partner who enjoys new experiences with you without excessive restriction is a good match.",
+        work: "Travel, sales, logistics, sports, entrepreneurship, and short-term projects suit your need for movement.",
+        secondary: "Your free-moving style is balanced by the emotional depth or caution of your second yokai tendency."
+      },
+      "nopperabo": {
+        name: "Noppera-bo",
+        title: "A shapeless empath who reflects others",
+        summary: "You can adjust to others and find the role that is needed in a situation. You are relatively free of prejudice and can accept many different feelings.",
+        strength: "Empathy, adaptability, and listening skills help you step between people and reduce tension.",
+        traits: ["Empathy", "Adaptability", "Listening", "Flexibility"],
+        shadow: "If you adapt too much, you can lose sight of what you want. Choose the version of yourself that feels calm, not merely the one others prefer.",
+        love: "You can meet a partner where they are, but may tolerate too much. Small honest statements make the relationship more stable.",
+        work: "Customer service, HR, assistant roles, counseling, acting, and support work suit your ability to understand others.",
+        secondary: "Your high empathy combines with the assertiveness or initiative of your second yokai tendency."
+      },
+      "umibozu": {
+        name: "Umibozu",
+        title: "A solitary guardian with deep resolve",
+        summary: "You carry strong resolve beneath a quiet exterior. You do not reveal everything easily, but you invest great energy in what you decide to protect.",
+        strength: "Mental endurance, conviction, and crisis response help you hold a long-term view and support others when responsibility is heavy.",
+        traits: ["Endurance", "Conviction", "Crisis response", "Protectiveness"],
+        shadow: "You may store frustration until it erupts all at once. Communicate what is happening before you reach your limit.",
+        love: "You prefer deep connection over casual relationships. The key is expressing strong affection as trust rather than control.",
+        work: "Crisis management, leadership, research, specialist work, and large-scale projects can suit your tolerance for responsibility.",
+        secondary: "How you express your strong will is influenced by the sociability and sensitivity of your second yokai tendency."
       }
     };
 
-    function applyPortalLanguage(){
-      const copy = portalCopy[currentLanguage];
+    const moodTranslations = [
+      "In a good mood",
+      "Quietly thinking",
+      "Staying close and calm",
+      "A little restless",
+      "Deeply focused",
+      "Keeping an eye on you"
+    ];
+
+    const themeTranslations = {
+      challenge: "A new step",
+      calm: "Peace of mind",
+      bond: "Connection with others"
+    };
+
+    const oracleTranslations = {
+      "kappa": {
+        messages: [
+          "Kappa has noticed a new ripple on the water. Do not overlook a small curiosity today.",
+          "Kappa is waving you over. Making time to laugh with someone can help you reset your mood.",
+          "Kappa is unusually quiet. Before acting on momentum alone, look once at where the choice may lead.",
+          "Kappa is watching a path you do not usually take. One small change may lead to a useful discovery."
+        ],
+        letter: "Your curiosity can bring new movement into everyday life. After seven visits, choose one thing you want to nurture instead of chasing interest alone."
+      },
+      "tengu": {
+        messages: [
+          "Tengu is looking over the road from high ground. Give the long-term goal priority over immediate reactions today.",
+          "Tengu has quietly set down the feather fan. Let someone else handle one thing instead of carrying everything yourself.",
+          "The mountain air is clear. Bring a skill you have worked on into view without downplaying it.",
+          "Tengu is checking the ground beneath its feet. The higher you aim, the more carefully you should handle the basics."
+        ],
+        letter: "Strength is not only enduring alone. After seven visits, you may be ready to share responsibility with someone you trust."
+      },
+      "yuki-onna": {
+        messages: [
+          "Yuki-onna is watching quiet snow. Do not rush to define a feeling before it has fully taken shape.",
+          "There is a little warmth in the cold wind. Try sharing one short, honest feeling with someone you trust.",
+          "The air around Yuki-onna is clear. Use something you find beautiful as a clue for sorting out your own feelings.",
+          "Yuki-onna is keeping some distance. If you are tired, you do not have to force yourself to appear cheerful."
+        ],
+        letter: "Your sensitivity is not weakness; it is an ability to notice subtle change. After seven visits, use that sensitivity for yourself as well as for others."
+      },
+      "zashiki-warashi": {
+        messages: [
+          "Zashiki-warashi is tidying the room. A small bit of organization can create fresh space in your mind too.",
+          "Zashiki-warashi looks pleased. A small kindness toward someone can help improve the atmosphere around you.",
+          "Make a place for yourself today as well. Check what you want before automatically putting someone else first.",
+          "Zashiki-warashi is looking around a familiar room. Adjusting one nearby space can make it easier to reset your mood."
+        ],
+        letter: "The reassurance you give others supports your relationships. On your seventh visit, return some of that kindness to yourself."
+      },
+      "karakasa-kozo": {
+        messages: [
+          "Karakasa-kozo seems to have an idea. Make it visible first instead of waiting for perfect quality.",
+          "Karakasa-kozo is hopping on one foot. Showing someone a work in progress can reveal the next thing to improve.",
+          "Share one honest feeling hidden behind a joke today. Your intention will be easier for the other person to understand.",
+          "The dull atmosphere is ready to crack open. Add one small idea that feels unmistakably like you."
+        ],
+        letter: "Your individuality can do more than surprise people; it can change stagnant situations. After seven visits, leave behind one thing you truly mean."
+      },
+      "nurikabe": {
+        messages: [
+          "Nurikabe is standing quietly. Rather than rushing, reinforce one part that feels fragile today.",
+          "Nurikabe has opened a little space in the road. Allow one small exception instead of rejecting change completely.",
+          "You can see what needs protection. Set a calm but clear boundary around requests you should decline.",
+          "The ground is stable. Look back at something you have continued for a long time and notice what has accumulated."
+        ],
+        letter: "What you have protected will not collapse easily. After seven visits, turn part of the wall into a door and allow a new flow in."
+      },
+      "nekomata": {
+        messages: [
+          "Nekomata is watching while its tail sways. Trust your intuition, but avoid testing people just to see how they react.",
+          "Nekomata's eyes are bright. Use a strength or charm of yours without minimizing it.",
+          "Time alone can organize your thoughts today. You do not have to match someone else's pace.",
+          "Nekomata has lit a small flame. Showing one honest feeling can deepen trust."
+        ],
+        letter: "Because you notice so much, you do not hand over trust easily. After seven visits, add the option of believing, not only evaluating."
+      },
+      "nurarihyon": {
+        messages: [
+          "Nurarihyon is reading the flow of the room. Arrange the natural order of things instead of pushing head-on.",
+          "Nurarihyon has set down the tea. Make one reply clear that you have been leaving vague.",
+          "Use today to maintain a relationship. Send a short, low-pressure message to someone you have not contacted in a while.",
+          "You may look relaxed, but fatigue can still build underneath. Make space for rest that no one else needs to see."
+        ],
+        letter: "You can move people and situations naturally. After seven visits, use that ability to create a path everyone can move through, not to avoid responsibility."
+      },
+      "rokurokubi": {
+        messages: [
+          "Rokurokubi is looking into the distance. Research one thing that interests you and organize only the information you need now.",
+          "Not knowing everything matters too. Put one question without an answer back on the shelf for now.",
+          "Rokurokubi is listening to someone's voice. Receive the words as they are before searching for hidden meaning.",
+          "Your curiosity is strong today. Choose one small question, investigate it fully, and leave a record of what you found."
+        ],
+        letter: "Your curiosity reaches far, like a long neck stretching toward the truth. After seven visits, choose one important question instead of trying to know everything."
+      },
+      "ittan-momen": {
+        messages: [
+          "Ittan-momen has caught the wind. Take a light first step instead of continuing to think about it.",
+          "Ittan-momen is looking at another route. You can change methods if another approach feels more convincing.",
+          "You already have momentum. Finish one thing you started so the next action becomes easier.",
+          "Ittan-momen seems ready to travel. Even changing your location for a while can help reorganize your mood and thoughts."
+        ],
+        letter: "Your lightness is a wing that helps you enter new worlds. On your seventh visit, develop the power to finish as deliberately as you begin."
+      },
+      "nopperabo": {
+        messages: [
+          "Noppera-bo is quietly facing you. Choose one thing you want today rather than what someone else expects.",
+          "Noppera-bo is listening carefully. Do not carry home emotions that are not yours to hold.",
+          "A small honest statement is useful today: say no, say you need rest, or say what you want.",
+          "Noppera-bo is standing before a mirror. Remember who you are when you are not performing a role for anyone."
+        ],
+        letter: "Because you can stay close to many people, your own outline can sometimes fade. After seven visits, protect some time in which you do not have to adapt to anyone."
+      },
+      "umibozu": {
+        messages: [
+          "Umibozu is floating on a calm sea. The bigger the decision, the less you need to rush an answer today.",
+          "Something is moving in deeper water. Tell someone you trust what is happening before endurance reaches its limit.",
+          "Strong waves are rising around Umibozu. Clarify what you want to protect and be direct when the situation calls for it.",
+          "Umibozu is looking over a quiet sea. Take time alone and organize the direction you want to follow over the long term."
+        ],
+        letter: "Your depth and strength exist to protect what matters. After seven visits, do not use solitude as your only shield; let someone trustworthy come closer."
+      }
+    };
+
+    const themeAdviceTranslations = {
+      challenge: [
+        "Do not wait for perfect preparation. Turn the task into a step small enough to begin now.",
+        "Break it into something you can finish today and start with only the first piece.",
+        "Create a work-in-progress version you can show someone; the next improvement will become clearer.",
+        "Add one new idea to the method you normally use."
+      ],
+      calm: [
+        "Remove one item from your schedule and deliberately create some empty space.",
+        "Do not rush to a conclusion. Wait until your breathing settles before you reply.",
+        "Tidying one place in your field of view can also reduce mental noise.",
+        "Use a short walk or a warm drink to bring your attention back into your body."
+      ],
+      bond: [
+        "Choose one short, direct sentence instead of a long explanation.",
+        "Before answering, make listening to the other person all the way through the priority.",
+        "Send a short, low-pressure message to someone you have not contacted in a while.",
+        "Do not only offer help. Ask for one small thing yourself and let the relationship become more balanced."
+      ]
+    };
+
+    const supportItemTranslations = ["A white handkerchief", "A warm drink", "A small mirror", "A blue accessory", "A round snack", "A woody scent", "A favorite pen", "A soft cloth", "A glass of water", "An old photo", "A silver accessory", "A small key"];
+    const approachTipTranslations = ["Try it for just five minutes", "Write it down once and organize it", "Work in a quiet place", "Show someone your progress", "Proceed one step at a time", "Choose a stopping time first"];
+    const recommendedActionTranslations = ["Tidy one small area of your desk", "Walk a route you do not usually take", "Send a short thank-you", "Write down one upcoming task", "Step outside for five minutes", "Turn off one unnecessary notification", "Listen to one song you like", "Drink a glass of water slowly"];
+
+    function isEnglish() { return currentLanguage === "en"; }
+    function profileSlug(profile) { return slugByName[profile.name]; }
+    function profileText(profile, field) {
+      if (!isEnglish()) return profile[field];
+      const translated = profileTranslations[profileSlug(profile)];
+      return translated && translated[field] !== undefined ? translated[field] : profile[field];
+    }
+    function profileName(profile) { return profileText(profile, "name"); }
+    function questionTextAt(index) { return isEnglish() ? questionTranslations[index] : questions[index].text; }
+    function answerLabelAt(index) { return isEnglish() ? answerTranslations[index] : answerOptions[index].label; }
+    function scoreLabel(key) { return isEnglish() ? labelTranslations[key] : labels[key]; }
+    function moodNameAt(index) { return isEnglish() ? moodTranslations[index] : dailyMoods[index].name; }
+    function themeName(theme) { return isEnglish() ? themeTranslations[theme.key] : theme.name; }
+    function oracleMessage(slug, index) { return isEnglish() ? oracleTranslations[slug].messages[index] : oracleData[slug].messages[index]; }
+    function oracleLetter(slug) { return isEnglish() ? oracleTranslations[slug].letter : oracleData[slug].letter; }
+    function themeAdviceText(key, index) { return isEnglish() ? themeAdviceTranslations[key][index] : themeAdvice[key][index]; }
+    function recommendedAction(index) { return isEnglish() ? recommendedActionTranslations[index] : recommendedActions[index]; }
+    function approachTip(index) { return isEnglish() ? approachTipTranslations[index] : approachTips[index]; }
+    function supportItem(index) { return isEnglish() ? supportItemTranslations[index] : supportItems[index]; }
+
+    const staticUi = {
+      ja: {
+        title: "妖怪診断｜あなたに近い妖怪タイプは？",
+        description: "12の質問から考え方や行動の傾向を分析し、あなたに近い妖怪タイプと毎日の行動アドバイスを紹介する無料の妖怪診断。登録不要です。",
+        ogDescription: "12の質問から妖怪タイプを診断。性格傾向と毎日の行動アドバイスを確認でき、妖怪図鑑も少しずつ増えていきます。",
+        toggle: "EN",
+        toggleAria: "Switch to English"
+      },
+      en: {
+        title: "Yokai Diagnosis | Which Yokai Type Are You?",
+        description: "A free 12-question personality diagnosis that matches your thinking and behavior patterns with a Japanese yokai type and offers practical daily advice. No registration required.",
+        ogDescription: "Discover your yokai personality type in 12 questions, review your traits, get practical daily advice, and gradually expand your yokai collection.",
+        toggle: "日本語",
+        toggleAria: "日本語に切り替える"
+      }
+    };
+
+    const staticTextRules = [
+      ["#mainTitle", "妖怪診断", "Yokai Diagnosis"],
+      ["#firstVisitBlock .lead", "十二の質問への回答から、あなたの考え方や行動に最も近い妖怪タイプを診断します。深く考えすぎず、普段の自分に近い答えを選んでください。", "Answer 12 questions to find the yokai type closest to your way of thinking and acting. Do not overthink it; choose the answer that feels most like your usual self."],
+      [".info-strip span:nth-child(1)", "無料", "Free"],
+      [".info-strip span:nth-child(2)", "登録不要", "No sign-up"],
+      [".info-strip span:nth-child(3)", "約2分", "About 2 min"],
+      [".info-strip span:nth-child(4)", "全12問", "12 questions"],
+      ["#startBtn", "鳥居をくぐる", "Start the Diagnosis"],
+      [".returning-panel .visit-strip-head span", "7日間の記録", "7-Day Record"],
+      ["#dailyBtn", "今日のアドバイスを見る", "View Today's Advice"],
+      ["#savedResultBtn", "診断結果を見る", "View My Result"],
+      ["#bookBtn", "妖怪図鑑", "Yokai Collection"],
+      ["#rediagnoseBtn", "診断をやり直す", "Retake the Diagnosis"],
+      [".progress-text span:first-child", "回答を確認しています", "Question Progress"],
+      [".reveal-title", "回答を分析しています", "Analyzing Your Answers"],
+      [".reveal-copy", "あなたの回答から、六つの性格傾向を照合しています。", "Comparing six personality traits based on your answers."],
+      [".result-grid .result-card:nth-child(1) h3", "あなたの強み", "Your Strengths"],
+      [".result-grid .result-card:nth-child(2) h3", "注意したい状態", "Watch Out For"],
+      [".result-grid .result-card:nth-child(3) h3", "恋愛の傾向", "Relationship Tendencies"],
+      [".result-grid .result-card:nth-child(4) h3", "仕事の傾向", "Work Tendencies"],
+      [".result-grid .result-card:nth-child(5) h3", "六つの気質", "Six Traits"],
+      ["#goDailyBtn", "今日のアドバイスへ", "Today's Advice"],
+      ["#shareImageBtn", "結果画像を作る", "Create Result Image"],
+      ["#shareBtn", "結果を共有", "Share Result"],
+      ["#resultBookBtn", "妖怪図鑑", "Yokai Collection"],
+      ["#restartBtn", "もう一度診断する", "Retake Diagnosis"],
+      [".footer-note", "この診断は、質問への回答から考え方や行動の傾向を分類し、妖怪の特徴になぞらえて紹介するエンターテインメントコンテンツです。医療、心理、法律、金融その他の専門的な診断や判断を行うものではありません。結果とアドバイスは、ご自身を振り返るための参考としてお楽しみください。", "This is an entertainment personality experience that groups patterns in your answers and compares them with characteristics associated with Japanese yokai. It is not a medical, psychological, legal, financial, or other professional diagnosis. Use the results and advice as a prompt for personal reflection."],
+      ["#dailyScreen .page-topbar h2", "今日の行動アドバイス", "Today's Action Advice"],
+      [".theme-panel h3", "今日、優先したいものを一つ選んでください", "Choose One Priority for Today"],
+      [".theme-panel p", "選んだテーマに合わせて、今日取り入れやすい行動案を表示します。", "Choose a theme to receive an action you can easily try today."],
+      ["#oraclePanel h3", "妖怪タイプ別アドバイス", "Advice for Your Yokai Type"],
+      [".oracle-item:nth-child(1) span", "おすすめの行動", "Suggested Action"],
+      [".oracle-item:nth-child(2) span", "取り組み方", "How to Approach It"],
+      [".oracle-item:nth-child(3) span", "役立つもの", "Something Useful"],
+      ["#dailyScreen .visit-strip-head span", "7日間の記録", "7-Day Record"],
+      ["#visitorPanel h3", "今日の図鑑ゲスト", "Today's Collection Guest"],
+      ["#letterPanel h3", "7日間を振り返って", "After Seven Visits"],
+      ["#dailyShareBtn", "今日のアドバイスを共有", "Share Today's Advice"],
+      ["#dailyResultBtn", "妖怪タイプの診断結果", "My Yokai Result"],
+      ["#bookScreen .page-topbar h2", "妖怪図鑑", "Yokai Collection"],
+      [".book-intro p", "診断された妖怪タイプは最初から記録されます。別の日に訪れると、ほかの妖怪が一体ずつ図鑑へ加わることがあります。", "Your diagnosed yokai type is recorded immediately. On later visits, another yokai may be added to your collection one at a time."]
+    ];
+
+    function setNodeText(selector, ja, en) {
+      const node = document.querySelector(selector);
+      if (node) node.textContent = isEnglish() ? en : ja;
+    }
+
+    function localizedDate() {
+      return new Intl.DateTimeFormat(isEnglish() ? "en-US" : "ja-JP", {
+        timeZone: "Asia/Tokyo", month: "long", day: "numeric", weekday: "short"
+      }).format(new Date());
+    }
+
+    function applyStaticLanguage() {
+      const copy = staticUi[currentLanguage];
       document.documentElement.lang = currentLanguage;
       document.title = copy.title;
       const desc = document.querySelector('meta[name="description"]');
       if (desc) desc.content = copy.description;
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      if (ogTitle) ogTitle.content = isEnglish() ? "Yokai Diagnosis | Which Yokai Type Are You?" : "妖怪診断｜あなたに近い妖怪タイプは？";
       const ogDesc = document.querySelector('meta[property="og:description"]');
       if (ogDesc) ogDesc.content = copy.ogDescription;
-      document.getElementById("tarotTitle").textContent = copy.tarotTitle;
-      document.getElementById("tarotDesc").textContent = copy.tarotDesc;
-      document.getElementById("yokaiTitle").textContent = copy.yokaiTitle;
-      document.getElementById("yokaiDesc").textContent = copy.yokaiDesc;
-      document.getElementById("tarotCard").setAttribute("aria-label", copy.tarotAria);
-      document.getElementById("yokaiCard").setAttribute("aria-label", copy.yokaiAria);
-      document.getElementById("tarotImage").alt = copy.tarotAlt;
-      document.getElementById("yokaiImage").alt = copy.yokaiAlt;
-      document.getElementById("readingTitle").textContent = copy.readingTitle;
-      document.getElementById("readingNote").textContent = copy.readingNote;
-      document.getElementById("tarotGuideTitle").textContent = copy.tarotGuideTitle;
-      document.getElementById("tarotGuideDesc").textContent = copy.tarotGuideDesc;
-      document.getElementById("yokaiGuideTitle").textContent = copy.yokaiGuideTitle;
-      document.getElementById("yokaiGuideDesc").textContent = copy.yokaiGuideDesc;
+
+      staticTextRules.forEach(([selector, ja, en]) => setNodeText(selector, ja, en));
+
+      const subStrong = document.querySelector(".sub-result strong");
+      if (subStrong && subStrong.firstChild) subStrong.firstChild.nodeValue = isEnglish() ? "Another yokai tendency: " : "もう一つの妖怪傾向：";
+
       const toggle = document.getElementById("languageToggle");
-      toggle.textContent = copy.button;
-      toggle.setAttribute("aria-label", copy.buttonAria);
+      toggle.textContent = copy.toggle;
+      toggle.setAttribute("aria-label", copy.toggleAria);
+      document.getElementById("dailyBookBtn").textContent = isEnglish() ? "☷" : "帳";
+
+      document.getElementById("backBtn").setAttribute("aria-label", isEnglish() ? "Previous question" : "前の質問へ");
+      document.getElementById("quitBtn").setAttribute("aria-label", isEnglish() ? "Return to the beginning" : "最初に戻る");
+      document.getElementById("dailyHomeBtn").setAttribute("aria-label", isEnglish() ? "Back to yokai type home" : "妖怪タイプのホームへ戻る");
+      document.getElementById("dailyBookBtn").setAttribute("aria-label", isEnglish() ? "Yokai collection" : "妖怪図鑑");
+      document.getElementById("bookHomeBtn").setAttribute("aria-label", isEnglish() ? "Back to yokai type home" : "妖怪タイプのホームへ戻る");
+      document.getElementById("returningPanel").setAttribute("aria-label", isEnglish() ? "Yokai type home" : "妖怪タイプのホーム");
+      document.querySelector("#firstVisitBlock .info-strip").setAttribute("aria-label", isEnglish() ? "Usage information" : "利用情報");
+      document.getElementById("homeStampRow").setAttribute("aria-label", isEnglish() ? "Visit stamps" : "訪問印");
+      document.getElementById("dailyStampRow").setAttribute("aria-label", isEnglish() ? "Visit stamps" : "訪問印");
     }
 
-    document.getElementById("languageToggle").addEventListener("click", () => {
-      currentLanguage = currentLanguage === "ja" ? "en" : "ja";
+    function refreshCurrentView() {
+      applyStaticLanguage();
+      renderQuestion();
+      updateHome();
+      if (state.result) renderResult();
+      if (screens.daily.classList.contains("is-active") && state.savedGuardian) renderDailyOracle();
+      if (screens.book.classList.contains("is-active")) renderBook();
+    }
+
+    function toggleLanguage() {
+      currentLanguage = isEnglish() ? "ja" : "en";
       try { localStorage.setItem(LANGUAGE_KEY, currentLanguage); } catch (error) {}
-      applyPortalLanguage();
+      refreshCurrentView();
+    }
+
+
+    const screens = {
+      intro: document.getElementById("introScreen"),
+      quiz: document.getElementById("quizScreen"),
+      reveal: document.getElementById("revealScreen"),
+      result: document.getElementById("resultScreen"),
+      daily: document.getElementById("dailyScreen"),
+      book: document.getElementById("bookScreen")
+    };
+
+    const state = {
+      current: 0,
+      answers: new Array(questions.length).fill(null),
+      result: null,
+      savedGuardian: null,
+      visits: [],
+      collection: [],
+      encounterSlug: null,
+      isNewVisit: false
+    };
+
+    const els = {
+      startBtn: document.getElementById("startBtn"),
+      backBtn: document.getElementById("backBtn"),
+      quitBtn: document.getElementById("quitBtn"),
+      questionCard: document.getElementById("questionCard"),
+      questionNumber: document.getElementById("questionNumber"),
+      questionText: document.getElementById("questionText"),
+      answerList: document.getElementById("answerList"),
+      progressCount: document.getElementById("progressCount"),
+      lanterns: document.getElementById("lanterns"),
+      resultName: document.getElementById("resultName"),
+      resultGlyph: document.getElementById("resultGlyph"),
+      resultTitle: document.getElementById("resultTitle"),
+      resultSummary: document.getElementById("resultSummary"),
+      resultStrength: document.getElementById("resultStrength"),
+      resultTraits: document.getElementById("resultTraits"),
+      resultShadow: document.getElementById("resultShadow"),
+      resultLove: document.getElementById("resultLove"),
+      resultWork: document.getElementById("resultWork"),
+      scoreList: document.getElementById("scoreList"),
+      secondaryName: document.getElementById("secondaryName"),
+      secondaryText: document.getElementById("secondaryText"),
+      shareBtn: document.getElementById("shareBtn"),
+      restartBtn: document.getElementById("restartBtn"),
+      firstVisitBlock: document.getElementById("firstVisitBlock"),
+      returningPanel: document.getElementById("returningPanel"),
+      homeYokaiImage: document.getElementById("homeYokaiImage"),
+      homeYokaiName: document.getElementById("homeYokaiName"),
+      homeYokaiTitle: document.getElementById("homeYokaiTitle"),
+      homeVisitCount: document.getElementById("homeVisitCount"),
+      homeStampRow: document.getElementById("homeStampRow"),
+      dailyBtn: document.getElementById("dailyBtn"),
+      savedResultBtn: document.getElementById("savedResultBtn"),
+      bookBtn: document.getElementById("bookBtn"),
+      rediagnoseBtn: document.getElementById("rediagnoseBtn"),
+      quizYokaiImage: document.getElementById("quizYokaiImage"),
+      resultImage: document.getElementById("resultImage"),
+      goDailyBtn: document.getElementById("goDailyBtn"),
+      shareImageBtn: document.getElementById("shareImageBtn"),
+      resultBookBtn: document.getElementById("resultBookBtn"),
+      dailyHomeBtn: document.getElementById("dailyHomeBtn"),
+      dailyBookBtn: document.getElementById("dailyBookBtn"),
+      dailyYokaiImage: document.getElementById("dailyYokaiImage"),
+      dailyYokaiName: document.getElementById("dailyYokaiName"),
+      dailyDate: document.getElementById("dailyDate"),
+      dailyMood: document.getElementById("dailyMood"),
+      dailyMessage: document.getElementById("dailyMessage"),
+      themeButtons: document.getElementById("themeButtons"),
+      oraclePanel: document.getElementById("oraclePanel"),
+      oracleAdvice: document.getElementById("oracleAdvice"),
+      oracleAction: document.getElementById("oracleAction"),
+      oracleTime: document.getElementById("oracleTime"),
+      oracleItem: document.getElementById("oracleItem"),
+      dailyVisitCount: document.getElementById("dailyVisitCount"),
+      dailyStampRow: document.getElementById("dailyStampRow"),
+      visitorPanel: document.getElementById("visitorPanel"),
+      visitorImage: document.getElementById("visitorImage"),
+      visitorText: document.getElementById("visitorText"),
+      letterPanel: document.getElementById("letterPanel"),
+      letterText: document.getElementById("letterText"),
+      dailyShareBtn: document.getElementById("dailyShareBtn"),
+      dailyResultBtn: document.getElementById("dailyResultBtn"),
+      bookHomeBtn: document.getElementById("bookHomeBtn"),
+      bookProgress: document.getElementById("bookProgress"),
+      bookGrid: document.getElementById("bookGrid"),
+      shareCanvas: document.getElementById("shareCanvas"),
+      toast: document.getElementById("toast")
+    };
+
+
+    function safeParse(value, fallback) {
+      try { return value ? JSON.parse(value) : fallback; }
+      catch (error) { return fallback; }
+    }
+
+    function todayKey() {
+      const parts = new Intl.DateTimeFormat("en-US", {
+        timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit"
+      }).formatToParts(new Date()).reduce((acc, part) => {
+        acc[part.type] = part.value;
+        return acc;
+      }, {});
+      return `${parts.year}-${parts.month}-${parts.day}`;
+    }
+
+    function hashString(value) {
+      let hash = 2166136261;
+      for (let i = 0; i < value.length; i += 1) {
+        hash ^= value.charCodeAt(i);
+        hash = Math.imul(hash, 16777619);
+      }
+      return Math.abs(hash >>> 0);
+    }
+
+    function profileBySlug(slug) {
+      return yokaiProfiles.find(profile => slugByName[profile.name] === slug) || null;
+    }
+
+    function assetPath(slug, pattern = "a") {
+      return `assets/yokai/pattern-${pattern}/${slug}.webp`;
+    }
+
+    function setCharacterAnimation(image, animation) {
+      image.classList.remove("anim-float", "anim-sway", "anim-bounce", "anim-doze", "anim-glow", "anim-peek");
+      image.classList.add(animation || "anim-float");
+    }
+
+    function readSavedState() {
+      state.savedGuardian = safeParse(localStorage.getItem(STORAGE_KEYS.guardian), null);
+      state.visits = safeParse(localStorage.getItem(STORAGE_KEYS.visits), []);
+      const collectionState = safeParse(localStorage.getItem(STORAGE_KEYS.collection), { unlocked: [], lastEncounterDate: null, lastEncounterSlug: null });
+      state.collection = Array.isArray(collectionState.unlocked) ? collectionState.unlocked : [];
+      state.encounterSlug = collectionState.lastEncounterDate === todayKey() ? collectionState.lastEncounterSlug : null;
+    }
+
+    function saveCollection(lastEncounterDate = null, lastEncounterSlug = null) {
+      localStorage.setItem(STORAGE_KEYS.collection, JSON.stringify({
+        unlocked: state.collection,
+        lastEncounterDate,
+        lastEncounterSlug
+      }));
+    }
+
+    function registerVisit() {
+      if (!state.savedGuardian) return;
+      const today = todayKey();
+      state.isNewVisit = !state.visits.includes(today);
+      if (state.isNewVisit) {
+        state.visits.push(today);
+        state.visits = state.visits.slice(-60);
+        localStorage.setItem(STORAGE_KEYS.visits, JSON.stringify(state.visits));
+      }
+
+      const guardianSlug = state.savedGuardian.primarySlug;
+      if (!state.collection.includes(guardianSlug)) state.collection.unshift(guardianSlug);
+
+      let encounter = state.isNewVisit ? null : state.encounterSlug;
+      if (state.isNewVisit && state.visits.length > 1) {
+        const locked = yokaiProfiles.map(profile => slugByName[profile.name]).filter(slug => !state.collection.includes(slug));
+        if (locked.length) {
+          encounter = locked[hashString(`${today}:${guardianSlug}:${state.visits.length}`) % locked.length];
+          state.collection.push(encounter);
+        }
+      }
+      state.encounterSlug = encounter;
+      saveCollection(encounter ? today : null, encounter);
+    }
+
+    function createStampRow(target, count) {
+      target.innerHTML = "";
+      for (let i = 0; i < 7; i += 1) {
+        const stamp = document.createElement("span");
+        stamp.className = `stamp${i < Math.min(count, 7) ? " is-earned" : ""}`;
+        stamp.textContent = i < Math.min(count, 7) ? "妖" : String(i + 1);
+        target.appendChild(stamp);
+      }
+    }
+
+    function updateHome() {
+      const hasGuardian = Boolean(state.savedGuardian && profileBySlug(state.savedGuardian.primarySlug));
+      els.firstVisitBlock.hidden = hasGuardian;
+      els.returningPanel.hidden = !hasGuardian;
+      if (!hasGuardian) return;
+
+      const profile = profileBySlug(state.savedGuardian.primarySlug);
+      const dayHash = hashString(`${todayKey()}:${state.savedGuardian.primarySlug}`);
+      const mood = dailyMoods[dayHash % dailyMoods.length];
+      const pattern = dayHash % 2 === 0 ? "a" : "b";
+      els.homeYokaiImage.src = assetPath(state.savedGuardian.primarySlug, pattern);
+      els.homeYokaiImage.alt = isEnglish() ? `${profileName(profile)} illustration` : `${profile.name}のイラスト`;
+      setCharacterAnimation(els.homeYokaiImage, mood.animation);
+      els.homeYokaiName.textContent = profileName(profile);
+      els.homeYokaiTitle.textContent = profileText(profile, "title");
+      els.homeVisitCount.textContent = `${Math.min(state.visits.length, 7)} / 7`;
+      createStampRow(els.homeStampRow, state.visits.length);
+    }
+
+    function saveDiagnosisResult() {
+      if (!state.result) return;
+      const primarySlug = slugByName[state.result.primary.profile.name];
+      const secondarySlug = slugByName[state.result.secondary.profile.name];
+      const previousSlug = state.savedGuardian && state.savedGuardian.primarySlug;
+      state.savedGuardian = {
+        primarySlug,
+        secondarySlug,
+        userScores: state.result.userScores,
+        gap: state.result.gap,
+        diagnosedAt: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEYS.guardian, JSON.stringify(state.savedGuardian));
+
+      if (previousSlug !== primarySlug) {
+        state.visits = [];
+        state.collection = [primarySlug];
+        localStorage.removeItem(STORAGE_KEYS.daily);
+      }
+      registerVisit();
+      updateHome();
+    }
+
+    function restoreSavedResult() {
+      if (!state.savedGuardian) return false;
+      const primary = profileBySlug(state.savedGuardian.primarySlug);
+      const secondary = profileBySlug(state.savedGuardian.secondarySlug) || primary;
+      if (!primary) return false;
+      state.result = {
+        userScores: state.savedGuardian.userScores || primary.scores,
+        primary: { profile: primary, distance: 0 },
+        secondary: { profile: secondary, distance: 0 },
+        gap: Number(state.savedGuardian.gap || 3),
+        rankings: []
+      };
+      renderResult();
+      return true;
+    }
+
+    function showScreen(name) {
+      Object.values(screens).forEach(screen => screen.classList.remove("is-active"));
+      screens[name].classList.add("is-active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function buildLanterns() {
+      els.lanterns.innerHTML = "";
+      for (let i = 0; i < questions.length; i += 1) {
+        const node = document.createElement("span");
+        node.className = "lantern";
+        els.lanterns.appendChild(node);
+      }
+    }
+
+    function updateLanterns() {
+      [...els.lanterns.children].forEach((node, index) => {
+        node.classList.toggle("is-lit", state.answers[index] !== null || index < state.current);
+      });
+    }
+
+    function renderQuestion() {
+      const question = questions[state.current];
+      const selected = state.answers[state.current];
+      els.questionNumber.textContent = String(state.current + 1).padStart(2, "0");
+      els.progressCount.textContent = `${state.current + 1} / ${questions.length}`;
+      els.questionText.textContent = questionTextAt(state.current);
+      els.backBtn.disabled = state.current === 0;
+      els.answerList.innerHTML = "";
+
+      const companionProfile = yokaiProfiles[state.current % yokaiProfiles.length];
+      const companionSlug = slugByName[companionProfile.name];
+      els.quizYokaiImage.src = assetPath(companionSlug, state.current % 2 === 0 ? "a" : "b");
+      els.quizYokaiImage.alt = "";
+      setCharacterAnimation(els.quizYokaiImage, dailyMoods[state.current % dailyMoods.length].animation);
+
+      answerOptions.forEach((option, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "answer-btn" + (selected === option.value ? " is-selected" : "");
+        btn.innerHTML = `<span class="answer-number">${index + 1}</span><span class="answer-copy">${answerLabelAt(index)}</span>`;
+        btn.addEventListener("click", () => selectAnswer(option.value, btn));
+        els.answerList.appendChild(btn);
+      });
+
+      updateLanterns();
+    }
+
+    function selectAnswer(value, button) {
+      state.answers[state.current] = value;
+      [...els.answerList.children].forEach(node => node.classList.remove("is-selected"));
+      button.classList.add("is-selected");
+      els.questionCard.animate(
+        [
+          { transform: "translateX(0)", opacity: 1 },
+          { transform: "translateX(-10px)", opacity: .7 },
+          { transform: "translateX(0)", opacity: 1 }
+        ],
+        { duration: 260, easing: "ease-out" }
+      );
+
+      window.setTimeout(() => {
+        if (state.current < questions.length - 1) {
+          state.current += 1;
+          renderQuestion();
+        } else {
+          beginReveal();
+        }
+      }, 230);
+    }
+
+    function calculateUserScores(answers) {
+      const sums = { action: 0, social: 0, sensitivity: 0, caution: 0, independence: 0, intuition: 0 };
+      const counts = { action: 0, social: 0, sensitivity: 0, caution: 0, independence: 0, intuition: 0 };
+
+      questions.forEach((question, index) => {
+        const raw = answers[index];
+        const score = question.reverse ? 6 - raw : raw;
+        sums[question.key] += score;
+        counts[question.key] += 1;
+      });
+
+      return Object.keys(sums).reduce((acc, key) => {
+        acc[key] = sums[key] / counts[key];
+        return acc;
+      }, {});
+    }
+
+    function calculateDistance(userScores, yokaiScores) {
+      return Object.keys(labels).reduce((total, key) => total + (userScores[key] - yokaiScores[key]) ** 2, 0);
+    }
+
+    function diagnose() {
+      const userScores = calculateUserScores(state.answers);
+      const rankings = yokaiProfiles
+        .map(profile => ({ profile, distance: calculateDistance(userScores, profile.scores) }))
+        .sort((a, b) => a.distance - b.distance);
+
+      return {
+        userScores,
+        primary: rankings[0],
+        secondary: rankings[1],
+        gap: rankings[1].distance - rankings[0].distance,
+        rankings
+      };
+    }
+
+    function beginReveal() {
+      state.result = diagnose();
+      showScreen("reveal");
+      window.setTimeout(() => {
+        saveDiagnosisResult();
+        renderResult();
+        showScreen("result");
+      }, 2200);
+    }
+
+    function renderResult() {
+      const { userScores, primary, secondary, gap } = state.result;
+      const p = primary.profile;
+      const s = secondary.profile;
+
+      els.resultName.textContent = profileName(p);
+      els.resultGlyph.textContent = p.glyph;
+      const primarySlug = slugByName[p.name];
+      els.resultImage.src = assetPath(primarySlug, "a");
+      els.resultImage.alt = isEnglish() ? `${profileName(p)} illustration` : `${p.name}のイラスト`;
+      setCharacterAnimation(els.resultImage, "anim-float");
+      els.resultTitle.textContent = profileText(p, "title");
+      els.resultSummary.textContent = profileText(p, "summary");
+      els.resultStrength.textContent = profileText(p, "strength");
+      els.resultShadow.textContent = profileText(p, "shadow");
+      els.resultLove.textContent = profileText(p, "love");
+      els.resultWork.textContent = profileText(p, "work");
+      els.resultTraits.innerHTML = profileText(p, "traits").map(trait => `<span class="trait">${trait}</span>`).join("");
+      els.secondaryName.textContent = profileName(s);
+
+      if (gap < 1) {
+        els.secondaryText.textContent = isEnglish()
+          ? `The two closest yokai are almost tied. You show a blended type with both ${profileName(p)} and ${profileName(s)} traits at nearly equal strength. ${profileText(s, "secondary")}`
+          : `二つの妖怪の距離が非常に近く、あなたは「${p.name}」と「${s.name}」の性質をほぼ同じ強さで持つ複合型です。${s.secondary}`;
+      } else if (gap < 3) {
+        els.secondaryText.textContent = isEnglish()
+          ? `Your main type is ${profileName(p)}, but ${profileName(s)} traits also appear strongly. ${profileText(s, "secondary")}`
+          : `中心となるのは「${p.name}」ですが、「${s.name}」の気質も強く表れています。${s.secondary}`;
+      } else {
+        els.secondaryText.textContent = isEnglish()
+          ? `Your core type is clearly ${profileName(p)}. Depending on the situation, ${profileName(s)} traits may appear as a supporting tendency. ${profileText(s, "secondary")}`
+          : `あなたの中心は明確に「${p.name}」です。ただし、状況によっては「${s.name}」の性質が補助的に現れます。${s.secondary}`;
+      }
+
+      els.scoreList.innerHTML = "";
+      Object.entries(labels).forEach(([key, label]) => {
+        const value = userScores[key];
+        const row = document.createElement("div");
+        row.className = "score-row";
+        row.innerHTML = `
+          <span>${scoreLabel(key)}</span>
+          <div class="score-track"><div class="score-fill" data-width="${(value / 5) * 100}%"></div></div>
+          <span>${value.toFixed(1)}</span>
+        `;
+        els.scoreList.appendChild(row);
+      });
+
+      requestAnimationFrame(() => {
+        document.querySelectorAll(".score-fill").forEach(fill => {
+          fill.style.width = fill.dataset.width;
+        });
+      });
+    }
+
+
+    function dailySeed(extra = "") {
+      return hashString(`${todayKey()}:${state.savedGuardian.primarySlug}:${extra}`);
+    }
+
+    function getDailySelection() {
+      const data = safeParse(localStorage.getItem(STORAGE_KEYS.daily), null);
+      if (!data || data.date !== todayKey() || data.guardianSlug !== state.savedGuardian.primarySlug) return null;
+      return data;
+    }
+
+    function renderDailyOracle(themeKey = null) {
+      if (!state.savedGuardian) return;
+      const slug = state.savedGuardian.primarySlug;
+      const profile = profileBySlug(slug);
+      const oracle = oracleData[slug];
+      const seed = dailySeed();
+      const mood = dailyMoods[seed % dailyMoods.length];
+      const pattern = seed % 2 === 0 ? "a" : "b";
+
+      els.dailyDate.textContent = localizedDate();
+      els.dailyYokaiName.textContent = profileName(profile);
+      els.dailyYokaiImage.src = assetPath(slug, pattern);
+      els.dailyYokaiImage.alt = isEnglish() ? `${profileName(profile)} illustration` : `${profile.name}のイラスト`;
+      setCharacterAnimation(els.dailyYokaiImage, mood.animation);
+      els.dailyMood.textContent = `${mood.icon} ${moodNameAt(dailyMoods.indexOf(mood))}`;
+      els.dailyMessage.textContent = oracleMessage(slug, seed % oracle.messages.length);
+      els.dailyVisitCount.textContent = `${Math.min(state.visits.length, 7)} / 7`;
+      createStampRow(els.dailyStampRow, state.visits.length);
+
+      const savedDaily = getDailySelection();
+      const selectedKey = themeKey || (savedDaily && savedDaily.themeKey);
+      els.themeButtons.innerHTML = "";
+      dailyThemes.forEach(theme => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `theme-btn${selectedKey === theme.key ? " is-selected" : ""}`;
+        button.innerHTML = `<span class="theme-icon">${theme.icon}</span><span class="theme-name">${themeName(theme)}</span>`;
+        button.addEventListener("click", () => {
+          localStorage.setItem(STORAGE_KEYS.daily, JSON.stringify({
+            date: todayKey(), guardianSlug: slug, themeKey: theme.key
+          }));
+          renderDailyOracle(theme.key);
+        });
+        els.themeButtons.appendChild(button);
+      });
+
+      if (selectedKey) {
+        const themeSeed = dailySeed(selectedKey);
+        els.oraclePanel.hidden = false;
+        els.oracleAdvice.textContent = themeAdviceText(selectedKey, themeSeed % themeAdvice[selectedKey].length);
+        els.oracleAction.textContent = recommendedAction((themeSeed + 2) % recommendedActions.length);
+        els.oracleTime.textContent = approachTip((themeSeed + 3) % approachTips.length);
+        els.oracleItem.textContent = supportItem((themeSeed + 5) % supportItems.length);
+      } else {
+        els.oraclePanel.hidden = true;
+      }
+
+      if (state.encounterSlug) {
+        const visitor = profileBySlug(state.encounterSlug);
+        els.visitorPanel.hidden = false;
+        els.visitorImage.src = assetPath(state.encounterSlug, "b");
+        els.visitorImage.alt = isEnglish() ? `${profileName(visitor)} illustration` : `${visitor.name}のイラスト`;
+        els.visitorText.textContent = isEnglish()
+          ? `${profileName(visitor)} is today's collection guest. A new entry has been added to your Yokai Collection.`
+          : `今日は「${visitor.name}」が図鑑ゲストとして登場しました。妖怪図鑑に新しい記録が加わっています。`;
+      } else {
+        els.visitorPanel.hidden = true;
+      }
+
+      if (state.visits.length >= 7) {
+        els.letterPanel.hidden = false;
+        els.letterText.textContent = oracleLetter(slug);
+      } else {
+        els.letterPanel.hidden = true;
+      }
+    }
+
+    function openDaily() {
+      if (!state.savedGuardian) return;
+      renderDailyOracle();
+      showScreen("daily");
+    }
+
+    function renderBook() {
+      if (!state.savedGuardian) {
+        els.bookProgress.textContent = isEnglish() ? "Complete the diagnosis to begin your Yokai Collection." : "妖怪タイプを診断すると、妖怪図鑑が始まります。";
+        els.bookGrid.innerHTML = isEnglish()
+          ? '<p class="empty-note">Answer the 12 questions first to discover your yokai type.</p>'
+          : '<p class="empty-note">まずは十二の質問に答えて、あなたの妖怪タイプを確認してください。</p>';
+        return;
+      }
+      els.bookProgress.textContent = isEnglish() ? `${state.collection.length} / ${yokaiProfiles.length} recorded` : `${state.collection.length} / ${yokaiProfiles.length}体を記録`;
+      els.bookGrid.innerHTML = "";
+      yokaiProfiles.forEach((profile, index) => {
+        const slug = slugByName[profile.name];
+        const unlocked = state.collection.includes(slug);
+        const isGuardian = state.savedGuardian.primarySlug === slug;
+        const card = document.createElement("article");
+        card.className = `book-card${unlocked ? "" : " is-locked"}${isGuardian ? " is-guardian" : ""}`;
+        card.innerHTML = `
+          ${isGuardian ? `<span class="book-badge">${isEnglish() ? "Your Type" : "あなたのタイプ"}</span>` : unlocked ? `<span class="book-badge">${isEnglish() ? "Discovered" : "遭遇済み"}</span>` : ""}
+          <img class="book-image" src="${assetPath(slug, index % 2 === 0 ? "a" : "b")}" alt="${unlocked ? (isEnglish() ? `${profileName(profile)} illustration` : `${profile.name}のイラスト`) : (isEnglish() ? "Undiscovered yokai" : "未発見の妖怪")}" />
+          <h3>${unlocked ? profileName(profile) : "???"}</h3>
+          <p>${unlocked ? profileText(profile, "summary") : (isEnglish() ? "Visit on another day and this yokai may be added to your collection." : "別の日にサイトを訪れると、この妖怪が図鑑へ加わることがあります。")}</p>
+        `;
+        els.bookGrid.appendChild(card);
+      });
+    }
+
+    function openBook() {
+      renderBook();
+      showScreen("book");
+    }
+
+    function loadImage(url) {
+      return new Promise((resolve, reject) => {
+        const image = new Image();
+        image.onload = () => resolve(image);
+        image.onerror = reject;
+        image.src = url;
+      });
+    }
+
+    function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines = 5) {
+      const units = isEnglish() ? text.split(/\s+/) : [...text];
+      const spacer = isEnglish() ? " " : "";
+      let line = "";
+      let lines = 0;
+      for (const unit of units) {
+        const test = line ? `${line}${spacer}${unit}` : unit;
+        if (ctx.measureText(test).width > maxWidth && line) {
+          ctx.fillText(line, x, y + lines * lineHeight);
+          line = unit;
+          lines += 1;
+          if (lines >= maxLines - 1) break;
+        } else {
+          line = test;
+        }
+      }
+      if (line && lines < maxLines) ctx.fillText(line, x, y + lines * lineHeight);
+    }
+
+    async function createShareImage(mode = "result") {
+      if (!state.savedGuardian) return;
+      const profile = profileBySlug(state.savedGuardian.primarySlug);
+      const canvas = els.shareCanvas;
+      const ctx = canvas.getContext("2d");
+      const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+      gradient.addColorStop(0, "#08090d");
+      gradient.addColorStop(.62, "#151019");
+      gradient.addColorStop(1, "#35131c");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 1200, 630);
+
+      ctx.strokeStyle = "rgba(216,178,96,.55)";
+      ctx.lineWidth = 2;
+      ctx.strokeRect(38, 38, 1124, 554);
+      ctx.fillStyle = "rgba(255,255,255,.035)";
+      ctx.beginPath();
+      ctx.roundRect(70, 70, 1060, 490, 34);
+      ctx.fill();
+
+      const image = await loadImage(assetPath(state.savedGuardian.primarySlug, "a"));
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(310, 315, 205, 0, Math.PI * 2);
+      ctx.clip();
+      ctx.fillStyle = "#eee5ce";
+      ctx.fillRect(105, 110, 410, 410);
+      ctx.drawImage(image, 105, 110, 410, 410);
+      ctx.restore();
+
+      ctx.fillStyle = "#d8b260";
+      ctx.font = "24px sans-serif";
+      ctx.fillText(mode === "daily" ? "TODAY'S ACTION ADVICE" : "MY YOKAI TYPE", 570, 150);
+      ctx.fillStyle = "#f6f2e8";
+      ctx.font = "72px serif";
+      ctx.fillText(profileName(profile), 570, 240);
+      ctx.fillStyle = "#d3cec5";
+      ctx.font = "29px serif";
+      ctx.fillText(profileText(profile, "title"), 570, 292);
+
+      ctx.fillStyle = "#f0ece4";
+      ctx.font = "27px serif";
+      const dailyData = getDailySelection();
+      const text = mode === "daily"
+        ? oracleMessage(state.savedGuardian.primarySlug, dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length)
+        : profileText(profile, "summary");
+      wrapCanvasText(ctx, text, 570, 350, 490, 46, 4);
+      ctx.fillStyle = "#8e8981";
+      ctx.font = "22px sans-serif";
+      ctx.fillText(isEnglish() ? "Yokai Diagnosis" : "妖怪診断", 570, 520);
+
+      const blob = await new Promise(resolve => canvas.toBlob(resolve, "image/png", .95));
+      const filename = `yokai-${mode}-${state.savedGuardian.primarySlug}.png`;
+      const file = new File([blob], filename, { type: "image/png" });
+      const textShare = isEnglish()
+        ? (mode === "daily" ? `My yokai type is ${profileName(profile)}. I also checked today's action advice.` : `My yokai type is ${profileName(profile)}.`)
+        : (mode === "daily" ? `私の妖怪タイプは「${profile.name}」です。今日の行動アドバイスも確認しました。` : `私の妖怪タイプは「${profile.name}」でした。`);
+
+      try {
+        if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({ files: [file], title: isEnglish() ? "Yokai Diagnosis" : "妖怪診断", text: textShare });
+        } else {
+          const link = document.createElement("a");
+          link.href = URL.createObjectURL(blob);
+          link.download = filename;
+          link.click();
+          setTimeout(() => URL.revokeObjectURL(link.href), 1500);
+          showToast(isEnglish() ? "Share image saved" : "共有画像を保存しました");
+        }
+      } catch (error) {
+        if (error && error.name !== "AbortError") showToast(isEnglish() ? "Could not create the image" : "画像を作成できませんでした");
+      }
+    }
+
+    async function shareDaily() {
+      if (!state.savedGuardian) return;
+      const profile = profileBySlug(state.savedGuardian.primarySlug);
+      const message = oracleMessage(state.savedGuardian.primarySlug, dailySeed() % oracleData[state.savedGuardian.primarySlug].messages.length);
+      const text = isEnglish() ? `Today's advice for ${profileName(profile)}: ${message}` : `今日の「${profile.name}」タイプ向けアドバイス：${message}`;
+      try {
+        if (navigator.share) await navigator.share({ title: isEnglish() ? "Today\'s Action Advice" : "今日の行動アドバイス", text, url: location.href });
+        else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(`${text}\n${location.href}`);
+          showToast(isEnglish() ? "Today\'s advice copied" : "今日のアドバイスをコピーしました");
+        }
+      } catch (error) {
+        if (error && error.name !== "AbortError") showToast(isEnglish() ? "Could not complete sharing" : "共有を完了できませんでした");
+      }
+    }
+
+    function resetDiagnosis() {
+      state.current = 0;
+      state.answers.fill(null);
+      state.result = null;
+      renderQuestion();
+      showScreen("quiz");
+    }
+
+    function showToast(message) {
+      els.toast.textContent = message;
+      els.toast.classList.add("is-show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => els.toast.classList.remove("is-show"), 2200);
+    }
+
+    async function shareResult() {
+      if (!state.result) return;
+      const resultProfile = state.result.primary.profile;
+      const name = profileName(resultProfile);
+      const title = profileText(resultProfile, "title");
+      const text = isEnglish() ? `My yokai type is ${name}. ${title} | Yokai Diagnosis` : `私の妖怪タイプは「${resultProfile.name}」でした。${resultProfile.title}｜妖怪診断`;
+      const shareData = { title: isEnglish() ? "Yokai Diagnosis" : "妖怪診断", text, url: location.href };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else if (navigator.clipboard) {
+          await navigator.clipboard.writeText(`${text}\n${location.href}`);
+          showToast(isEnglish() ? "Result copied" : "結果をコピーしました");
+        } else {
+          showToast(isEnglish() ? "Sharing is not available on this device" : "共有機能を利用できませんでした");
+        }
+      } catch (error) {
+        if (error && error.name !== "AbortError") showToast(isEnglish() ? "Could not complete sharing" : "共有を完了できませんでした");
+      }
+    }
+
+    els.startBtn.addEventListener("click", () => {
+      state.current = 0;
+      state.answers.fill(null);
+      renderQuestion();
+      showScreen("quiz");
     });
 
-    function trackPortal(service){ if(typeof gtag === 'function') gtag('event','portal_select',{service_name:service}); }
-    function trackGuide(topic){ if(typeof gtag === 'function') gtag('event','guide_select',{guide_topic:topic}); }
+    els.backBtn.addEventListener("click", () => {
+      if (state.current === 0) return;
+      state.current -= 1;
+      renderQuestion();
+    });
 
-    applyPortalLanguage();
+    els.quitBtn.addEventListener("click", () => { updateHome(); showScreen("intro"); });
+    els.restartBtn.addEventListener("click", resetDiagnosis);
+    els.rediagnoseBtn.addEventListener("click", resetDiagnosis);
+    els.shareBtn.addEventListener("click", shareResult);
+    els.shareImageBtn.addEventListener("click", () => createShareImage("result"));
+    els.goDailyBtn.addEventListener("click", openDaily);
+    els.dailyBtn.addEventListener("click", openDaily);
+    els.savedResultBtn.addEventListener("click", () => { if (restoreSavedResult()) showScreen("result"); });
+    els.bookBtn.addEventListener("click", openBook);
+    els.resultBookBtn.addEventListener("click", openBook);
+    els.dailyBookBtn.addEventListener("click", openBook);
+    els.bookHomeBtn.addEventListener("click", () => { updateHome(); showScreen("intro"); });
+    els.dailyHomeBtn.addEventListener("click", () => { updateHome(); showScreen("intro"); });
+    els.dailyResultBtn.addEventListener("click", () => { if (restoreSavedResult()) showScreen("result"); });
+    els.dailyShareBtn.addEventListener("click", shareDaily);
+    document.getElementById("languageToggle").addEventListener("click", toggleLanguage);
+
+    buildLanterns();
+    readSavedState();
+    applyStaticLanguage();
+    renderQuestion();
+    if (state.savedGuardian) {
+      registerVisit();
+      updateHome();
+      if (state.encounterSlug) {
+        const visitor = profileBySlug(state.encounterSlug);
+        window.setTimeout(() => showToast(isEnglish() ? `${profileName(visitor)} was added to your Yokai Collection` : `${visitor.name}が妖怪図鑑に加わりました`), 650);
+      }
+    } else {
+      updateHome();
+    }
   </script>
 </body>
 </html>
